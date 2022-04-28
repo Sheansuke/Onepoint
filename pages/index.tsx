@@ -1,9 +1,8 @@
 import { Button, Typography } from '@mui/material'
 
-import { useAuth, useSession } from "@clerk/nextjs"
+import { useAuth, useSession } from '@clerk/nextjs'
 
 import type { NextPage } from 'next'
-
 
 const Home: NextPage = () => {
   const { signOut } = useAuth()
@@ -15,8 +14,15 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Typography variant="h1">Hola: {session.publicUserData.firstName}</Typography>
-      <Button variant="contained" color="primary" size="large" onClick={handleSignOut}>
+      <Typography variant="h1">
+        Hola: {session.publicUserData.firstName}
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        size="large"
+        onClick={handleSignOut}
+      >
         signOut
       </Button>
     </>
