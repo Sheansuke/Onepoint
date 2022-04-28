@@ -23,7 +23,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse<IApiRes
       clerkId: data.id,
       role: {
        connect: {
-         name: "user"
+         name: "cliente"
        }
       }
     }

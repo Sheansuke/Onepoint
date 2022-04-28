@@ -1,36 +1,48 @@
-import { ThemeProvider } from '@mui/material'
-import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs';
-import { SignedOutWrapper, SignedInWrapper } from "@organism/Clerk"
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
+import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { store } from '../redux/store'
+import { Provider } from 'react-redux'
+import { ThemeProvider } from '@mui/material'
+import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 
-const publicPages = [];
+const publicPages = []
 
+// REACT-QUERY
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter();
+  const { pathname } = useRouter()
 
   // Check if the current route matches a public page
-  const isPublicPage = publicPages.includes(pathname);
+  const isPublicPage = publicPages.includes(pathname)
 
   return (
+    <Provider store={store}>
+
     <ThemeProvider theme={mainTheme}>
       <ClerkProvider {...pageProps}>
-        {isPublicPage ? (
-          <Component {...pageProps} />
-        ) : (
-          <>
-            <SignedInWrapper>
-              <Component {...pageProps} />
-            </SignedInWrapper>
-            <SignedOutWrapper>
-              <RedirectToSignIn />
-            </SignedOutWrapper>
-          </>
-        )}
+        <QueryClientProvider client={queryClient}>
+          {isPublicPage ? (
+            <Component {...pageProps} />
+          ) : (
+            <>
+              <SignedInWrapper>
+                <Component {...pageProps} />
+              </SignedInWrapper>
+              <SignedOutWrapper>
+                <RedirectToSignIn />
+              </SignedOutWrapper>
+            </>
+          )}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </ClerkProvider>
     </ThemeProvider>
+    </Provider>
   )
 }
 
