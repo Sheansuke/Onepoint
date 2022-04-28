@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=14.x"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,14 +20,18 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.1",
     "@mui/material": "^5.6.1",
-    "@prisma/client": "^3.12.0",
+    "@prisma/client": "^3.13.0",
+    "@reduxjs/toolkit": "^1.8.1",
+    "axios": "^0.27.2",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-hook-form": "^7.29.0"
+    "react-hook-form": "^7.30.0",
+    "react-query": "^3.38.0",
+    "react-redux": "^8.0.1"
   },
   "devDependencies": {
-    "@types/node": "17.0.23",
+    "@types/node": "^17.0.29",
     "@types/react": "^18.0.5",
     "@types/react-dom": "18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
@@ -35,7 +42,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.2",
-    "prisma": "^3.12.0",
-    "typescript": "4.6.3"
+    "prisma": "^3.13.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   }
 }

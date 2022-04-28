@@ -30,6 +30,12 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=publ
 npx prisma db push
 ```
 
+- Ejecute el siguiente comando para rellenar los datos iniciales en la base de datos:
+
+```
+npx prisma db seed
+```
+
 ## NOTAS:
 
 cada vez que cambie o modifique un schema recuerde ejecutar:

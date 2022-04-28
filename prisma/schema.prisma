@@ -17,8 +17,8 @@ model User {
   email           String           @unique @default("")
   role            UserRole         @relation(fields: [userRoleId], references: [id])
   userRoleId      Int
-  Order           Order[]
-  DeliveryAddress DeliveryAddress?
+  order           Order[]
+  deliveryAddress DeliveryAddress?
 }
 
 model DeliveryAddress {
@@ -35,8 +35,8 @@ model DeliveryAddress {
 
 model UserRole {
   id   Int    @id @default(autoincrement())
-  name String @unique @default("")
-  User User[]
+  name String @unique @default("Cliente")
+  user User[]
 }
 
 model Product {
@@ -61,12 +61,14 @@ model Order {
   total         Int
   status        OrderStatus @relation(fields: [orderStatusId], references: [id])
   orderStatusId Int
+  deliveryDate  DateTime
+  isPaid        Boolean
   paidAt        DateTime
   transactionId String?
 }
 
 model OrderStatus {
   id    Int     @id @default(autoincrement())
-  name  String  @unique @default("")
-  Order Order[]
+  name  String  @unique @default("Pendiente")
+  order Order[]
 }
