@@ -36,7 +36,7 @@ model DeliveryAddress {
 model UserRole {
   id   Int    @id @default(autoincrement())
   name String @unique @default("Cliente")
-  user User[]
+  User User[]
 }
 
 model Product {
