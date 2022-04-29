@@ -1,9 +1,8 @@
 import React from 'react'
-import { SignedOut } from '@clerk/nextjs';
+import { SignedOut } from '@clerk/nextjs'
 
-export const SignedOutWrapper: React.FC = ({ children }) => {
-    return (
-        <SignedOut>{children}</SignedOut>
-    )
+export const SignedOutWrapper: React.FC<{ children: JSX.Element }> = ({
+  children
+}) => {
+  return <SignedOut>{children}</SignedOut>
 }
-

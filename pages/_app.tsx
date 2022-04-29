@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material'
 import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
+import MainLayout from '@organism/layouts/MainLayout'
 
 const publicPages = []
 
@@ -22,26 +23,27 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-
-    <ThemeProvider theme={mainTheme}>
-      <ClerkProvider {...pageProps}>
-        <QueryClientProvider client={queryClient}>
-          {isPublicPage ? (
-            <Component {...pageProps} />
-          ) : (
-            <>
-              <SignedInWrapper>
+      <ThemeProvider theme={mainTheme}>
+        <ClerkProvider {...pageProps}>
+          <QueryClientProvider client={queryClient}>
+            <MainLayout>
+              {isPublicPage ? (
                 <Component {...pageProps} />
-              </SignedInWrapper>
-              <SignedOutWrapper>
-                <RedirectToSignIn />
-              </SignedOutWrapper>
-            </>
-          )}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </ClerkProvider>
-    </ThemeProvider>
+              ) : (
+                <>
+                  <SignedInWrapper>
+                    <Component {...pageProps} />
+                  </SignedInWrapper>
+                  <SignedOutWrapper>
+                    <RedirectToSignIn />
+                  </SignedOutWrapper>
+                </>
+              )}
+            </MainLayout>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </ClerkProvider>
+      </ThemeProvider>
     </Provider>
   )
 }

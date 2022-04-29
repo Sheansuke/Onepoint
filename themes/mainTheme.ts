@@ -51,21 +51,26 @@ export const mainTheme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          color: "#0f172a"
+          color: "#0F172A"
         },
         h1: {
           fontSize: 30,
-          fontWeight: 600
+          fontWeight: "semi-bold",
         },
         h2: {
           fontSize: 20,
-          fontWeight: 400
+          fontWeight: "regular"
         },
         subtitle1: {
           fontSize: 18,
-          fontWeight: 600
+          fontWeight: "regular"
+        },
+        paragraph: {
+          fontSize: 15,
+          fontWeight: "lighter"
         }
-      }
+      },
+      
     },
 
     MuiButton: {
