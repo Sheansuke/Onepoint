@@ -6,12 +6,21 @@ import {
 } from '@mui/icons-material'
 import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material'
 import React, { FC } from 'react'
+import { useDispatch } from 'react-redux';
+import {openSideMenu} from "@redux/slices/uiSlice"
+
 
 interface NavBarProps {
   // name?: string;
 }
 
 export const NavBar: FC<NavBarProps> = () => {
+  const dispatch = useDispatch()
+
+  const handleOpenSideMenu = () => {
+    dispatch(openSideMenu())
+  }
+
   return (
     <AppBar>
       <Toolbar
@@ -21,13 +30,14 @@ export const NavBar: FC<NavBarProps> = () => {
         }}
       >
         <Box>
-          <IconButton size="small" sx={{ m: 0, p: 0 }}>
+          <IconButton size="small" sx={{ m: 0, p: 0 }} onClick={handleOpenSideMenu}>
             <MenuOutlined
               color="secondary"
               sx={{
                 fontSize: 40
               }}
-            />{' '}
+              
+            />
           </IconButton>
         </Box>
 

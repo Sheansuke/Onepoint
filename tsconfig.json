@@ -16,6 +16,9 @@
       ],
       "@utils/*": [
         "utils/*"
+      ],
+      "@redux/slices/*": [
+        "redux/slices/*"
       ]
     },
     "target": "es5",
