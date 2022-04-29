@@ -1,36 +1,48 @@
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavListItem } from '@molecules/NavListItem'
-import {
-  Box,
-  Divider,
-  Drawer,
-  List,
-  Typography,
-  useTheme
-} from '@mui/material'
+import { Box, Divider, Drawer, List, Typography, useTheme } from '@mui/material'
+import { RootState } from 'redux/store'
+import { closeSideMenu } from '@redux/slices/uiSlice'
 import { NavItemsData, NavItemsAdminData } from './NavItemsData'
 
-interface SideMenuProps {
-  // name?: string;
-}
-
-export const SideMenu: FC<SideMenuProps> = () => {
+export const SideMenu: FC = () => {
   const router = useRouter()
   const { palette } = useTheme()
+
+  // redux
+  const { isSideMenuOpen } = useSelector((state: RootState) => state.uiState)
+  const dispatch = useDispatch()
 
   const navigateTo = (url: string) => {
     router.push(url)
   }
 
+  const handleClose = () => {
+    dispatch(closeSideMenu())
+  }
+
   return (
     <Drawer
-      open={true}
-      onClose={() => console.log('close')}
+      open={isSideMenuOpen}
+      onClose={handleClose}
       anchor="left"
       sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
     >
-      <Box sx={{ width: 275, paddingTop: 5 }}>
+      <Typography
+        variant="h1"
+        color="primary"
+        sx={{
+          mt: 2,
+          mb: 2,
+          ml: 1,
+          fontWeight: 400
+        }}
+      >
+        Onepoint
+      </Typography>
+      <Box sx={{ width: 275 }}>
         <List>
           {/* CLIENTE */}
           {NavItemsData.map((item, index) => (
