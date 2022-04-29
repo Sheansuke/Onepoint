@@ -1,21 +1,22 @@
 import { Button } from '@mui/material'
+import { NavBar } from '@organism/NavBar'
 import React, { FC } from 'react'
+import { SideMenu } from '../SideMenu/index'
 
 interface MainLayoutProps {
   children: React.ReactNode | React.ReactNode[]
 }
 
-const MainLayout: FC<MainLayoutProps> = ({ children }) => {
+export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
-      {/* TODO: Navbar */}
-      <nav></nav>
+      <nav>
+        <NavBar />
+      </nav>
 
-      {/* TODO: SideMenu */}
+      <SideMenu />
 
       <main>{children}</main>
     </>
   )
 }
-
-export default React.memo(MainLayout)

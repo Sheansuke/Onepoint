@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material'
 import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
-import MainLayout from '@organism/layouts/MainLayout'
+import {MainLayout} from '@organism/layouts/MainLayout'
 
 const publicPages = []
 
