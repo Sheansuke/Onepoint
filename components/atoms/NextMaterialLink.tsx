@@ -10,7 +10,7 @@ interface NextMaterialLinkProps {
 }
 
 export const NextMaterialLink: FC<NextMaterialLinkProps> = ({
-  href,
+  href ,
   prefetch = false,
   key,
   children
