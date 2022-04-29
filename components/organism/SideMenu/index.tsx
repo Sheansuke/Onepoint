@@ -17,6 +17,7 @@ export const SideMenu: FC = () => {
 
   const navigateTo = (url: string) => {
     router.push(url)
+    handleClose()
   }
 
   const handleClose = () => {
