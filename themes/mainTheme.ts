@@ -15,7 +15,7 @@ export const mainTheme = createTheme({
       '900': '#134e4a'
     },
     secondary: {
-      main: '#64748b',
+      main: '#0f172a',
       '100': '#f1f5f9',
       '200': '#e2e8f0',
       '300': '#cbd5e1',
@@ -43,7 +43,7 @@ export const mainTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          // backgroundColor: 'white',
+          backgroundColor: 'white',
           // height: 60
         }
       }
