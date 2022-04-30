@@ -23,7 +23,7 @@ interface ProductCardProps {
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { palette } = useTheme()
   return (
-    <Grid item xs={12} md={3}>
+    <Grid item xs={12} sm={6} md={3}>
       <Card
         sx={{
           p: 2
