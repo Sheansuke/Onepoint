@@ -1,7 +1,9 @@
 import { Button } from '@mui/material'
 import { NavBar } from '@organism/NavBar'
+import { setInitialState } from '@redux/slices/cartSlice'
 import dynamic from 'next/dynamic'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 interface MainLayoutProps {
   children: React.ReactNode | React.ReactNode[]
@@ -15,6 +17,15 @@ const SideMenu = dynamic(
 )
 
 export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const cartState = localStorage.getItem('cartState')
+    if (cartState) {
+      dispatch(setInitialState(JSON.parse(cartState)))
+    }
+  }, [])
+
   return (
     <>
       <nav>
