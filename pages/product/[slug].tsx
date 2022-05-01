@@ -12,8 +12,11 @@ import { ProductsTestData } from '@utils/ProductsTestData'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { IProductModel } from '../../interfaces/models/IProductModel'
+import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
+import { useDispatch } from 'react-redux'
+import { addProductToCart } from '@redux/slices/cartSlice'
 
 interface ProductBySlugPageProps {
   product: IProductModel
@@ -21,6 +24,40 @@ interface ProductBySlugPageProps {
 
 const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   const { palette } = useTheme()
+  const dispatch = useDispatch()
+  const [cartProduct, setCartProduct] = useState<ICartProduct>({
+    id: product.id,
+    title: product.title,
+    slug: product.slug,
+    description: product.description,
+    imageUrl: product.imageUrl,
+    tags: product.tags,
+    inStock: product.inStock,
+    price: product.price,
+    quantity: 1
+  })
+
+  const incrementQuantity = () => {
+    if (cartProduct.quantity < product.inStock) {
+      setCartProduct({
+        ...cartProduct,
+        quantity: cartProduct.quantity + 1
+      })
+    }
+  }
+
+  const decrementQuantity = () => {
+    if (cartProduct.quantity > 1) {
+      setCartProduct({
+        ...cartProduct,
+        quantity: cartProduct.quantity - 1
+      })
+    }
+  }
+
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(cartProduct))
+  }
   return (
     <>
       <NextSeo
@@ -60,7 +97,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
             <Box
               sx={{ mt: 4, display: 'flex', gap: 2, justifyContent: 'center' }}
             >
-              <IconButton sx={{ p: 0, m: 0 }}>
+              <IconButton sx={{ p: 0, m: 0 }} onClick={decrementQuantity}>
                 <RemoveCircleOutline fontSize="large" color="primary" />
               </IconButton>
               <Typography
@@ -68,9 +105,9 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                 fontWeight="bold"
                 color="text.primary"
               >
-                1
+                {cartProduct.quantity}
               </Typography>
-              <IconButton sx={{ p: 0, m: 0 }}>
+              <IconButton sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
                 <ControlPointOutlined fontSize="large" color="primary" />
               </IconButton>
             </Box>
@@ -84,7 +121,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                 mt: 4
               }}
             >
-              Total: 500
+              {` Total: $${cartProduct.quantity * cartProduct.price}`}
             </Typography>
             <Box
               sx={{
@@ -97,6 +134,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                   color: palette.primary[50],
                   width: '100%'
                 }}
+                onClick={handleAddProductToCart}
               >
                 Agregar al carrito
               </Button>
@@ -109,7 +147,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async ctx => {
-  const data = ProductsTestData 
+  const data = ProductsTestData
   const products = data.map(product => ({ params: { slug: product.slug } }))
   return {
     paths: products,

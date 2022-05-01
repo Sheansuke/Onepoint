@@ -5,10 +5,19 @@ import {
   SearchOutlined,
   ShoppingCartOutlined
 } from '@mui/icons-material'
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material'
+import {
+  AppBar,
+  Badge,
+  Box,
+  Button,
+  Chip,
+  IconButton,
+  Toolbar
+} from '@mui/material'
 import React, { FC, Suspense } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice'
+import { RootState } from 'redux/store'
 
 interface NavBarProps {
   // name?: string;
@@ -23,6 +32,7 @@ const SearchModal = dynamic(
 
 export const NavBar: FC<NavBarProps> = () => {
   const dispatch = useDispatch()
+  const {numberOfItems} = useSelector((state: RootState) => state.cartState)
 
   const handleOpenSideMenu = () => {
     dispatch(openSideMenu())
@@ -39,7 +49,8 @@ export const NavBar: FC<NavBarProps> = () => {
       <Toolbar
         sx={{
           display: 'flex',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          m: 1
         }}
       >
         <Box>
@@ -83,12 +94,14 @@ export const NavBar: FC<NavBarProps> = () => {
 
           <Box>
             <NextMaterialLink href="/cart">
-              <ShoppingCartOutlined
-                color="secondary"
-                sx={{
-                  fontSize: 40
-                }}
-              />
+              <Badge badgeContent={numberOfItems >= 9 ? "+9" : numberOfItems} color="info"  >
+                <ShoppingCartOutlined
+                  color="secondary"
+                  sx={{
+                    fontSize: 40
+                  }}
+                />
+              </Badge>
             </NextMaterialLink>
           </Box>
         </Box>

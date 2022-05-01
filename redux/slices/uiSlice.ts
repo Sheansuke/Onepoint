@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 export interface IUIState {
   isSideMenuOpen: boolean
@@ -11,7 +11,7 @@ const initialState: IUIState = {
 }
 
 export const uiSlice = createSlice({
-  name: 'sideMenu',
+  name: 'uiState',
   initialState,
   reducers: {
     openSideMenu: state => {

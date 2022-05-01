@@ -10,7 +10,7 @@ import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 import {MainLayout} from '@organism/layouts/MainLayout'
 
-const publicPages = []
+const publicPages = ["/","/cart","/product/[slug]"]
 
 // REACT-QUERY
 const queryClient = new QueryClient()
@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // Check if the current route matches a public page
   const isPublicPage = publicPages.includes(pathname)
+  
 
   return (
     <Provider store={store}>
