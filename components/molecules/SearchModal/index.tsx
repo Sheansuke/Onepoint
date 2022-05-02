@@ -68,15 +68,16 @@ export const SearchModal: FC<SearchModalProps> = () => {
           p: 2
         }}
       >
-        <form onSubmit={handleSubmit(handleSubmitForm)}>
+        <form onSubmit={handleSubmit(handleSubmitForm)}  >
           <TextField
-            autoFocus
             id="input-with-icon-textfield"
             label="Buscar producto"
             {...register('search', {
               required: true
             })}
             InputProps={{
+              autoComplete: 'off',
+              autoFocus: true,
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchOutlined />
