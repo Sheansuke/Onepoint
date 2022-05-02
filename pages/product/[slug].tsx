@@ -17,6 +17,7 @@ import { IProductModel } from '../../interfaces/models/IProductModel'
 import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
 import { useDispatch } from 'react-redux'
 import { addProductToCart } from '@redux/slices/cartSlice'
+import { useCartState } from '@hooks/useCartState'
 
 interface ProductBySlugPageProps {
   product: IProductModel
@@ -24,41 +25,21 @@ interface ProductBySlugPageProps {
 
 const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   const { palette } = useTheme()
-  const dispatch = useDispatch()
-  
-  const [cartProduct, setCartProduct] = useState<ICartProduct>({
-    id: product.id,
-    title: product.title,
-    slug: product.slug,
-    description: product.description,
-    imageUrl: product.imageUrl,
-    tags: product.tags,
-    inStock: product.inStock,
-    price: product.price,
-    quantity: 1
-  })
+  const { handleAddProductToCart } = useCartState()
+  const [quantity, setQuantity] = useState(1)
 
   const incrementQuantity = () => {
-    if (cartProduct.quantity < product.inStock) {
-      setCartProduct({
-        ...cartProduct,
-        quantity: cartProduct.quantity + 1
-      })
+    if (quantity < product.inStock) {
+      setQuantity(quantity + 1)
     }
   }
 
   const decrementQuantity = () => {
-    if (cartProduct.quantity > 1) {
-      setCartProduct({
-        ...cartProduct,
-        quantity: cartProduct.quantity - 1
-      })
+    if (quantity > 1) {
+      setQuantity(quantity - 1)
     }
   }
 
-  const handleAddProductToCart = () => {
-    dispatch(addProductToCart(cartProduct))
-  }
   return (
     <>
       <NextSeo
@@ -106,7 +87,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                 fontWeight="bold"
                 color="text.primary"
               >
-                {cartProduct.quantity}
+                {quantity}
               </Typography>
               <IconButton sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
                 <ControlPointOutlined fontSize="large" color="primary" />
@@ -122,7 +103,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                 mt: 4
               }}
             >
-              {` Total: $${cartProduct.quantity * cartProduct.price}`}
+              {` Total: $${quantity * product.price}`}
             </Typography>
             <Box
               sx={{
@@ -135,7 +116,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                   color: palette.primary[50],
                   width: '100%'
                 }}
-                onClick={handleAddProductToCart}
+                onClick={() => handleAddProductToCart(product, quantity)}
               >
                 Agregar al carrito
               </Button>
