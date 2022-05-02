@@ -7,6 +7,8 @@ type RequestBody = IUserCreated
 
 /*
 This endpoint receive events of Clerk webhooks.
+
+when clerk emit even user.created, we create a new user in our database.
 */
 
 export default async function (

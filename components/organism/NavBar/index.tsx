@@ -9,12 +9,10 @@ import {
   AppBar,
   Badge,
   Box,
-  Button,
-  Chip,
   IconButton,
   Toolbar
 } from '@mui/material'
-import React, { FC, Suspense } from 'react'
+import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice'
 import { RootState } from 'redux/store'

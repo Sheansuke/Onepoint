@@ -25,6 +25,7 @@ interface ProductBySlugPageProps {
 const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   const { palette } = useTheme()
   const dispatch = useDispatch()
+  
   const [cartProduct, setCartProduct] = useState<ICartProduct>({
     id: product.id,
     title: product.title,
@@ -146,7 +147,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async ctx => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const data = ProductsTestData
   const products = data.map(product => ({ params: { slug: product.slug } }))
   return {

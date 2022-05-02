@@ -1,14 +1,11 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
 import { ICartProduct } from '@interfaces/frontend/ICartProduct'
 import {
-  AddShoppingCartOutlined,
-  ShoppingCartOutlined
-} from '@mui/icons-material'
+  AddShoppingCartOutlined} from '@mui/icons-material'
 import {
   Box,
   Button,
   Card,
-  CardMedia,
   Chip,
   Grid,
   Typography,
@@ -16,7 +13,7 @@ import {
 } from '@mui/material'
 import { addProductToCart } from '@redux/slices/cartSlice'
 import Image from 'next/image'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { IProductModel } from '../../../interfaces/models/IProductModel'
 

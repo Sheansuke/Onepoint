@@ -1,4 +1,3 @@
-import { Button } from '@mui/material'
 import { NavBar } from '@organism/NavBar'
 import { setInitialState } from '@redux/slices/cartSlice'
 import dynamic from 'next/dynamic'

@@ -21,6 +21,7 @@ export const cartSlice = createSlice({
   name: 'cartState',
   initialState,
   reducers: {
+    // currently this function is execute in MainLayout inside useEffect
     setInitialState: (state, action: PayloadAction<ICartState>) => {
       state.items = action.payload.items
       state.numberOfItems = action.payload.numberOfItems
@@ -29,6 +30,7 @@ export const cartSlice = createSlice({
       state.total = action.payload.total
     },
 
+    // if product exist in cart, update quantity, else add product to cart
     addProductToCart: (state, action: PayloadAction<ICartProduct>) => {
       const currentState = current(state)
       const productExistInCart = currentState.items.find(
@@ -57,7 +59,6 @@ export const cartSlice = createSlice({
   }
 })
 
-// Action creators are generated for each case reducer function
 export const { addProductToCart, setInitialState } = cartSlice.actions
 
 export default cartSlice.reducer
