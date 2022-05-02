@@ -1,4 +1,5 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
+import { ICartProduct } from '@interfaces/frontend/ICartProduct'
 import {
   AddShoppingCartOutlined,
   ShoppingCartOutlined
@@ -13,8 +14,10 @@ import {
   Typography,
   useTheme
 } from '@mui/material'
+import { addProductToCart } from '@redux/slices/cartSlice'
 import Image from 'next/image'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { IProductModel } from '../../../interfaces/models/IProductModel'
 
 interface ProductCardProps {
@@ -23,6 +26,24 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { palette } = useTheme()
+  const dispatch = useDispatch()
+
+  const handleAddProductToCart = () => {
+    dispatch(
+      addProductToCart({
+        id: product.id,
+        title: product.title,
+        slug: product.slug,
+        description: product.description,
+        imageUrl: product.imageUrl,
+        tags: product.tags,
+        inStock: product.inStock,
+        price: product.price,
+        quantity: 1
+      } as ICartProduct)
+    )
+  }
+
   return (
     <Grid item xs={12} sm={6} md={3}>
       <Card
@@ -73,6 +94,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
 
           <Box sx={{ alignSelf: 'flex-end' }}>
             <Button
+              onClick={handleAddProductToCart}
               sx={{
                 width: 60,
                 height: 60,
