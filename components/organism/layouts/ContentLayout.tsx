@@ -1,6 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
-import { NavBar } from '@organism/NavBar'
-import dynamic from 'next/dynamic'
+import { Box, Typography } from '@mui/material'
 import React, { FC } from 'react'
 
 interface ContentLayoutProps {

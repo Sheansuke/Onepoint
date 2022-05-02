@@ -10,7 +10,8 @@ import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 import {MainLayout} from '@organism/layouts/MainLayout'
 
-const publicPages = ["/","/cart","/product/[slug]"]
+// put public pages here
+const publicPages = ["/","/cart","/product/[slug]","/search/[query]"]
 
 // REACT-QUERY
 const queryClient = new QueryClient()
