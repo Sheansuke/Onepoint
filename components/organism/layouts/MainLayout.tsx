@@ -22,6 +22,8 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
     const cartState = localStorage.getItem('cartState')
     if (cartState) {
       dispatch(setInitialState(JSON.parse(cartState)))
+    } else {
+      dispatch(setInitialState())
     }
   }, [])
 

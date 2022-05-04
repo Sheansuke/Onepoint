@@ -12,7 +12,9 @@ export const ProductList: FC<ProductListProps> = ({ products = [] }) => {
     <Grid container spacing={4}>
       {products.length > 0 ? (
         products.map((product, index) => (
-          <ProductCard key={index} product={product} />
+          <Grid item key={index} xs={12} sm={6} md={3}>
+            <ProductCard product={product} />
+          </Grid>
         ))
       ) : (
         <Box
@@ -22,7 +24,7 @@ export const ProductList: FC<ProductListProps> = ({ products = [] }) => {
             justifyContent: 'center'
           }}
         >
-          <Typography>No se encontraron productos...</Typography>
+          <Typography mt={5}>No se encontraron productos...</Typography>
         </Box>
       )}
     </Grid>

@@ -140,7 +140,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ctx => {
   const slug = ctx.params?.slug
 
-  // TODO: get products by slug
   const product = ProductsTestData.find(product => product.slug === slug)
 
   if (!product) {
