@@ -1,6 +1,5 @@
-import { SupervisedUserCircleOutlined } from '@mui/icons-material'
 import { IconProps, ListItem, ListItemText } from '@mui/material'
-import React, { FC, ReactElement, ReactNode } from 'react'
+import React, { FC, ReactElement } from 'react'
 
 interface NavListItemProps {
   onClick?: () => void

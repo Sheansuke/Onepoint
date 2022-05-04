@@ -9,13 +9,17 @@ import { ThemeProvider } from '@mui/material'
 import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 import { MainLayout } from '@organism/layouts/MainLayout'
-import {ToastContainer} from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 // put public pages here
-// TODO: falta definir la totalidad de las rutas
-const publicPages = ['/', '/cart', '/product/[slug]', '/search/[query]']
+const publicPages = [
+  '/',
+  '/contacts',
+  '/cart',
+  '/product/[slug]',
+  '/search/[query]'
+]
 
 // REACT-QUERY
 const queryClient = new QueryClient()

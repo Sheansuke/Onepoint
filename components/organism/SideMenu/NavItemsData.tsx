@@ -32,9 +32,9 @@ export const NavItemsData: NavItem[] = [
     navigateTo: '/cart'
   },
   {
-    text: 'Contacto',
+    text: 'Contactos',
     icon: <PermContactCalendarOutlined />,
-    navigateTo: '/contact'
+    navigateTo: '/contacts'
   }
 ]
 
