@@ -7,6 +7,7 @@ import { ProductList } from '../components/organism/ProductList/index'
 import {ProductsTestData} from "@utils/ProductsTestData"
 
 // TODO: CREATE 404 PAGE
+// TODO: USE REVALIDATE OR ON-DEMAND FOR STATICS PAGES
 const Home: NextPage = () => {
   return (
     <>

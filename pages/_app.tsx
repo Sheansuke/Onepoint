@@ -8,10 +8,14 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material'
 import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
-import {MainLayout} from '@organism/layouts/MainLayout'
+import { MainLayout } from '@organism/layouts/MainLayout'
+import {ToastContainer} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // put public pages here
-const publicPages = ["/","/cart","/product/[slug]","/search/[query]"]
+// TODO: falta definir la totalidad de las rutas
+const publicPages = ['/', '/cart', '/product/[slug]', '/search/[query]']
 
 // REACT-QUERY
 const queryClient = new QueryClient()
@@ -21,13 +25,23 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // Check if the current route matches a public page
   const isPublicPage = publicPages.includes(pathname)
-  
 
   return (
     <Provider store={store}>
       <ThemeProvider theme={mainTheme}>
         <ClerkProvider {...pageProps}>
           <QueryClientProvider client={queryClient}>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <MainLayout>
               {isPublicPage ? (
                 <Component {...pageProps} />
@@ -42,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </>
               )}
             </MainLayout>
+            <ToastContainer />
             <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </ClerkProvider>

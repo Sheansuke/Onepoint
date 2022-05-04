@@ -1,5 +1,5 @@
 import { ICartProduct } from '@interfaces/frontend/ICartProduct'
-import { addProductToCart } from '@redux/slices/cartSlice'
+import { addProductToCart, decrementProductQuantity, incrementProductQuantity, PaymentType, removeProductFromCart, setDeliveryDate, setPaymentType } from '@redux/slices/cartSlice'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
@@ -9,20 +9,63 @@ export const useCartState = () => {
   const dispatch = useDispatch()
   const cartState = useSelector((state: RootState) => state.cartState)
 
+
   const handleAddProductToCart = useCallback(
     (product: IProductModel, quantity: number) => {
       dispatch(
         addProductToCart({
-          id: product.id,
-          title: product.title,
-          slug: product.slug,
-          description: product.description,
-          imageUrl: product.imageUrl,
-          tags: product.tags,
-          inStock: product.inStock,
-          price: product.price,
+          ...product,
           quantity: quantity ? quantity : 1
         } as ICartProduct)
+      )
+    },
+    []
+  )
+  const handleRemoveProductFromCart = useCallback(
+    (product: ICartProduct) => {
+      dispatch(
+        removeProductFromCart({
+          ...product
+        } as ICartProduct)
+      )
+    },
+    []
+  )
+
+  const handleIncrementProductQuantity = useCallback(
+    (product: ICartProduct) => {
+      dispatch(
+        incrementProductQuantity({
+          ...product,
+        } as ICartProduct)
+      )
+    },
+    []
+  )
+
+  const handledecrementProductQuantity = useCallback(
+    (product: ICartProduct) => {
+      dispatch(
+        decrementProductQuantity({
+          ...product
+        } as ICartProduct)
+      )
+    },
+    []
+  )
+
+  const handleSetPaymentType = useCallback(
+    (paymentType: PaymentType) => {
+      dispatch(
+        setPaymentType(paymentType)
+      )
+    },
+    []
+  )
+  const handleSetDeliveryDate = useCallback(
+    (deliveryDate: string) => {
+      dispatch(
+        setDeliveryDate(deliveryDate)
       )
     },
     []
@@ -30,6 +73,11 @@ export const useCartState = () => {
 
   return {
     cartState,
-    handleAddProductToCart
+    handleAddProductToCart,
+    handleRemoveProductFromCart,
+    handleIncrementProductQuantity,
+    handledecrementProductQuantity,
+    handleSetPaymentType,
+    handleSetDeliveryDate
   }
 }

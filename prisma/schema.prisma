@@ -61,6 +61,7 @@ model Order {
   total         Int
   status        OrderStatus @relation(fields: [orderStatusId], references: [id])
   orderStatusId Int
+  paymentType   String
   deliveryDate  DateTime
   isPaid        Boolean
   paidAt        DateTime
