@@ -8,12 +8,18 @@ interface SelectPaymentTypeProps {
 }
 
 export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
-  const {cartState, handleSetPaymentType } = useCartState()
-  const [paymentType, setPaymentType] = useState<PaymentType | string>(cartState?.paymentType)
+  const { cartState, handleSetPaymentType, handleSetDeliveryDate } =
+    useCartState()
+  const [paymentType, setPaymentType] = useState<PaymentType | string>(
+    cartState?.paymentType
+  )
 
   const handleChange = (event: React.ChangeEvent<any>) => {
     setPaymentType(event.target.value)
     handleSetPaymentType(event.target.value)
+    if (event.target.value === 'transferencia') {
+      handleSetDeliveryDate(undefined)
+    }
   }
 
   return (
@@ -28,7 +34,6 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
         <MenuItem value="contra entrega">Contra entrega</MenuItem>
         <MenuItem value="transferencia">Transferencia</MenuItem>
       </Select>
-     
     </FormControl>
   )
 }

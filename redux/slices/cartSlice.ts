@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
 import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
+import { showNotification } from '../../utils/showNotification'
 
-
-export type PaymentType = "contra entrega" | "transferencia"
+export type PaymentType = 'contra entrega' | 'transferencia'
 
 export interface ICartState {
   isLoading: boolean
@@ -17,7 +17,7 @@ export interface ICartState {
 
 const initialState: ICartState = {
   isLoading: true,
-  paymentType: "contra entrega",
+  paymentType: 'contra entrega',
   items: [],
   numberOfItems: 0,
   subTotal: 0,
@@ -33,12 +33,13 @@ export const cartSlice = createSlice({
     setInitialState: (state, action?: PayloadAction<ICartState>) => {
       state.isLoading = false
       state.deliveryDate = action.payload?.deliveryDate ?? undefined
-      state.paymentType = action.payload?.paymentType ?? "contra entrega"
+      state.paymentType = action.payload?.paymentType ?? 'contra entrega'
       state.items = action.payload?.items ?? []
       state.numberOfItems = action.payload?.numberOfItems ?? 0
       state.subTotal = action.payload?.subTotal ?? 0
-      state.tax = action.payload?.tax ?? Number(process.env.NEXT_PUBLIC_TAX_RATE)
-      state.total = action.payload?.total?? 0
+      state.tax =
+        action.payload?.tax ?? Number(process.env.NEXT_PUBLIC_TAX_RATE)
+      state.total = action.payload?.total ?? 0
     },
 
     // if product exist in cart, update quantity, else add product to cart
@@ -51,21 +52,36 @@ export const cartSlice = createSlice({
       if (productExistInCart) {
         state.items = state.items.map(product => {
           if (product.id === action.payload.id) {
-            product.quantity += action.payload.quantity
+            const newAmount = product.quantity + action.payload.quantity
+            if (newAmount > product.inStock) {
+              showNotification(
+                'Ya no queda mas de este producto en stock',
+                'error'
+              )
+            } else {
+              showNotification('Producto agregado al carrito', 'success')
+              product.quantity = newAmount
+              state.numberOfItems += action.payload.quantity
+              
+              // ACCOUNTING
+              state.subTotal += action.payload.price * action.payload.quantity
+              state.total = state.subTotal * state.tax + state.subTotal
+              localStorage.setItem('cartState', JSON.stringify(state))
+
+            }
           }
           return product
         })
-
-        state.numberOfItems += action.payload.quantity
       } else {
+        showNotification('Producto agregado al carrito', 'success')
         state.numberOfItems += action.payload.quantity
         state.items.push(action.payload)
-      }
 
-      // ACCOUNTING
-      state.subTotal += action.payload.price * action.payload.quantity
-      state.total = state.subTotal * state.tax + state.subTotal
-      localStorage.setItem('cartState', JSON.stringify(state))
+        // ACCOUNTING
+        state.subTotal += action.payload.price * action.payload.quantity
+        state.total = state.subTotal * state.tax + state.subTotal
+        localStorage.setItem('cartState', JSON.stringify(state))
+      }
     },
 
     removeProductFromCart: (state, action: PayloadAction<ICartProduct>) => {
@@ -88,9 +104,11 @@ export const cartSlice = createSlice({
 
             // ACCOUNTING
             state.numberOfItems += 1
-            state.subTotal += product.price 
+            state.subTotal += product.price
             state.total = state.subTotal * state.tax + state.subTotal
             localStorage.setItem('cartState', JSON.stringify(state))
+          } else {
+            showNotification('Ya no queda mas de este producto en stock', "error")
           }
         }
         return product
@@ -105,7 +123,7 @@ export const cartSlice = createSlice({
 
             // ACCOUNTING
             state.numberOfItems -= 1
-            state.subTotal -= product.price 
+            state.subTotal -= product.price
             state.total = state.subTotal * state.tax + state.subTotal
             localStorage.setItem('cartState', JSON.stringify(state))
           }
@@ -123,7 +141,7 @@ export const cartSlice = createSlice({
       state.deliveryDate = action.payload
       localStorage.setItem('cartState', JSON.stringify(state))
     },
-    clearCartState: (state) => {
+    clearCartState: state => {
       state.deliveryDate = undefined
       state.numberOfItems = 0
       state.subTotal = 0

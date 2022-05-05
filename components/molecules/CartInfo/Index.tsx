@@ -4,13 +4,12 @@ import { SelectPaymentType } from '@atoms/SelectPaymentType'
 import { useCartState } from '@hooks/useCartState'
 import { InfoOutlined } from '@mui/icons-material'
 import { Box, Button, Card, Divider, Typography, useTheme } from '@mui/material'
-import {toast} from "react-toastify"
+import { showNotification } from '../../../utils/showNotification';
 
 interface CartInfoProps {
   // name?: string;
 }
 
-// TODO: cuando el usuario elija transferencia borrar la fecha
 export const CartInfo: FC<CartInfoProps> = () => {
   const { palette } = useTheme()
   const { cartState } = useCartState()
@@ -18,15 +17,7 @@ export const CartInfo: FC<CartInfoProps> = () => {
 
   const handleConfirm = () => {
     if (!cartState.deliveryDate && cartState.paymentType === "contra entrega") {
-      toast.warn('Debes seleccionar un dia de entrega!', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
+      showNotification("Debes seleccionar un dia de entrega!", "warn")
     }
   }
   return (

@@ -23,22 +23,12 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { palette } = useTheme()
-  const { handleAddProductToCart } = useCartState()
+  const { cartState,handleAddProductToCart } = useCartState()
 
   const handleProductToCard = (product: IProductModel, quantity: number) => {
     handleAddProductToCart(product, quantity)
 
-    toast.success(` Agregado al carrito`,
-      {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      }
-    )
+    
   }
 
   return (

@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
 import { InfoOutlined } from '@mui/icons-material'
 import { toast } from 'react-toastify'
+import { showNotification } from '../../utils/showNotification'
 
 interface SelectDeliveryDateProps {
   buttonWidth?: number
@@ -24,25 +25,9 @@ export const SelectDeliveryDate: FC<SelectDeliveryDateProps> = ({
 
     if (selectedDay > currentDay + 1) {
       handleSetDeliveryDate(format(date, 'dd-MM-yyyy'))
-      toast.success('Fecha seleccionada con exito!', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      })
+      showNotification('Fecha seleccionada con exito!', 'success')
     } else {
-      toast.warn('El dia debe ser 2 dias despues de hoy', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      })
+      showNotification('El dia debe ser 2 dias despues de hoy', 'warn')
     }
   }
 
