@@ -3,9 +3,7 @@ import {
   Box,
   Button,
   Grid,
-  Icon,
   IconButton,
-  Input,
   TextField,
   Typography,
   useTheme
@@ -19,7 +17,7 @@ import React, { FC, useState } from 'react'
 import { IProductModel } from '../../interfaces/models/IProductModel'
 import { useCartState } from '@hooks/useCartState'
 import { useRouter } from 'next/router'
-import { height } from '@mui/system'
+import { showNotification } from '../../utils/showNotification';
 
 interface ProductBySlugPageProps {
   product: IProductModel
@@ -44,8 +42,10 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   }
 
   const handleAddToCart = (product: IProductModel, quantity: number) => {
-    handleAddProductToCart(product, quantity)
-    router.push('/cart')
+   if (quantity === 0) return showNotification("El valor minimo aceptado es de: 1","error")
+
+   handleAddProductToCart(product, quantity)
+   router.push('/cart')
   }
 
   return (
@@ -106,11 +106,12 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
               >
                 <TextField
                   value={quantity}
-                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  onChange={e => setQuantity(Number(e.target.value))}
                   size="small"
-                  sx={{
-                    width: 38
+                  inputProps={{
+                    min: 1,
                   }}
+                  sx={{ input: { textAlign: 'center'}, width: '3.5rem' }}
                 />
               </Typography>
               <IconButton sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>

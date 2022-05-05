@@ -1,5 +1,12 @@
 import { ICartProduct } from '@interfaces/frontend/ICartProduct'
-import { addProductToCart, decrementProductQuantity, incrementProductQuantity, PaymentType, removeProductFromCart, setDeliveryDate, setPaymentType } from '@redux/slices/cartSlice'
+import {
+  addProductToCart,
+  setProductQuantity,
+  PaymentType,
+  removeProductFromCart,
+  setDeliveryDate,
+  setPaymentType
+} from '@redux/slices/cartSlice'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
@@ -8,7 +15,6 @@ import { IProductModel } from '../interfaces/models/IProductModel'
 export const useCartState = () => {
   const dispatch = useDispatch()
   const cartState = useSelector((state: RootState) => state.cartState)
-
 
   const handleAddProductToCart = useCallback(
     (product: IProductModel, quantity: number) => {
@@ -21,10 +27,18 @@ export const useCartState = () => {
     },
     []
   )
-  const handleRemoveProductFromCart = useCallback(
+  const handleRemoveProductFromCart = useCallback((product: ICartProduct) => {
+    dispatch(
+      removeProductFromCart({
+        ...product
+      } as ICartProduct)
+    )
+  }, [])
+
+  const handleSetProductQuantity = useCallback(
     (product: ICartProduct) => {
       dispatch(
-        removeProductFromCart({
+        setProductQuantity({
           ...product
         } as ICartProduct)
       )
@@ -32,51 +46,18 @@ export const useCartState = () => {
     []
   )
 
-  const handleIncrementProductQuantity = useCallback(
-    (product: ICartProduct) => {
-      dispatch(
-        incrementProductQuantity({
-          ...product,
-        } as ICartProduct)
-      )
-    },
-    []
-  )
-
-  const handledecrementProductQuantity = useCallback(
-    (product: ICartProduct) => {
-      dispatch(
-        decrementProductQuantity({
-          ...product
-        } as ICartProduct)
-      )
-    },
-    []
-  )
-
-  const handleSetPaymentType = useCallback(
-    (paymentType: PaymentType) => {
-      dispatch(
-        setPaymentType(paymentType)
-      )
-    },
-    []
-  )
-  const handleSetDeliveryDate = useCallback(
-    (deliveryDate: string) => {
-      dispatch(
-        setDeliveryDate(deliveryDate)
-      )
-    },
-    []
-  )
+  const handleSetPaymentType = useCallback((paymentType: PaymentType) => {
+    dispatch(setPaymentType(paymentType))
+  }, [])
+  const handleSetDeliveryDate = useCallback((deliveryDate: string) => {
+    dispatch(setDeliveryDate(deliveryDate))
+  }, [])
 
   return {
     cartState,
     handleAddProductToCart,
     handleRemoveProductFromCart,
-    handleIncrementProductQuantity,
-    handledecrementProductQuantity,
+    handleSetProductQuantity,
     handleSetPaymentType,
     handleSetDeliveryDate
   }

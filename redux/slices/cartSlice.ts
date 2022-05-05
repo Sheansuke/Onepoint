@@ -62,12 +62,11 @@ export const cartSlice = createSlice({
               showNotification('Producto agregado al carrito', 'success')
               product.quantity = newAmount
               state.numberOfItems += action.payload.quantity
-              
+
               // ACCOUNTING
               state.subTotal += action.payload.price * action.payload.quantity
               state.total = state.subTotal * state.tax + state.subTotal
               localStorage.setItem('cartState', JSON.stringify(state))
-
             }
           }
           return product
@@ -96,29 +95,10 @@ export const cartSlice = createSlice({
       localStorage.setItem('cartState', JSON.stringify(state))
     },
 
-    incrementProductQuantity: (state, action: PayloadAction<ICartProduct>) => {
+    setProductQuantity: (state, action: PayloadAction<ICartProduct>) => {
       state.items = state.items.map(product => {
         if (product.id === action.payload.id) {
-          if (product.quantity < product.inStock) {
-            product.quantity += 1
-
-            // ACCOUNTING
-            state.numberOfItems += 1
-            state.subTotal += product.price
-            state.total = state.subTotal * state.tax + state.subTotal
-            localStorage.setItem('cartState', JSON.stringify(state))
-          } else {
-            showNotification('Ya no queda mas de este producto en stock', "error")
-          }
-        }
-        return product
-      })
-    },
-
-    decrementProductQuantity: (state, action: PayloadAction<ICartProduct>) => {
-      state.items = state.items.map(product => {
-        if (product.id === action.payload.id) {
-          if (product.quantity > 1) {
+          if (action.payload.quantity < 0 && product.quantity > 1) {
             product.quantity -= 1
 
             // ACCOUNTING
@@ -126,6 +106,21 @@ export const cartSlice = createSlice({
             state.subTotal -= product.price
             state.total = state.subTotal * state.tax + state.subTotal
             localStorage.setItem('cartState', JSON.stringify(state))
+          } else if (action.payload.quantity > 0) {
+            if (product.quantity < product.inStock) {
+              product.quantity += 1
+
+              // ACCOUNTING
+              state.numberOfItems += 1
+              state.subTotal += product.price
+              state.total = state.subTotal * state.tax + state.subTotal
+              localStorage.setItem('cartState', JSON.stringify(state))
+            } else {
+              showNotification(
+                'Ya no queda mas de este producto en stock',
+                'error'
+              )
+            }
           }
         }
         return product
@@ -153,8 +148,7 @@ export const cartSlice = createSlice({
 export const {
   addProductToCart,
   removeProductFromCart,
-  incrementProductQuantity,
-  decrementProductQuantity,
+  setProductQuantity,
   setPaymentType,
   setDeliveryDate,
   clearCartState,

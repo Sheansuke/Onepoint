@@ -19,11 +19,8 @@ export const CartProductCard: FC<CartProductCardProps> = ({
   product,
   canEdit = false
 }) => {
-  const {
-    handleRemoveProductFromCart,
-    handleIncrementProductQuantity,
-    handledecrementProductQuantity
-  } = useCartState()
+  const { handleRemoveProductFromCart, handleSetProductQuantity } =
+    useCartState()
 
   return (
     <Card
@@ -79,7 +76,12 @@ export const CartProductCard: FC<CartProductCardProps> = ({
             <IconButton
               aria-label="disminuir cantidad"
               sx={{ p: 0, m: 0 }}
-              onClick={() => handledecrementProductQuantity(product)}
+              onClick={() =>
+                handleSetProductQuantity({
+                  ...product,
+                  quantity: -1
+                })
+              }
             >
               <RemoveCircleOutline fontSize="large" color="primary" />
             </IconButton>
@@ -93,7 +95,12 @@ export const CartProductCard: FC<CartProductCardProps> = ({
             <IconButton
               aria-label="aumentar cantidad"
               sx={{ p: 0, m: 0 }}
-              onClick={() => handleIncrementProductQuantity(product)}
+              onClick={() =>
+                handleSetProductQuantity({
+                  ...product,
+                  quantity: 1
+                })
+              }
             >
               <ControlPointOutlined fontSize="large" color="primary" />
             </IconButton>

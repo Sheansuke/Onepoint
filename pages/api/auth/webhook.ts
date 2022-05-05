@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { IUserCreated } from '../../../interfaces/clerk'
 import { IApiResponse } from '../../../interfaces/api'

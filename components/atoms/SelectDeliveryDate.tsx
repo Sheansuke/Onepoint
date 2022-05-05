@@ -1,11 +1,10 @@
+import { useCartState } from '@hooks/useCartState'
+import { InfoOutlined } from '@mui/icons-material'
+import { Box, Button, useTheme } from '@mui/material'
+import { format } from 'date-fns'
 import React, { FC, useState } from 'react'
 import DatePicker from 'react-datepicker'
-import { Box, Button, useTheme } from '@mui/material'
-import { useCartState } from '@hooks/useCartState'
-import { format } from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
-import { InfoOutlined } from '@mui/icons-material'
-import { toast } from 'react-toastify'
 import { showNotification } from '../../utils/showNotification'
 
 interface SelectDeliveryDateProps {

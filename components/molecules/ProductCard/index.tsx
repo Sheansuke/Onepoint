@@ -1,21 +1,17 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
-import { ICartProduct } from '@interfaces/frontend/ICartProduct'
 import { AddShoppingCartOutlined } from '@mui/icons-material'
 import {
   Box,
   Button,
   Card,
   Chip,
-  Grid,
   Typography,
   useTheme
 } from '@mui/material'
-import { addProductToCart } from '@redux/slices/cartSlice'
 import { useCartState } from '@hooks/useCartState'
 import Image from 'next/image'
 import React, { FC } from 'react'
 import { IProductModel } from '../../../interfaces/models/IProductModel'
-import { toast } from 'react-toastify'
 
 interface ProductCardProps {
   product: IProductModel
@@ -23,12 +19,10 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { palette } = useTheme()
-  const { cartState,handleAddProductToCart } = useCartState()
+  const { handleAddProductToCart } = useCartState()
 
   const handleProductToCard = (product: IProductModel, quantity: number) => {
     handleAddProductToCart(product, quantity)
-
-    
   }
 
   return (

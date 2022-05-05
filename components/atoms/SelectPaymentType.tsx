@@ -1,5 +1,5 @@
 import { useCartState } from '@hooks/useCartState'
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
+import { FormControl, Select, MenuItem } from '@mui/material'
 import { PaymentType } from '@redux/slices/cartSlice'
 import React, { FC, useState } from 'react'
 
