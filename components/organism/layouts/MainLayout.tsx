@@ -11,7 +11,7 @@ interface MainLayoutProps {
 const SideMenu = dynamic(
   () => import('@organism/SideMenu').then(module => module.SideMenu),
   {
-    ssr: false
+    ssr: true
   }
 )
 

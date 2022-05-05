@@ -15,6 +15,7 @@ import { useCartState } from '@hooks/useCartState'
 import Image from 'next/image'
 import React, { FC } from 'react'
 import { IProductModel } from '../../../interfaces/models/IProductModel'
+import { toast } from 'react-toastify'
 
 interface ProductCardProps {
   product: IProductModel
@@ -23,6 +24,22 @@ interface ProductCardProps {
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { palette } = useTheme()
   const { handleAddProductToCart } = useCartState()
+
+  const handleProductToCard = (product: IProductModel, quantity: number) => {
+    handleAddProductToCart(product, quantity)
+
+    toast.success(` Agregado al carrito`,
+      {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      }
+    )
+  }
 
   return (
     <Card
@@ -44,7 +61,12 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
             justifyContent: 'center'
           }}
         >
-          <Image src={product.imageUrl} width={205} height={205} />
+          <Image
+            src={product.imageUrl}
+            width={410}
+            height={410}
+            alt={product.title}
+          />
         </Box>
       </NextMaterialLink>
       <Box
@@ -73,7 +95,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
 
         <Box sx={{ alignSelf: 'flex-end' }}>
           <Button
-            onClick={() => handleAddProductToCart(product, 1)}
+            aria-label="Agregar al carrito"
+            onClick={() => handleProductToCard(product, 1)}
             sx={{
               width: 60,
               height: 60,

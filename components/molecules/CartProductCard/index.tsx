@@ -19,8 +19,11 @@ export const CartProductCard: FC<CartProductCardProps> = ({
   product,
   canEdit = false
 }) => {
-
-  const {handleRemoveProductFromCart,handleIncrementProductQuantity,handledecrementProductQuantity} = useCartState()
+  const {
+    handleRemoveProductFromCart,
+    handleIncrementProductQuantity,
+    handledecrementProductQuantity
+  } = useCartState()
 
   return (
     <Card
@@ -38,7 +41,12 @@ export const CartProductCard: FC<CartProductCardProps> = ({
               justifyContent: 'center'
             }}
           >
-            <Image src={product.imageUrl} width={100} height={100} />
+            <Image
+              src={product.imageUrl}
+              width={100}
+              height={100}
+              alt={product.title}
+            />
           </Box>
         </NextMaterialLink>
       </Box>
@@ -68,7 +76,11 @@ export const CartProductCard: FC<CartProductCardProps> = ({
         {/* INCREMENT DECREMENT ICONS */}
         {canEdit && (
           <Box sx={{ display: 'flex', gap: 1, mt: 0.5 }}>
-            <IconButton sx={{ p: 0, m: 0 }} onClick={()=> handledecrementProductQuantity(product)}>
+            <IconButton
+              aria-label="disminuir cantidad"
+              sx={{ p: 0, m: 0 }}
+              onClick={() => handledecrementProductQuantity(product)}
+            >
               <RemoveCircleOutline fontSize="large" color="primary" />
             </IconButton>
             <Typography
@@ -78,7 +90,11 @@ export const CartProductCard: FC<CartProductCardProps> = ({
             >
               {product.quantity}
             </Typography>
-            <IconButton sx={{ p: 0, m: 0 }} onClick={()=>handleIncrementProductQuantity(product)}>
+            <IconButton
+              aria-label="aumentar cantidad"
+              sx={{ p: 0, m: 0 }}
+              onClick={() => handleIncrementProductQuantity(product)}
+            >
               <ControlPointOutlined fontSize="large" color="primary" />
             </IconButton>
           </Box>
@@ -93,7 +109,11 @@ export const CartProductCard: FC<CartProductCardProps> = ({
           }}
         >
           {canEdit ? (
-            <Button color="error" onClick={()=>handleRemoveProductFromCart(product)}>
+            <Button
+              aria-label="eliminar producto"
+              color="error"
+              onClick={() => handleRemoveProductFromCart(product)}
+            >
               <DeleteOutline
                 sx={{
                   mr: 0.2,

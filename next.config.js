@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   concurrentFeatures: true,
+    productionBrowserSourceMaps: true,
+
   images: {
     domains: ['res.cloudinary.com']
   }

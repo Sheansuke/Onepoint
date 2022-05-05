@@ -4,17 +4,13 @@ import { SelectPaymentType } from '@atoms/SelectPaymentType'
 import { useCartState } from '@hooks/useCartState'
 import { InfoOutlined } from '@mui/icons-material'
 import { Box, Button, Card, Divider, Typography, useTheme } from '@mui/material'
-import { format } from 'date-fns'
 import {toast} from "react-toastify"
 
 interface CartInfoProps {
   // name?: string;
 }
 
-
-
-// TODO: no ejecutar la validacion de fecha si el metodo de pago es transferencia
-// TODO: cuando el usuario eliga transferencia borrar la fecha
+// TODO: cuando el usuario elija transferencia borrar la fecha
 export const CartInfo: FC<CartInfoProps> = () => {
   const { palette } = useTheme()
   const { cartState } = useCartState()
@@ -109,6 +105,7 @@ export const CartInfo: FC<CartInfoProps> = () => {
 
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }} onClick={handleConfirm}>
         <Button
+        aria-label='confirmar orden'
           size="large"
           sx={{
             color: palette.primary[50],

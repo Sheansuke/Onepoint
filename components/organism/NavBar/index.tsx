@@ -5,15 +5,9 @@ import {
   SearchOutlined,
   ShoppingCartOutlined
 } from '@mui/icons-material'
-import {
-  AppBar,
-  Badge,
-  Box,
-  IconButton,
-  Toolbar
-} from '@mui/material'
+import { AppBar, Badge, Box, IconButton, Toolbar } from '@mui/material'
 import React, { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice'
 import { RootState } from 'redux/store'
 
@@ -24,13 +18,13 @@ interface NavBarProps {
 const SearchModal = dynamic(
   () => import('@molecules/SearchModal').then(module => module.SearchModal),
   {
-    ssr: false
+    ssr: true
   }
 )
 
 export const NavBar: FC<NavBarProps> = () => {
   const dispatch = useDispatch()
-  const {numberOfItems} = useSelector((state: RootState) => state.cartState)
+  const { numberOfItems } = useSelector((state: RootState) => state.cartState)
 
   const handleOpenSideMenu = () => {
     dispatch(openSideMenu())
@@ -53,6 +47,7 @@ export const NavBar: FC<NavBarProps> = () => {
       >
         <Box>
           <IconButton
+          aria-label='abrir menu'
             size="small"
             sx={{ m: 0, p: 0 }}
             onClick={handleOpenSideMenu}
@@ -77,6 +72,7 @@ export const NavBar: FC<NavBarProps> = () => {
             }}
           >
             <IconButton
+            aria-label='buscar'
               size="small"
               sx={{ m: 0, p: 0 }}
               onClick={handleOpenSearchModal}
@@ -92,7 +88,10 @@ export const NavBar: FC<NavBarProps> = () => {
 
           <Box>
             <NextMaterialLink href="/cart">
-              <Badge badgeContent={numberOfItems >= 9 ? "+9" : numberOfItems} color="info"  >
+              <Badge
+                badgeContent={numberOfItems >= 9 ? '+9' : numberOfItems}
+                color="info"
+              >
                 <ShoppingCartOutlined
                   color="secondary"
                   sx={{

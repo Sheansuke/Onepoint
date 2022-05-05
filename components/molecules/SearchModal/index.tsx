@@ -119,6 +119,7 @@ export const SearchModal: FC<SearchModalProps> = () => {
               }}
             >
               <Button
+              aria-label='cancelar'
                 variant="text"
                 sx={{
                   color: palette.error.main,
@@ -129,6 +130,7 @@ export const SearchModal: FC<SearchModalProps> = () => {
                 Cancelar
               </Button>
               <Button
+                aria-label='buscar producto'
                 type="submit"
                 sx={{
                   color: palette.primary[50]

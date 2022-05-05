@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Grid,
+  Icon,
   IconButton,
   Typography,
   useTheme
@@ -14,9 +15,6 @@ import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import React, { FC, useState } from 'react'
 import { IProductModel } from '../../interfaces/models/IProductModel'
-import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
-import { useDispatch } from 'react-redux'
-import { addProductToCart } from '@redux/slices/cartSlice'
 import { useCartState } from '@hooks/useCartState'
 import { useRouter } from 'next/router'
 
@@ -24,7 +22,6 @@ interface ProductBySlugPageProps {
   product: IProductModel
 }
 
-// TODO: debe enviar al usuario al carrito cuando agrege el producto
 const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   const { palette } = useTheme()
   const router = useRouter()
@@ -58,7 +55,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
       <ContentLayout>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <Image src={product.imageUrl} width={500} height={500} />
+            <Image src={product.imageUrl} width={500} height={500} alt={product.title} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="h1" component="h1" fontWeight="bold">
@@ -88,7 +85,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
             <Box
               sx={{ mt: 4, display: 'flex', gap: 2, justifyContent: 'center' }}
             >
-              <IconButton sx={{ p: 0, m: 0 }} onClick={decrementQuantity}>
+              <IconButton aria-label='disminuir cantidad' sx={{ p: 0, m: 0 }} onClick={decrementQuantity}>
                 <RemoveCircleOutline fontSize="large" color="primary" />
               </IconButton>
               <Typography
@@ -98,9 +95,9 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
               >
                 {quantity}
               </Typography>
-              <IconButton sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
+              <Icon sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
                 <ControlPointOutlined fontSize="large" color="primary" />
-              </IconButton>
+              </Icon>
             </Box>
 
             <Typography
@@ -120,6 +117,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
               }}
             >
               <Button
+              aria-label='agregar al carrito'
                 size="large"
                 sx={{
                   color: palette.primary[50],

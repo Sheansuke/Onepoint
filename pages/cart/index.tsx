@@ -67,6 +67,7 @@ const CartPage: FC = () => {
           <Typography mt={5}>No tienes ningun producto aun!</Typography>
 
           <Button
+          aria-label='ir a la pagina de inicio'
             size="large"
             onClick={() => navigateTo('/')}
             sx={{

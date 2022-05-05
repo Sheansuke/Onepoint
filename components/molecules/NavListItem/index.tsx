@@ -9,7 +9,7 @@ interface NavListItemProps {
 
 export const NavListItem: FC<NavListItemProps> = ({onClick,icon,text}) => {
   return (
-    <ListItem button onClick={onClick}>
+    <ListItem button aria-label='icono' onClick={onClick}>
       {icon && icon}
       <ListItemText primary={text ?? "No text"} sx={{ ml: 1 }} />
     </ListItem>
