@@ -5,6 +5,8 @@ import {
   Grid,
   Icon,
   IconButton,
+  Input,
+  TextField,
   Typography,
   useTheme
 } from '@mui/material'
@@ -17,6 +19,7 @@ import React, { FC, useState } from 'react'
 import { IProductModel } from '../../interfaces/models/IProductModel'
 import { useCartState } from '@hooks/useCartState'
 import { useRouter } from 'next/router'
+import { height } from '@mui/system'
 
 interface ProductBySlugPageProps {
   product: IProductModel
@@ -40,10 +43,9 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
     }
   }
 
-  const handleAddToCart = (product:IProductModel , quantity: number) => {
+  const handleAddToCart = (product: IProductModel, quantity: number) => {
     handleAddProductToCart(product, quantity)
     router.push('/cart')
-
   }
 
   return (
@@ -55,7 +57,12 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
       <ContentLayout>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <Image src={product.imageUrl} width={500} height={500} alt={product.title} />
+            <Image
+              src={product.imageUrl}
+              width={500}
+              height={500}
+              alt={product.title}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="h1" component="h1" fontWeight="bold">
@@ -85,7 +92,11 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
             <Box
               sx={{ mt: 4, display: 'flex', gap: 2, justifyContent: 'center' }}
             >
-              <IconButton aria-label='disminuir cantidad' sx={{ p: 0, m: 0 }} onClick={decrementQuantity}>
+              <IconButton
+                aria-label="disminuir cantidad"
+                sx={{ p: 0, m: 0 }}
+                onClick={decrementQuantity}
+              >
                 <RemoveCircleOutline fontSize="large" color="primary" />
               </IconButton>
               <Typography
@@ -93,11 +104,18 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                 fontWeight="bold"
                 color="text.primary"
               >
-                {quantity}
+                <TextField
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  size="small"
+                  sx={{
+                    width: 38
+                  }}
+                />
               </Typography>
-              <Icon sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
+              <IconButton sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
                 <ControlPointOutlined fontSize="large" color="primary" />
-              </Icon>
+              </IconButton>
             </Box>
 
             <Typography
@@ -117,7 +135,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
               }}
             >
               <Button
-              aria-label='agregar al carrito'
+                aria-label="agregar al carrito"
                 size="large"
                 sx={{
                   color: palette.primary[50],
