@@ -13,6 +13,8 @@ import { useRouter } from 'next/router'
 import { useCartState } from '@hooks/useCartState'
 import { CartInfo } from '@molecules/CartInfo/Index'
 
+
+
 const CartPage: FC = () => {
   const router = useRouter()
   const { palette } = useTheme()

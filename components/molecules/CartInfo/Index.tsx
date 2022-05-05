@@ -14,6 +14,7 @@ interface CartInfoProps {
 
 
 // TODO: no ejecutar la validacion de fecha si el metodo de pago es transferencia
+// TODO: cuando el usuario eliga transferencia borrar la fecha
 export const CartInfo: FC<CartInfoProps> = () => {
   const { palette } = useTheme()
   const { cartState } = useCartState()

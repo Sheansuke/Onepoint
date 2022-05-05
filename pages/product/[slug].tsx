@@ -18,13 +18,16 @@ import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
 import { useDispatch } from 'react-redux'
 import { addProductToCart } from '@redux/slices/cartSlice'
 import { useCartState } from '@hooks/useCartState'
+import { useRouter } from 'next/router'
 
 interface ProductBySlugPageProps {
   product: IProductModel
 }
 
+// TODO: debe enviar al usuario al carrito cuando agrege el producto
 const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   const { palette } = useTheme()
+  const router = useRouter()
   const { handleAddProductToCart } = useCartState()
   const [quantity, setQuantity] = useState(1)
 
@@ -38,6 +41,12 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
     if (quantity > 1) {
       setQuantity(quantity - 1)
     }
+  }
+
+  const handleAddToCart = (product:IProductModel , quantity: number) => {
+    handleAddProductToCart(product, quantity)
+    router.push('/cart')
+
   }
 
   return (
@@ -116,7 +125,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
                   color: palette.primary[50],
                   width: '100%'
                 }}
-                onClick={() => handleAddProductToCart(product, quantity)}
+                onClick={() => handleAddToCart(product, quantity)}
               >
                 Agregar al carrito
               </Button>

@@ -5,11 +5,13 @@ import {
   TextField,
   InputAdornment,
   Button,
-  useTheme
+  useTheme,
+  CircularProgress,
+  Typography
 } from '@mui/material'
 import { closeSearchModal } from '@redux/slices/uiSlice'
 import { useRouter } from 'next/router'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
@@ -18,8 +20,11 @@ interface SearchModalProps {
   // name?: string;
 }
 
+
 export const SearchModal: FC<SearchModalProps> = () => {
   const { palette } = useTheme()
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+
   const router = useRouter()
 
   const {
@@ -40,10 +45,12 @@ export const SearchModal: FC<SearchModalProps> = () => {
   }
 
   const handleSubmitForm = (data: { search: string }) => {
+    setIsSearching(true)
     router.push(`/search/${data.search}`).then(() => {
       handleCloseModal()
       reset()
       dispatch(closeSearchModal())
+      setIsSearching(false)
     })
   }
 
@@ -68,57 +75,70 @@ export const SearchModal: FC<SearchModalProps> = () => {
           p: 2
         }}
       >
-        <form onSubmit={handleSubmit(handleSubmitForm)}  >
-          <TextField
-            id="input-with-icon-textfield"
-            label="Buscar producto"
-            {...register('search', {
-              required: true
-            })}
-            InputProps={{
-              autoComplete: 'off',
-              autoFocus: true,
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchOutlined />
-                </InputAdornment>
-              )
-            }}
-            variant="outlined"
-            helperText="Presione enter o el boton buscar"
-            error={errors.search ? true : false}
-            sx={{
-              width: '100%'
-            }}
-          />
-
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              mt: 2
-            }}
-          >
-            <Button
-              variant="text"
-              sx={{
-                color: palette.error.main,
-                mr: 2
-              }}
-              onClick={handleCloseModal}
-            >
-              Cancelar
-            </Button>
-            <Button
-              type="submit"
-              sx={{
-                color: palette.primary[50]
-              }}
-            >
-              Buscar producto
-            </Button>
+        {isSearching ? (
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 2
+          }}>
+            <CircularProgress />
+            <Typography> Buscando...</Typography>
           </Box>
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit(handleSubmitForm)}>
+            <TextField
+              id="input-with-icon-textfield"
+              label="Buscar producto"
+              {...register('search', {
+                required: true
+              })}
+              InputProps={{
+                autoComplete: 'off',
+                autoFocus: true,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchOutlined />
+                  </InputAdornment>
+                )
+              }}
+              variant="outlined"
+              helperText="Presione enter o el boton buscar"
+              error={errors.search ? true : false}
+              sx={{
+                width: '100%'
+              }}
+            />
+
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                mt: 2
+              }}
+            >
+              <Button
+                variant="text"
+                sx={{
+                  color: palette.error.main,
+                  mr: 2
+                }}
+                onClick={handleCloseModal}
+              >
+                Cancelar
+              </Button>
+              <Button
+                type="submit"
+                sx={{
+                  color: palette.primary[50]
+                }}
+              >
+                Buscar producto
+              </Button>
+            </Box>
+          </form>
+        )}
       </Box>
     </Modal>
   )
