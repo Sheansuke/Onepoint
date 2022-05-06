@@ -6,28 +6,39 @@ import { InfoOutlined } from '@mui/icons-material'
 import { Box, Button, Card, Divider, Typography, useTheme } from '@mui/material'
 import { showNotification } from '../../../utils/showNotification'
 import { useRouter } from 'next/router'
-import { NextMaterialLink } from '../../atoms/NextMaterialLink'
 import { AddressInfo } from '@molecules/AddressInfo'
-import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel';
+import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
+import { dateTwoDaysValidation } from '../../../utils/dateTwoDaysValidation'
+import { format } from 'date-fns'
 
 interface CartInfoProps {
   canEdit?: boolean
   deliveryAddress?: IDeliveryAddressModel
 }
 
-export const CartInfo: FC<CartInfoProps> = ({ canEdit = true,deliveryAddress }) => {
+// TODO: la hora que se queda guardada no se verifica antes de confirmar
+
+export const CartInfo: FC<CartInfoProps> = ({
+  canEdit = true,
+  deliveryAddress
+}) => {
   const { palette } = useTheme()
   const router = useRouter()
   const { cartState } = useCartState()
 
   const handleConfirm = () => {
-    if (
-      !cartState.deliveryDate &&
-      cartState.paymentType === 'efectivo contra entrega'
-    ) {
-      return showNotification('Debes seleccionar un dia de entrega!', 'warn')
+    if (cartState.paymentType === 'efectivo contra entrega') {
+      if (cartState.deliveryDate) {
+        const isValidDate = dateTwoDaysValidation(new Date(cartState.deliveryDate))
+        if (isValidDate) {
+          return router.push('/cart/resume')
+        } else {
+          showNotification('El dia debe ser 2 dias apartir de hoy', 'warn')
+        }
+      } else {
+        return showNotification('Debes seleccionar un dia de entrega!', 'warn')
+      }
     }
-    router.replace('/cart/resume')
   }
 
   const handleEdit = () => {

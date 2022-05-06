@@ -5,6 +5,8 @@ interface AdressPageProps {
   // name?: string;
 }
 
+
+// TODO: hay que completar esta pagina, la validacion ya esta
 const AdressPage: FC<AdressPageProps> = () => {
   return <ContentLayout title='Direccion de entrega'>
 

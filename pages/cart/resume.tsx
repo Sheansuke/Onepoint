@@ -13,9 +13,6 @@ const ResumePage: FC<ResumePageProps> = ({deliveryAddress}) => {
   return <Cart title="Resumen de la orden" canEdit={false} deliveryAddress={deliveryAddress} />
 }
 
-
-
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const deliveryAddress = await getDeliveryAddressByEmail("")
 
