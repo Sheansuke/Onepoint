@@ -22,6 +22,9 @@
       ],
       "@redux/slices/*": [
         "redux/slices/*"
+      ],
+      "@api/*": [
+        "api/*"
       ]
     },
     "target": "es5",

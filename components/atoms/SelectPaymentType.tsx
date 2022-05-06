@@ -31,8 +31,8 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
         label="Age"
         onChange={handleChange}
       >
-        <MenuItem value="contra entrega">Contra entrega</MenuItem>
-        <MenuItem value="transferencia">Transferencia</MenuItem>
+        <MenuItem value="efectivo contra entrega">efectivo contra entrega</MenuItem>
+        <MenuItem value="transferencia">transferencia</MenuItem>
       </Select>
     </FormControl>
   )

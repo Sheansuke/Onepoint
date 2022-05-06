@@ -1,6 +1,11 @@
 import { IconProps } from '@mui/material'
 import { ReactElement } from 'react'
-import { PermContactCalendarOutlined, SupervisedUserCircleOutlined } from '@mui/icons-material'
+import {
+  ContactMailOutlined,
+  PermContactCalendarOutlined,
+  StoreOutlined,
+  SupervisedUserCircleOutlined
+} from '@mui/icons-material'
 import {
   HomeOutlined,
   AssignmentOutlined,
@@ -17,9 +22,14 @@ interface NavItem {
 
 export const NavItemsData: NavItem[] = [
   {
-    text: 'Home',
-    icon: <HomeOutlined />,
+    text: 'Tienda',
+    icon: <StoreOutlined />,
     navigateTo: '/'
+  },
+  {
+    text: 'Mi Direccion',
+    icon: <ContactMailOutlined />,
+    navigateTo: '/user/address'
   },
   {
     text: 'Mis Ordenes',

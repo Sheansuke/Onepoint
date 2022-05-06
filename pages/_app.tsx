@@ -13,6 +13,9 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 // put public pages here
+
+
+// TODO: eta vaina hay que dejala como taba anteriol mente le llegate?
 const publicPages = [
   '/',
   '/contacts',
