@@ -130,7 +130,7 @@ export const CartProductCard: FC<CartProductCardProps> = ({
               Eliminar
             </Button>
           ) : (
-            `Cantidad: ${product.quantity}`
+            <Typography>Cantidad: {product.quantity}</Typography>
           )}
         </Box>
       </Box>

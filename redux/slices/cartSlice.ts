@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
 import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
 import { showNotification } from '../../utils/showNotification'
 
-export type PaymentType = 'contra entrega' | 'transferencia'
+export type PaymentType = 'efectivo contra entrega' | 'transferencia'
 
 export interface ICartState {
   isLoading: boolean
@@ -17,7 +17,7 @@ export interface ICartState {
 
 const initialState: ICartState = {
   isLoading: true,
-  paymentType: 'contra entrega',
+  paymentType: 'efectivo contra entrega',
   items: [],
   numberOfItems: 0,
   subTotal: 0,
@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
     setInitialState: (state, action?: PayloadAction<ICartState>) => {
       state.isLoading = false
       state.deliveryDate = action.payload?.deliveryDate ?? undefined
-      state.paymentType = action.payload?.paymentType ?? 'contra entrega'
+      state.paymentType = action.payload?.paymentType ?? 'efectivo contra entrega'
       state.items = action.payload?.items ?? []
       state.numberOfItems = action.payload?.numberOfItems ?? 0
       state.subTotal = action.payload?.subTotal ?? 0
@@ -137,6 +137,8 @@ export const cartSlice = createSlice({
       localStorage.setItem('cartState', JSON.stringify(state))
     },
     clearCartState: state => {
+      state.items = []
+      state.paymentType = 'efectivo contra entrega'
       state.deliveryDate = undefined
       state.numberOfItems = 0
       state.subTotal = 0
