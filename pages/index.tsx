@@ -9,6 +9,7 @@ import {ProductsTestData} from "@utils/ProductsTestData"
 // TODO: CREATE 404 PAGE
 // TODO: USE REVALIDATE OR ON-DEMAND FOR STATICS PAGES
 // TODO: configure github actions to prisma migrate deploy
+// TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 const Home: NextPage = () => {
   return (
     <>

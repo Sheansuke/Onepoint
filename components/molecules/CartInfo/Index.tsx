@@ -1,9 +1,17 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate'
 import { SelectPaymentType } from '@atoms/SelectPaymentType'
 import { useCartState } from '@hooks/useCartState'
 import { InfoOutlined } from '@mui/icons-material'
-import { Box, Button, Card, Divider, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CircularProgress,
+  Divider,
+  Typography,
+  useTheme
+} from '@mui/material'
 import { showNotification } from '../../../utils/showNotification'
 import { useRouter } from 'next/router'
 import { AddressInfo } from '@molecules/AddressInfo'
@@ -26,11 +34,16 @@ export const CartInfo: FC<CartInfoProps> = ({
   const router = useRouter()
   const { cartState } = useCartState()
 
+  const [isLoadingConfirm, setIsLoadingConfirm] = useState<boolean>(false)
+
   const handleConfirm = () => {
     if (cartState.paymentType === 'efectivo contra entrega') {
       if (cartState.deliveryDate) {
-        const isValidDate = dateTwoDaysValidation(new Date(cartState.deliveryDate))
+        const isValidDate = dateTwoDaysValidation(
+          new Date(cartState.deliveryDate)
+        )
         if (isValidDate) {
+          setIsLoadingConfirm(true)
           return router.push('/cart/resume')
         } else {
           showNotification('El dia debe ser 2 dias apartir de hoy', 'warn')
@@ -137,17 +150,22 @@ export const CartInfo: FC<CartInfoProps> = ({
       >
         {canEdit ? (
           <>
-            <Button
-              aria-label="confirmar orden"
-              size="large"
-              onClick={handleConfirm}
-              sx={{
-                color: palette.primary[50],
-                width: '90%'
-              }}
-            >
-              Confirmar Orden
-            </Button>
+            {isLoadingConfirm ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                aria-label="confirmar orden"
+                size="large"
+                onClick={handleConfirm}
+                sx={{
+                  color: palette.primary[50],
+                  width: '90%'
+                }}
+              >
+                Confirmar Orden
+              </Button>
+            )}
+
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
               <InfoOutlined
                 color="info"
