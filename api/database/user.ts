@@ -1,13 +1,16 @@
+import { IApiResponse } from '@interfaces/api'
 import { PrismaClient } from '@prisma/client'
-import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel';
+import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel'
 
-export const getDeliveryAddressByEmail = async (email: string): Promise<IDeliveryAddressModel> => {
+export const getDeliveryAddressByClerkId = async (
+  clerkId: string
+): Promise<IDeliveryAddressModel> => {
   const prisma = new PrismaClient()
   const deliveryAddress = await prisma.deliveryAddress.findFirst({
     where: {
-        user: {
-            email
-        }
+      user: {
+        clerkId
+      }
     }
   })
 

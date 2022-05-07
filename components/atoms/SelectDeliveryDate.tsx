@@ -1,11 +1,12 @@
 import { useCartState } from '@hooks/useCartState'
 import { InfoOutlined } from '@mui/icons-material'
 import { Box, Button, useTheme } from '@mui/material'
+import { dateTwoDaysValidation } from '@utils/dateTwoDaysValidation'
+import { showNotification } from '@utils/showNotification'
 import { format } from 'date-fns'
 import React, { FC, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { showNotification } from '../../utils/showNotification'
 
 interface SelectDeliveryDateProps {
   buttonWidth?: number
@@ -19,14 +20,12 @@ export const SelectDeliveryDate: FC<SelectDeliveryDateProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const handleAccept = (date: Date | null) => {
-    const currentDay = Number(format(new Date(), 'dd'))
-    const selectedDay = Number(format(new Date(date) ?? new Date(), 'dd'))
-
-    if (selectedDay > currentDay + 1) {
-      handleSetDeliveryDate(format(date, 'dd-MM-yyyy'))
+    const isValidDate = dateTwoDaysValidation(date)
+    if (isValidDate) {
+      handleSetDeliveryDate(format(date, 'MM-dd-yyyy'))
       showNotification('Fecha seleccionada con exito!', 'success')
     } else {
-      showNotification('El dia debe ser 2 dias despues de hoy', 'warn')
+      showNotification('El dia debe ser 2 dias apartir de hoy', 'warn')
     }
   }
 
