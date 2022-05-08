@@ -1,16 +1,19 @@
 import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
 import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 import { store } from '../redux/store'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 import { MainLayout } from '@organism/layouts/MainLayout'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
+// REACT QUERY
+const queryClient = new QueryClient()
 
 // put public pages here
 const publicPages = [
@@ -21,9 +24,6 @@ const publicPages = [
   '/search/[query]'
 ]
 
-// REACT-QUERY
-const queryClient = new QueryClient()
-
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
 
@@ -33,19 +33,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={mainTheme}>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <QueryClientProvider client={queryClient}>
           <ClerkProvider {...pageProps}>
-          <QueryClientProvider client={queryClient}>
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
             <MainLayout>
               {isPublicPage ? (
                 <Component {...pageProps} />
@@ -60,10 +60,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </>
               )}
             </MainLayout>
-            <ToastContainer />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ClerkProvider>
+          </ClerkProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+        <ToastContainer />
       </ThemeProvider>
     </Provider>
   )

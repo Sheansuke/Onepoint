@@ -1,12 +1,12 @@
-import { DeliveryAddress, PrismaClient } from '@prisma/client'
-import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel'
+import prisma from '@prisma/prismaClient'
+import { DeliveryAddress, User } from '@prisma/client'
+import { IApiResponse } from '../../interfaces/api/IApiResponse'
 
-export const findFirstDeliveryAddressByClerkId = async (
+export const findUniqueDeliveryAddressByClerkId = async (
   clerkId: string
-): Promise<IDeliveryAddressModel> => {
+): Promise<DeliveryAddress> => {
   if (clerkId) {
-    const prisma = new PrismaClient()
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
         clerkId
       },
@@ -20,11 +20,9 @@ export const findFirstDeliveryAddressByClerkId = async (
       throw new Error('No se encontro el usuario')
     }
 
-    const deliveryAddress = await prisma.deliveryAddress.findFirst({
+    const deliveryAddress = await prisma.deliveryAddress.findUnique({
       where: {
-        user: {
-          id: user.id
-        }
+        userId: user.id
       }
     })
     return deliveryAddress
@@ -38,8 +36,7 @@ export const upSertDeliveryAddress = async (
   deliveryAddress: DeliveryAddress
 ): Promise<DeliveryAddress> => {
   if (email && deliveryAddress) {
-    const prisma = new PrismaClient()
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
         email
       },
@@ -65,5 +62,30 @@ export const upSertDeliveryAddress = async (
     })
 
     return deliveryAddressUpdated
+  }
+}
+
+export const findUniqueUserByClerkId = async (
+  clerkId: string
+): Promise<User> => {
+  if (clerkId) {
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          clerkId
+        },
+        include: {
+          role: true
+        }
+      })
+
+      if (!user) {
+        throw new Error('No se encontro el usuario')
+      }
+
+      return user
+    } catch (error) {
+      console.log('🚀 ~ file: user.ts ~ line 88 ~ error', error)
+    }
   }
 }

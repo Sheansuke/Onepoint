@@ -5,7 +5,10 @@ export interface IUserModel {
   id: number;
   clerkId: string;
   email: string;
-  role? : string
+  role? : {
+    id: number;
+    name: string;
+  }
   order?: IOrderModel[];
   deliveryAddress?: IDeliveryAddressModel
 }
