@@ -10,6 +10,7 @@ import {ProductsTestData} from "@utils/ProductsTestData"
 // TODO: USE REVALIDATE OR ON-DEMAND FOR STATICS PAGES
 // TODO: configure github actions to prisma migrate deploy
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
+// TODO: hydratation failed cuando se carga /user/address
 const Home: NextPage = () => {
   return (
     <>

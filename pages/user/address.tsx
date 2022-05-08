@@ -16,7 +16,7 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { getDeliveryAddressByClerkId } from '../../api/database/user'
+import { findFirstDeliveryAddressByClerkId } from '../../api/database/user'
 import { showNotification } from '../../utils/showNotification'
 
 interface AdressPageProps {
@@ -163,15 +163,24 @@ const AddressPage: FC<AdressPageProps> = ({ deliveryAddress }) => {
   )
 }
 
+//TODO: esto da problema en la redireccion cambiar a un componente del lado del cliente
 export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async ({ req }) => {
     const { userId } = req.auth
-    const deliveryAddress = await getDeliveryAddressByClerkId(userId)
-
-
-    return {
-      props: {
-        deliveryAddress
+    try {
+      const deliveryAddress = await findFirstDeliveryAddressByClerkId(userId)
+      return {
+        props: {
+          deliveryAddress
+        }
+      }
+    } catch (error) {
+      console.log("🚀 ~ file: address.tsx ~ line 178 ~ error", error)
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
+        }
       }
     }
   }

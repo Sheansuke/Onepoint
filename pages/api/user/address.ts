@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
 import { IApiResponse } from '../../../interfaces/api/IApiResponse'
 import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
+import { upSertDeliveryAddress } from '../../../api/database/user'
 
 type Data = IApiResponse<Partial<IDeliveryAddressModel>>
 
@@ -25,28 +25,11 @@ const createOrUpdateDeliveryAddress = async (
 ) => {
   const { email, deliveryAddress } = req.body
 
-  const prisma = new PrismaClient()
   try {
-    const user = await prisma.user.findFirst({
-      where: {
-        email
-      },
-      include: {
-        order: true,
-        role: true
-      }
-    })
-
-    const deliveryAddressUpdated = await prisma.deliveryAddress.upsert({
-      where: {
-        userId: user.id
-      },
-      create: {
-        userId: user.id,
-        ...deliveryAddress
-      },
-      update: deliveryAddress
-    })
+    const deliveryAddressUpdated = await upSertDeliveryAddress(
+      email,
+      deliveryAddress
+    )
 
     return res.status(200).json({
       statusCode: 200,

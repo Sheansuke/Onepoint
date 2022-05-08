@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={mainTheme}>
-        <ClerkProvider {...pageProps}>
+          <ClerkProvider {...pageProps}>
           <QueryClientProvider client={queryClient}>
             <ToastContainer
               position="top-center"

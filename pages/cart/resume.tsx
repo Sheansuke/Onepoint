@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import Cart from '../../components/organism/Cart/index'
-import { getDeliveryAddressByClerkId } from '../../api/database/user'
+import { findFirstDeliveryAddressByClerkId } from '../../api/database/user'
 import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
 
@@ -29,10 +29,9 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
           destination: '/user/address',
           permanent: false
         }
-      }
+ }
 
-    // TODO: falta por poner el userId
-    const deliveryAddress = await getDeliveryAddressByClerkId(userId)
+    const deliveryAddress = await findFirstDeliveryAddressByClerkId(userId)
 
     if (!deliveryAddress) {
       return {
