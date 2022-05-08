@@ -50,6 +50,7 @@ const AddressPage: FC<AdressPageProps> = ({ deliveryAddress }) => {
     const sessionUserEmail = user.emailAddresses[0].emailAddress
     createOrUpdateDeliveryAddress(sessionUserEmail, data)
       .then(() => {
+        showNotification('Dirección guardada!', 'success')
         router.back()
       })
       .catch(() => {
@@ -175,7 +176,7 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
         }
       }
     } catch (error) {
-      console.log("🚀 ~ file: address.tsx ~ line 178 ~ error", error)
+      console.log('🚀 ~ file: address.tsx ~ line 178 ~ error', error)
       return {
         redirect: {
           destination: '/',
