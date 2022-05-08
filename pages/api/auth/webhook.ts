@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import  prisma  from '@prisma/prismaClient'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { IUserCreated } from '../../../interfaces/clerk'
 import { IApiResponse } from '../../../interfaces/api'
@@ -11,11 +11,10 @@ This endpoint receive events of Clerk webhooks.
 when clerk emit even user.created, we create a new user in our database.
 */
 
-export default async function (
+export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<IApiResponse<RequestBody>>
 ) {
-  const prisma = new PrismaClient()
   const { data } = req.body as RequestBody
 
   const isExist = await prisma.user.findUnique({

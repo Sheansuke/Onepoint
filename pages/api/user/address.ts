@@ -5,7 +5,7 @@ import { upSertDeliveryAddress } from '../../../api/database/user'
 
 type Data = IApiResponse<Partial<IDeliveryAddressModel>>
 
-export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler (req: NextApiRequest, res: NextApiResponse<Data>) {
   switch (req.method) {
     case 'POST':
       return createOrUpdateDeliveryAddress(req, res)

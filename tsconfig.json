@@ -25,6 +25,12 @@
       ],
       "@api/*": [
         "api/*"
+      ],
+      "@prisma/*": [
+        "prisma/*"
+      ],
+      "@constants": [
+        "constants"
       ]
     },
     "target": "es5",

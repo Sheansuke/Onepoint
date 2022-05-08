@@ -17,14 +17,11 @@ import { useRouter } from 'next/router'
 import { AddressInfo } from '@molecules/AddressInfo'
 import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
 import { dateTwoDaysValidation } from '../../../utils/dateTwoDaysValidation'
-import { format } from 'date-fns'
 
 interface CartInfoProps {
   canEdit?: boolean
   deliveryAddress?: IDeliveryAddressModel
 }
-
-// TODO: la hora que se queda guardada no se verifica antes de confirmar
 
 export const CartInfo: FC<CartInfoProps> = ({
   canEdit = true,

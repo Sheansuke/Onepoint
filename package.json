@@ -1,10 +1,17 @@
 {
   "name": "onepoint",
   "version": "0.1.0",
+  "author": {
+    "name": "Sheansuke",
+    "email": "suerojean@gmail.com",
+    "url": "https://github.com/Sheansuke"
+  },
+  "description": "Onepoint ecommerce",
   "private": true,
   "engines": {
     "node": ">=14.x"
   },
+  "types": "node",
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
@@ -29,10 +36,11 @@
     "react-datepicker": "^4.7.0",
     "react-dom": "18.0.0",
     "react-hook-form": "^7.30.0",
-    "react-query": "^3.38.0",
+    "react-query": "^3.39.0",
     "react-redux": "^8.0.1",
     "react-toastify": "^9.0.0",
-    "sharp": "^0.30.4"
+    "sharp": "^0.30.4",
+    "swr": "^1.3.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.29",
