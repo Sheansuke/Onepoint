@@ -1,6 +1,6 @@
 name: deploy-to-vercel
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -31,4 +31,7 @@ jobs:
 
       - name: install dependencies
         run: yarn install
+
+      - name: build
+        run: yarn build
       
