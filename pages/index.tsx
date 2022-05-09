@@ -1,16 +1,24 @@
-import { NextSeo } from 'next-seo'
-import type { NextPage } from 'next'
-import { ContentLayout } from '../components/organism/layouts/ContentLayout'
 import { Box } from '@mui/material'
+import { ProductsTestData } from "@utils/ProductsTestData"
+import type { NextPage } from 'next'
+import { GetStaticProps } from 'next'
+import { NextSeo } from 'next-seo'
+import { ContentLayout } from '../components/organism/layouts/ContentLayout'
 import { ProductList } from '../components/organism/ProductList/index'
+import { findManyProducts } from '../api/database/product';
+import { IProductModel } from '../interfaces/models/IProductModel';
+import { FC } from 'react'
 
-import {ProductsTestData} from "@utils/ProductsTestData"
 
 // TODO: CREATE 404 PAGE
 // TODO: USE REVALIDATE OR ON-DEMAND FOR STATICS PAGES
-// TODO: configure github actions to prisma migrate deploy
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
-const Home: NextPage = () => {
+//TODO: crear pagina principal de productos estatica + revalidaicon
+interface IHomePageProps {
+  products: IProductModel[]
+}
+
+const HomePage: FC<IHomePageProps> = ({products}) => {
   return (
     <>
       <NextSeo
@@ -19,7 +27,7 @@ const Home: NextPage = () => {
       />
       <ContentLayout title="Todos los productos">
         <Box sx={{ mt: 5 }}>
-          <ProductList products={ProductsTestData} />
+          <ProductList products={products} />
         </Box>
       </ContentLayout>
     </>
@@ -27,4 +35,17 @@ const Home: NextPage = () => {
 }
 
 
-export default Home
+
+
+export const getStaticProps: GetStaticProps = async () => {
+  const products = await findManyProducts()
+
+  return {
+    props: {
+      products
+    }
+  }
+}
+
+
+export default HomePage

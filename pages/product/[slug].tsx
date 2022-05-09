@@ -18,6 +18,7 @@ import { IProductModel } from '../../interfaces/models/IProductModel'
 import { useCartState } from '@hooks/useCartState'
 import { useRouter } from 'next/router'
 import { showNotification } from '../../utils/showNotification';
+import { findManyProducts, findUniqueProduct } from '../../api/database/product';
 
 interface ProductBySlugPageProps {
   product: IProductModel
@@ -155,7 +156,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = ProductsTestData
+  const data = await findManyProducts()
   const products = data.map(product => ({ params: { slug: product.slug } }))
   return {
     paths: products,
@@ -164,9 +165,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ctx => {
-  const slug = ctx.params?.slug
+  const slug = ctx.params?.slug as string
 
-  const product = ProductsTestData.find(product => product.slug === slug)
+  const product = await findUniqueProduct(slug)
 
   if (!product) {
     return {
