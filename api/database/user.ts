@@ -1,6 +1,5 @@
 import prisma from '@prisma/prismaClient'
 import { DeliveryAddress, User } from '@prisma/client'
-import { IApiResponse } from '../../interfaces/api/IApiResponse'
 
 export const findUniqueDeliveryAddressByClerkId = async (
   clerkId: string
