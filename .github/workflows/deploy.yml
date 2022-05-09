@@ -1,34 +1,16 @@
 name: deploy-to-vercel
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs: 
-  vercel-deploy:
+  prisma-deploy:
     runs-on: ubuntu-20.04
+    env:
+      DATABASE_URL: postgresql://postgres:TVDg31CCIIrwQas73mBv@containers-us-west-37.railway.app:7853/railway
     steps:
       - uses: actions/checkout@v2
-        with: 
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ">=14.x"
-
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install 
-
-      - name: install dependencies
-        run: yarn install
-      
+      - run: npx prisma migrate deploy
+        
+        
