@@ -1,0 +1,25 @@
+name: deploy-to-vercel
+on:
+  push:
+    branches:
+      - main
+
+jobs: 
+  vercel-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ">=14.x"
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install 
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: build 
+      - name: install dependencies
+        run: yarn install
+      
