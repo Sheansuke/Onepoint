@@ -85,6 +85,7 @@ export const findUniqueUserByClerkId = async (
       return user
     } catch (error) {
       console.log('🚀 ~ file: user.ts ~ line 88 ~ error', error)
+      throw new Error('No se encontro el usuario')
     }
   }
 }
