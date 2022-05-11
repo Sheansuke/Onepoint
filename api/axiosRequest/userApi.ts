@@ -13,7 +13,7 @@ export const createOrUpdateDeliveryAddress = async (
   deliveryAddress: IDeliveryAddressModel
 ) => {
   try {
-    await axios.post('/address', {
+    await userApi.post('/address', {
       email,
       deliveryAddress
     })
@@ -23,5 +23,5 @@ export const createOrUpdateDeliveryAddress = async (
 }
 
 
-// user id is optained from the token by clerk auth
+// user id is optained from the token by clerk auth in /api/user/[clerkId]
 export const getUser = () => userApi.get<IApiResponse<IUserModel>>("*").then(res => res.data)

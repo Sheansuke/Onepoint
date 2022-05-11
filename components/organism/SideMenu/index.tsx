@@ -31,7 +31,7 @@ export const SideMenu: FC = () => {
 
   useEffect(() => {
     if (data) {
-      const userRole = data.data.role.name
+      const userRole = data?.data?.role?.name
 
       if (userRole === 'admin') {
         setIsAdmin(true)

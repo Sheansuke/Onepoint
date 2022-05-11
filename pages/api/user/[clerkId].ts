@@ -21,7 +21,7 @@ export default withAuth(
 
         return res.status(200).json({
           data: null,
-          message: 'Usuario encontrado',
+          message: 'Usuario no encontrado',
           statusCode: 200
         })
       }
