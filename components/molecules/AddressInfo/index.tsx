@@ -5,9 +5,13 @@ import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddre
 
 interface AddressInfoProps {
   deliveryAddress?: IDeliveryAddressModel
+  isOrderPage?: boolean
 }
 
-export const AddressInfo: FC<AddressInfoProps> = ({deliveryAddress}) => {
+export const AddressInfo: FC<AddressInfoProps> = ({
+  deliveryAddress,
+  isOrderPage = false
+}) => {
   return (
     <>
       <Typography variant="h1" fontWeight={500}>
@@ -20,16 +24,21 @@ export const AddressInfo: FC<AddressInfoProps> = ({deliveryAddress}) => {
         }}
       />
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <NextMaterialLink underline href='/user/address'>
-        <Typography variant="subtitle1" color="#0284C7">Editar direccion</Typography>
-        </NextMaterialLink>
-
-      </Box>
+      {!isOrderPage && (
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <NextMaterialLink underline href="/user/address">
+            <Typography variant="subtitle1" color="#0284C7">
+              Editar direccion
+            </Typography>
+          </NextMaterialLink>
+        </Box>
+      )}
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="subtitle1">Nombre</Typography>
-        <Typography variant="subtitle1">{deliveryAddress?.name} {deliveryAddress?.lastName}</Typography>
+        <Typography variant="subtitle1">
+          {deliveryAddress?.name} {deliveryAddress?.lastName}
+        </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -44,7 +53,9 @@ export const AddressInfo: FC<AddressInfoProps> = ({deliveryAddress}) => {
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="subtitle1">Lugar de referencia</Typography>
-        <Typography variant="subtitle1">{deliveryAddress?.referencePlace}</Typography>
+        <Typography variant="subtitle1">
+          {deliveryAddress?.referencePlace}
+        </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

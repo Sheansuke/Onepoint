@@ -21,6 +21,8 @@ import {
   createOrderRequest,
   ICreateOrderRequest
 } from '../../../api/axiosRequest/cartRequest'
+import { OrderInfo } from '@molecules/OrderInfo/OrderInfo'
+import { IOrderModel } from '@interfaces/models'
 
 interface CartInfoProps {
   canEdit?: boolean
@@ -33,7 +35,7 @@ export const CartInfo: FC<CartInfoProps> = ({
 }) => {
   const { palette } = useTheme()
   const router = useRouter()
-  const { cartState, handleClearState } = useCartState()
+  const { cartState } = useCartState()
 
   const [isLoadingConfirm, setIsLoadingConfirm] = useState<boolean>(false)
   const [isLoadingPost, setIsLoadingPost] = useState<boolean>(false)
@@ -115,55 +117,8 @@ export const CartInfo: FC<CartInfoProps> = ({
         </Box>
       )}
 
-      <Typography variant="h1" fontWeight={500}>
-        Orden
-      </Typography>
-
-      <Divider
-        sx={{
-          mb: 2
-        }}
-      />
-
-      {cartState.paymentType && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="subtitle1">Tipo de pago</Typography>
-          <Typography variant="subtitle1">{cartState.paymentType}</Typography>
-        </Box>
-      )}
-
-      {cartState.deliveryDate && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="subtitle1">Fecha de entrega</Typography>
-          <Typography variant="subtitle1">{cartState.deliveryDate}</Typography>
-        </Box>
-      )}
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">No. Productos</Typography>
-        <Typography variant="subtitle1">{`${cartState.numberOfItems}`}</Typography>
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Sub Total</Typography>
-        <Typography variant="subtitle1">{`$${cartState.subTotal}`}</Typography>
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">{`Impuestos (${process.env.NEXT_PUBLIC_TAX_RATE}%)`}</Typography>
-        <Typography variant="subtitle1">{`$${
-          cartState.subTotal * cartState.tax
-        }`}</Typography>
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <Typography variant="h2" mr={10} fontWeight="bold">
-          Total:
-        </Typography>
-        <Typography variant="h2" ml={10} fontWeight="bold">
-          {`$${cartState.total}`}
-        </Typography>
-      </Box>
+      {/* order info */}
+      <OrderInfo order={(cartState as any) as IOrderModel} />
 
       <Box
         sx={{
