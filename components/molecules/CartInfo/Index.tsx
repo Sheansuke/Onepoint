@@ -17,6 +17,10 @@ import { useRouter } from 'next/router'
 import { AddressInfo } from '@molecules/AddressInfo'
 import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
 import { dateTwoDaysValidation } from '../../../utils/dateTwoDaysValidation'
+import {
+  createOrderRequest,
+  ICreateOrderRequest
+} from '../../../api/axiosRequest/cartRequest'
 
 interface CartInfoProps {
   canEdit?: boolean
@@ -29,9 +33,10 @@ export const CartInfo: FC<CartInfoProps> = ({
 }) => {
   const { palette } = useTheme()
   const router = useRouter()
-  const { cartState } = useCartState()
+  const { cartState, handleClearState } = useCartState()
 
   const [isLoadingConfirm, setIsLoadingConfirm] = useState<boolean>(false)
+  const [isLoadingPost, setIsLoadingPost] = useState<boolean>(false)
 
   const handleConfirm = () => {
     if (cartState.paymentType === 'efectivo contra entrega') {
@@ -54,6 +59,30 @@ export const CartInfo: FC<CartInfoProps> = ({
   const handleEdit = () => {
     router.replace('/cart')
   }
+
+  const handlePostOrder = () => {
+    setIsLoadingPost(true)
+
+    const newOrder: ICreateOrderRequest = {
+      deliveryAddress: deliveryAddress,
+      paymentType: cartState.paymentType,
+      deliveryDate: cartState.deliveryDate,
+      items: cartState.items
+    }
+    createOrderRequest(newOrder)
+      .then(order => {
+        router.replace(`/user/orders/${order?.id}`)
+        localStorage.removeItem('cartState')
+      })
+      .catch(() => {
+        showNotification(
+          'La orden no pudo ser realizada, si el fallo continua comunicate con nosotros',
+          'error'
+        )
+        setIsLoadingPost(false)
+      })
+  }
+
   return (
     <Card
       sx={{
@@ -192,16 +221,21 @@ export const CartInfo: FC<CartInfoProps> = ({
               Editar la orden
             </Button>
 
-            <Button
-              aria-label="confirmar orden"
-              size="large"
-              sx={{
-                color: palette.primary[50],
-                width: '90%'
-              }}
-            >
-              Realizar la orden
-            </Button>
+            {isLoadingPost ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                aria-label="confirmar orden"
+                size="large"
+                onClick={handlePostOrder}
+                sx={{
+                  color: palette.primary[50],
+                  width: '90%'
+                }}
+              >
+                Realizar la orden
+              </Button>
+            )}
           </>
         )}
       </Box>

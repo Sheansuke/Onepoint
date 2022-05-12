@@ -11,9 +11,7 @@ import { FC } from 'react'
 
 
 // TODO: CREATE 404 PAGE
-// TODO: USE REVALIDATE OR ON-DEMAND FOR STATICS PAGES
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
-//TODO: crear pagina principal de productos estatica + revalidaicon
 interface IHomePageProps {
   products: IProductModel[]
 }

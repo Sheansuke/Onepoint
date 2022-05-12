@@ -22,7 +22,6 @@ const ResumePage: FC<ResumePageProps> = ({ deliveryAddress }) => {
 export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async ({ req }) => {
     const { userId } = req?.auth
-
     if (!userId)
       return {
         redirect: {

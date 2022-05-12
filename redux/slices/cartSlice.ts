@@ -7,7 +7,7 @@ export type PaymentType = 'efectivo contra entrega' | 'transferencia'
 export interface ICartState {
   isLoading: boolean
   deliveryDate?: string
-  paymentType?: PaymentType
+  paymentType: PaymentType
   items: ICartProduct[]
   numberOfItems: number
   subTotal: number
@@ -143,6 +143,7 @@ export const cartSlice = createSlice({
       state.numberOfItems = 0
       state.subTotal = 0
       state.total = 0
+      localStorage.removeItem('cartState')
     }
   }
 })

@@ -11,6 +11,25 @@ export const findManyProducts = async (): Promise<Product[]> => {
   return products
 }
 
+export const findManyProductsByArrayId = async (
+  productsIds: number[]
+): Promise<Product[]> => {
+  const products = await prisma.product.findMany({
+    where: {
+      id: {
+        in: productsIds
+      }
+    }
+  })
+
+  if (!products) {
+    throw new Error('No se encontraron productos')
+  }
+
+  return products
+}
+
+
 export const findUniqueProduct = async (slug: string): Promise<Product> => {
   const product = await prisma.product.findUnique({
     where: {

@@ -34,7 +34,7 @@ export const NavItemsData: NavItem[] = [
   {
     text: 'Mis Ordenes',
     icon: <AssignmentOutlined />,
-    navigateTo: '/my-orders'
+    navigateTo: '/user/orders'
   },
   {
     text: 'Carrito',

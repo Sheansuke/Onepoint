@@ -1,4 +1,4 @@
-import { createOrUpdateDeliveryAddress } from '@api/axiosRequest/userApi'
+import { createOrUpdateDeliveryAddressRequest } from '@api/axiosRequest/userRequest'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
 import { useUser } from '@clerk/nextjs'
 import { IDeliveryAddressModel } from '@interfaces/models'
@@ -48,7 +48,7 @@ const AddressPage: FC<AdressPageProps> = ({ deliveryAddress }) => {
   const onSaved = (data: FormData) => {
     setIsLoadingPost(true)
     const sessionUserEmail = user.emailAddresses[0].emailAddress
-    createOrUpdateDeliveryAddress(sessionUserEmail, data)
+    createOrUpdateDeliveryAddressRequest(sessionUserEmail, data)
       .then(() => {
         showNotification('Dirección guardada!', 'success')
         router.back()
