@@ -208,33 +208,34 @@ export const CartInfo: FC<CartInfoProps> = ({
           </>
         ) : (
           <>
-            <Button
-              aria-label="editar orden"
-              size="large"
-              variant="text"
-              onClick={handleEdit}
-              sx={{
-                color: '#0284C7',
-                width: '90%'
-              }}
-            >
-              Editar la orden
-            </Button>
-
             {isLoadingPost ? (
               <CircularProgress />
             ) : (
-              <Button
-                aria-label="confirmar orden"
-                size="large"
-                onClick={handlePostOrder}
-                sx={{
-                  color: palette.primary[50],
-                  width: '90%'
-                }}
-              >
-                Realizar la orden
-              </Button>
+              <>
+                <Button
+                  aria-label="editar orden"
+                  size="large"
+                  variant="text"
+                  onClick={handleEdit}
+                  sx={{
+                    color: '#0284C7',
+                    width: '90%'
+                  }}
+                >
+                  Editar la orden
+                </Button>
+                <Button
+                  aria-label="confirmar orden"
+                  size="large"
+                  onClick={handlePostOrder}
+                  sx={{
+                    color: palette.primary[50],
+                    width: '90%'
+                  }}
+                >
+                  Realizar la orden
+                </Button>
+              </>
             )}
           </>
         )}
