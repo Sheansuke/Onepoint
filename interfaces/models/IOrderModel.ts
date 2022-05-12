@@ -1,16 +1,17 @@
 import { IUserModel } from './'
 import { ICartProduct } from '../frontend/ICartProduct';
 import { PaymentType } from '@redux/slices/cartSlice';
+import { OrderStatus } from '@prisma/client';
 
 export interface IOrderModel {
-  id: number
+  id: string
   user?: IUserModel
   items: ICartProduct[]
   numberOfItems: number
   subTotal: number
   tax: number
   total: number
-  status: string
+  status: OrderStatus
   paymentType: PaymentType
   deliveryDate: Date
   isPaid: boolean

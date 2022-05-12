@@ -5,7 +5,7 @@ import { showNotification } from '../../utils/showNotification'
 export type PaymentType = 'efectivo contra entrega' | 'transferencia'
 
 export interface ICartState {
-  isLoading: boolean
+  isLoading?: boolean
   deliveryDate?: string
   paymentType: PaymentType
   items: ICartProduct[]
