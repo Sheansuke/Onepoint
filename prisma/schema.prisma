@@ -35,7 +35,7 @@ model DeliveryAddress {
 
 model UserRole {
   id   Int    @id @default(autoincrement())
-  name String @unique @default("Cliente")
+  name String @unique @default("cliente")
   User User[]
 }
 
@@ -51,25 +51,25 @@ model Product {
 }
 
 model Order {
-  id            Int         @id @default(autoincrement())
+  id            String      @id @default(uuid()) 
   user          User        @relation(fields: [userId], references: [id])
   userId        Int
   items         Json[]
   numberOfItems Int
   subTotal      Int
-  tax           Int
+  tax           Float
   total         Int
   status        OrderStatus @relation(fields: [orderStatusId], references: [id])
   orderStatusId Int
   paymentType   String
   deliveryDate  DateTime
   isPaid        Boolean
-  paidAt        DateTime
+  paidAt        DateTime?
   transactionId String?
 }
 
 model OrderStatus {
   id    Int     @id @default(autoincrement())
-  name  String  @unique @default("Pendiente")
+  name  String  @unique @default("pendiente")
   order Order[]
 }

@@ -7,12 +7,12 @@ import { RootState } from 'redux/store'
 import { closeSideMenu } from '@redux/slices/uiSlice'
 import { NavItemsData, NavItemsAdminData } from './NavItemsData'
 import { useQuery } from 'react-query'
-import { getUser } from '../../../api/axiosRequest/userApi'
+import { getUserRequest } from '../../../api/axiosRequest/userRequest'
 
 export const SideMenu: FC = () => {
   const router = useRouter()
   const { palette } = useTheme()
-  const { data } = useQuery('user', () => getUser())
+  const { data } = useQuery('user', () => getUserRequest())
 
   // redux
   const { isSideMenuOpen } = useSelector((state: RootState) => state.uiState)

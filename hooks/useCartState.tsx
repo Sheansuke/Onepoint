@@ -5,7 +5,8 @@ import {
   PaymentType,
   removeProductFromCart,
   setDeliveryDate,
-  setPaymentType
+  setPaymentType,
+  clearCartState
 } from '@redux/slices/cartSlice'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -53,12 +54,17 @@ export const useCartState = () => {
     dispatch(setDeliveryDate(deliveryDate))
   }, [])
 
+  const handleClearState = useCallback(() => {
+    dispatch(clearCartState())
+  }, [])
+
   return {
     cartState,
     handleAddProductToCart,
     handleRemoveProductFromCart,
     handleSetProductQuantity,
     handleSetPaymentType,
-    handleSetDeliveryDate
+    handleSetDeliveryDate,
+    handleClearState
   }
 }

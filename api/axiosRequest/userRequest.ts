@@ -4,16 +4,16 @@ import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressM
 import { IApiResponse } from '../../interfaces/api/IApiResponse';
 import { IUserModel } from '../../interfaces/models/IUserModel';
 
-export const userApi = axios.create({
+export const userRequest = axios.create({
   baseURL: API_USER_URL
 })
 
-export const createOrUpdateDeliveryAddress = async (
+export const createOrUpdateDeliveryAddressRequest = async (
   email: string,
   deliveryAddress: IDeliveryAddressModel
 ) => {
   try {
-    await userApi.post('/address', {
+    await userRequest.post('/address', {
       email,
       deliveryAddress
     })
@@ -24,4 +24,4 @@ export const createOrUpdateDeliveryAddress = async (
 
 
 // user id is optained from the token by clerk auth in /api/user/[clerkId]
-export const getUser = () => userApi.get<IApiResponse<IUserModel>>("*").then(res => res.data)
+export const getUserRequest = () => userRequest.get<IApiResponse<IUserModel>>("*").then(res => res.data)
