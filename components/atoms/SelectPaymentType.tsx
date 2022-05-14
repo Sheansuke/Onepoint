@@ -1,6 +1,6 @@
 import { getAllOrderPaymentTypeRequest } from '@api/axiosRequest/orderRequest'
 import { useCartState } from '@hooks/useCartState'
-import { FormControl, Select, MenuItem, CircularProgress } from '@mui/material'
+import { FormControl, Select, MenuItem, CircularProgress, Box, Typography } from '@mui/material'
 import { PaymentType } from '@prisma/client'
 
 import React, { FC, useState } from 'react'
@@ -38,7 +38,9 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
   return (
     <FormControl fullWidth>
       {isLoading ? (
-        <CircularProgress />
+        <Box display="flex" alignItems="center">
+        <CircularProgress />  <Typography variant='subtitle2' ml={1}>Cargando tipos de pago...</Typography>
+        </Box>
       ) : (
         <Select
           labelId="selectPaymentTypeLabel"
