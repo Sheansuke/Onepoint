@@ -5,6 +5,14 @@ const nextConfig = {
 
   images: {
     domains: ['res.cloudinary.com']
+  },
+
+  experimental: {
+    modularizeImports: {
+      '@mui/icons-material/?(((\\w*)?/?)*)': {
+        transform: '@mui/icons-material/{{ matches.[1] }}/{{member}}'
+      }
+    }
   }
 }
 
