@@ -19,10 +19,6 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
   const [paymentType, setPaymentType] = useState<number>(
     cartState?.paymentType?.id
   )
-  console.log(
-    '🚀 ~ file: SelectPaymentType.tsx ~ line 20 ~ paymentType',
-    paymentType
-  )
 
   const handleChange = (event: React.ChangeEvent<any>) => {
     setPaymentType(event.target.value)
@@ -30,7 +26,7 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
       (item: PaymentType) => item.id === event.target.value
     )
     handleSetPaymentType(paymentTypeState)
-    if (event.target.value === 'transferencia') {
+    if (paymentTypeState.id === 2) {
       handleSetDeliveryDate(undefined)
     }
   }
