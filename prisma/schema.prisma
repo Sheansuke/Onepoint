@@ -61,8 +61,9 @@ model Order {
   total         Int
   status        OrderStatus @relation(fields: [orderStatusId], references: [id])
   orderStatusId Int
-  paymentType   String
-  deliveryDate  DateTime
+  paymentType   PaymentType @relation(fields: [paymentTypeId], references: [id])
+  paymentTypeId Int
+  deliveryDate  DateTime?
   isPaid        Boolean
   paidAt        DateTime?
   transactionId String?
@@ -72,4 +73,10 @@ model OrderStatus {
   id    Int     @id @default(autoincrement())
   name  String  @unique @default("pendiente")
   order Order[]
+}
+
+model PaymentType {
+  id   Int    @id @default(autoincrement())
+  name String @unique @default("efectivo contra entrega")
+  Order Order[]
 }

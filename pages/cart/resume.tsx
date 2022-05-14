@@ -28,22 +28,32 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
           destination: '/user/address',
           permanent: false
         }
- }
+      }
 
-    const deliveryAddress = await findUniqueDeliveryAddressByClerkId(userId)
+    try {
+      const deliveryAddress = await findUniqueDeliveryAddressByClerkId(userId)
 
-    if (!deliveryAddress) {
-      return {
-        redirect: {
-          destination: '/user/address',
-          permanent: false
+      if (!deliveryAddress) {
+        return {
+          redirect: {
+            destination: '/user/address',
+            permanent: false
+          }
         }
       }
-    }
 
-    return {
-      props: {
-        deliveryAddress
+      return {
+        props: {
+          deliveryAddress
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ file: resume.tsx ~ line 51 ~ error', error)
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
+        }
       }
     }
   }

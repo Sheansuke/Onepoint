@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import {seedUserRoles,seedOrderStatus} from "./seedData"
+import {seedUserRoles,seedOrderStatus, seedPaymentType, seedProduct} from "./seedData"
+
 const prisma = new PrismaClient()
 
 const load = async () => {
@@ -19,6 +20,22 @@ const load = async () => {
        data: seedOrderStatus
      })
      console.log('Added OrderStatus data')
+
+     // PaymentType ----------------------------------------------------
+     await prisma.paymentType.deleteMany()
+     console.log('Deleted records in PaymentType table')
+     await prisma.paymentType.createMany({
+       data: seedPaymentType
+     })
+     console.log('Added PaymentType data')
+
+     // Product ----------------------------------------------------
+     await prisma.product.deleteMany()
+     console.log('Deleted records in product table')
+     await prisma.product.createMany({
+       data: seedProduct
+     })
+     console.log('Added product data')
   } catch (e) {
     console.error(e)
     process.exit(1)

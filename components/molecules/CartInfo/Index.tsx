@@ -8,7 +8,6 @@ import {
   Button,
   Card,
   CircularProgress,
-  Divider,
   Typography,
   useTheme
 } from '@mui/material'
@@ -35,13 +34,13 @@ export const CartInfo: FC<CartInfoProps> = ({
 }) => {
   const { palette } = useTheme()
   const router = useRouter()
-  const { cartState } = useCartState()
+  const { cartState, handleClearState } = useCartState()
 
   const [isLoadingConfirm, setIsLoadingConfirm] = useState<boolean>(false)
   const [isLoadingPost, setIsLoadingPost] = useState<boolean>(false)
 
   const handleConfirm = () => {
-    if (cartState.paymentType === 'efectivo contra entrega') {
+    if (cartState.paymentType.id === 1) {
       if (cartState.deliveryDate) {
         const isValidDate = dateTwoDaysValidation(
           new Date(cartState.deliveryDate)
@@ -55,6 +54,9 @@ export const CartInfo: FC<CartInfoProps> = ({
       } else {
         return showNotification('Debes seleccionar un dia de entrega!', 'warn')
       }
+    } else{
+      setIsLoadingConfirm(true)
+      return router.push('/cart/resume')
     }
   }
 
@@ -74,7 +76,7 @@ export const CartInfo: FC<CartInfoProps> = ({
     createOrderRequest(newOrder)
       .then(order => {
         router.replace(`/user/orders/${order?.id}`)
-        localStorage.removeItem('cartState')
+        handleClearState()
       })
       .catch(() => {
         showNotification(
@@ -98,7 +100,7 @@ export const CartInfo: FC<CartInfoProps> = ({
           </Typography>
           <SelectPaymentType />
 
-          {cartState.paymentType === 'efectivo contra entrega' && (
+          {cartState.paymentType?.id === 1 && (
             <Box
               sx={{
                 mt: 2,
@@ -118,7 +120,7 @@ export const CartInfo: FC<CartInfoProps> = ({
       )}
 
       {/* order info */}
-      <OrderInfo order={(cartState as any) as IOrderModel} />
+      <OrderInfo order={cartState as any as IOrderModel} />
 
       <Box
         sx={{

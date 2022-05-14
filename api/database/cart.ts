@@ -12,3 +12,22 @@ export const createOrder = async (newOrder: Order): Promise<Order> => {
 
   return order
 }
+
+export const updateOrder = async (newOrder: Order): Promise<Order> => {
+  const order = await prisma.order.update({
+    where: {
+      id: newOrder.id
+    },
+    data: {
+      transactionId: newOrder.transactionId,
+      deliveryDate: newOrder.deliveryDate,
+      orderStatusId: 3
+    }
+  })
+
+  if (!order) {
+    throw new Error('Fallo al intentar actualizar el pedido')
+  }
+
+  return order
+}
