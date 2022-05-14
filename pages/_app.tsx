@@ -10,6 +10,9 @@ import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 import { MainLayout } from '@organism/layouts/MainLayout'
 import { ToastContainer } from 'react-toastify'
+import CssBaseline from '@mui/material/CssBaseline';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import createEmotionCache from '../themes/createEmotionCache';
 import 'react-toastify/dist/ReactToastify.css'
 
 // REACT QUERY
@@ -24,7 +27,15 @@ const publicPages = [
   '/search/[query]'
 ]
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const { pathname } = useRouter()
 
   // Check if the current route matches a public page
@@ -32,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
+      <CacheProvider value={emotionCache}>
       <ThemeProvider theme={mainTheme}>
         <ToastContainer
           position="top-center"
@@ -64,7 +76,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
         <ToastContainer />
+        <CssBaseline />
       </ThemeProvider>
+      </CacheProvider>
     </Provider>
   )
 }

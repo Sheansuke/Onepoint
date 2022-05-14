@@ -1,26 +1,21 @@
 import { Box } from '@mui/material'
-import { ProductsTestData } from "@utils/ProductsTestData"
-import type { NextPage } from 'next'
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { ContentLayout } from '../components/organism/layouts/ContentLayout'
 import { ProductList } from '../components/organism/ProductList/index'
-import { findManyProducts } from '../api/database/product';
-import { IProductModel } from '../interfaces/models/IProductModel';
+import { findManyProducts } from '../api/database/product'
+import { IProductModel } from '../interfaces/models/IProductModel'
 import { FC } from 'react'
-
 
 // TODO: CREATE 404 PAGE
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
-// TODO: improve imports material
-
 
 interface IHomePageProps {
   products: IProductModel[]
 }
 
-const HomePage: FC<IHomePageProps> = ({products}) => {
+const HomePage: FC<IHomePageProps> = ({ products }) => {
   return (
     <>
       <NextSeo
@@ -36,9 +31,6 @@ const HomePage: FC<IHomePageProps> = ({products}) => {
   )
 }
 
-
-
-
 export const getStaticProps: GetStaticProps = async () => {
   const products = await findManyProducts()
 
@@ -48,6 +40,5 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   }
 }
-
 
 export default HomePage
