@@ -1,6 +1,6 @@
 import { getAllOrderPaymentTypeRequest } from '@api/axiosRequest/orderRequest'
 import { useCartState } from '@hooks/useCartState'
-import { FormControl, Select, MenuItem } from '@mui/material'
+import { FormControl, Select, MenuItem, CircularProgress } from '@mui/material'
 import { PaymentType } from '@prisma/client'
 
 import React, { FC, useState } from 'react'
@@ -11,15 +11,18 @@ interface SelectPaymentTypeProps {
 }
 
 export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
-  const { data } = useQuery('paymentTypes', () =>
+  const { data, isLoading } = useQuery('paymentTypes', () =>
     getAllOrderPaymentTypeRequest()
   )
   const { cartState, handleSetPaymentType, handleSetDeliveryDate } =
     useCartState()
   const [paymentType, setPaymentType] = useState<number>(
     cartState?.paymentType?.id
-    )
-    console.log("🚀 ~ file: SelectPaymentType.tsx ~ line 20 ~ paymentType", paymentType)
+  )
+  console.log(
+    '🚀 ~ file: SelectPaymentType.tsx ~ line 20 ~ paymentType',
+    paymentType
+  )
 
   const handleChange = (event: React.ChangeEvent<any>) => {
     setPaymentType(event.target.value)
@@ -34,18 +37,22 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
 
   return (
     <FormControl fullWidth>
-      <Select
-        labelId="selectPaymentTypeLabel"
-        id="selectPaymentType"
-        value={paymentType}
-        onChange={handleChange}
-      >
-        {data?.map((paymentType: PaymentType) => (
-          <MenuItem key={paymentType.id} value={paymentType.id}>
-            {paymentType.name}
-          </MenuItem>
-        ))}
-      </Select>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <Select
+          labelId="selectPaymentTypeLabel"
+          id="selectPaymentType"
+          value={paymentType}
+          onChange={handleChange}
+        >
+          {data?.map((paymentType: PaymentType) => (
+            <MenuItem key={paymentType.id} value={paymentType.id}>
+              {paymentType.name}
+            </MenuItem>
+          ))}
+        </Select>
+      )}
     </FormControl>
   )
 }
