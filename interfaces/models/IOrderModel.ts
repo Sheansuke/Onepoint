@@ -1,7 +1,6 @@
 import { IUserModel } from './'
 import { ICartProduct } from '../frontend/ICartProduct';
-import { PaymentType } from '@redux/slices/cartSlice';
-import { OrderStatus } from '@prisma/client';
+import { OrderStatus, PaymentType } from '@prisma/client';
 
 export interface IOrderModel {
   id: string

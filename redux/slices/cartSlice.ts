@@ -1,8 +1,9 @@
+import { PaymentType } from '@prisma/client'
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
 import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
 import { showNotification } from '../../utils/showNotification'
 
-export type PaymentType = 'efectivo contra entrega' | 'transferencia'
+
 
 export interface ICartState {
   isLoading?: boolean
@@ -17,7 +18,10 @@ export interface ICartState {
 
 const initialState: ICartState = {
   isLoading: true,
-  paymentType: 'efectivo contra entrega',
+  paymentType: {
+    id: 1,
+    name: "efectivo contra entrega"
+  },
   items: [],
   numberOfItems: 0,
   subTotal: 0,
@@ -33,7 +37,10 @@ export const cartSlice = createSlice({
     setInitialState: (state, action?: PayloadAction<ICartState>) => {
       state.isLoading = false
       state.deliveryDate = action.payload?.deliveryDate ?? undefined
-      state.paymentType = action.payload?.paymentType ?? 'efectivo contra entrega'
+      state.paymentType = action.payload?.paymentType ?? {
+        id: 1,
+        name: "efectivo contra entrega"
+      },
       state.items = action.payload?.items ?? []
       state.numberOfItems = action.payload?.numberOfItems ?? 0
       state.subTotal = action.payload?.subTotal ?? 0
@@ -138,7 +145,10 @@ export const cartSlice = createSlice({
     },
     clearCartState: state => {
       state.items = []
-      state.paymentType = 'efectivo contra entrega'
+      state.paymentType = {
+        id: 1,
+        name: "efectivo contra entrega"
+      },
       state.deliveryDate = undefined
       state.numberOfItems = 0
       state.subTotal = 0

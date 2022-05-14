@@ -1,5 +1,5 @@
 import { IOrderModel } from '@interfaces/models'
-import { Order } from '@prisma/client'
+import { Order, PaymentType } from '@prisma/client'
 import prisma from '@prisma/prismaClient'
 
 export const findOrderById = async (id: string): Promise<Order> => {
@@ -9,6 +9,7 @@ export const findOrderById = async (id: string): Promise<Order> => {
     },
     include: {
       status: true,
+      paymentType: true,
       user: {
         include: {
           deliveryAddress: true
@@ -22,4 +23,14 @@ export const findOrderById = async (id: string): Promise<Order> => {
   }
 
   return order
+}
+
+export const findManyOrderPaymentType = async (): Promise<PaymentType[]> => {
+  const paymentTypes = await prisma.paymentType.findMany()
+
+  if (!paymentTypes) {
+    throw new Error('Fallo al intentar encontrar los tipos de pago')
+  }
+
+  return paymentTypes
 }

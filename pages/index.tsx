@@ -14,6 +14,7 @@ import { FC } from 'react'
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
 // TODO: create paymentMethod model
+//TODO: check paymenType
 interface IHomePageProps {
   products: IProductModel[]
 }

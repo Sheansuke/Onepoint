@@ -4,7 +4,6 @@ import { IApiResponse } from '../../../interfaces/api/IApiResponse'
 import { ICreateOrderRequest } from '@api/axiosRequest/cartRequest'
 import { findManyProductsByArrayId } from '../../../api/database/product'
 import { findUniqueUserByClerkId } from '@api/database/user'
-import prisma from '@prisma/prismaClient'
 import { Order } from '@prisma/client'
 import { createOrder } from '@api/database/cart'
 
@@ -84,7 +83,7 @@ export const createOrderApi = async (
       tax: taxRate,
       total,
       orderStatusId: 1,
-      paymentType: paymentType,
+      paymentTypeId: paymentType?.id,
       deliveryDate: new Date(deliveryDate),
       isPaid: false,
       paidAt: null,

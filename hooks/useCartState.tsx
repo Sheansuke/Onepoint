@@ -1,8 +1,8 @@
 import { ICartProduct } from '@interfaces/frontend/ICartProduct'
+import { PaymentType } from '@prisma/client'
 import {
   addProductToCart,
   setProductQuantity,
-  PaymentType,
   removeProductFromCart,
   setDeliveryDate,
   setPaymentType,

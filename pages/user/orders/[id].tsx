@@ -9,6 +9,7 @@ import {
   Button,
   Card,
   Chip,
+  CircularProgress,
   Grid,
   Typography,
   useTheme
@@ -16,7 +17,8 @@ import {
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { showNotification } from '@utils/showNotification'
 import { GetServerSideProps } from 'next'
-import React, { FC } from 'react'
+import { useRouter } from 'next/router'
+import React, { FC, useState } from 'react'
 import { CartProductCard } from '../../../components/molecules/CartProductCard/index'
 
 interface OrderPageProps {
@@ -24,7 +26,14 @@ interface OrderPageProps {
 }
 
 const OrderPage: FC<OrderPageProps> = ({ order }) => {
+  const [loadingTransferPage, setLoadingTransferPage] = useState(false)
+  const router = useRouter()
   const { palette } = useTheme()
+
+  const handleTransfer = () => {
+    setLoadingTransferPage(true)
+    router.push(`/user/orders/transaction/${order.id}`)
+  }
   return (
     <ContentLayout title={`orden: ${order.id.slice(0, 8)}`}>
       <Typography
@@ -88,49 +97,55 @@ const OrderPage: FC<OrderPageProps> = ({ order }) => {
               />
             )}
 
-            {order.paymentType !== 'efectivo contra entrega' && !order.isPaid && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  mt: 2,
-                  flexDirection: 'column'
-                }}
-              >
-                <Button
-                  aria-label="confirmar orden"
-                  size="large"
-                  onClick={() =>
-                    showNotification(
-                      'Esta funcionalidad aun no esta disponible',
-                      'error'
-                    )
-                  }
+            {order.paymentType.id !== 1 &&
+              !order.isPaid && order.status.id !== 3 && !order.transactionId &&(
+                <Box
                   sx={{
-                    color: palette.primary[50],
-                    width: '90%'
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    mt: 2,
+                    flexDirection: 'column'
                   }}
                 >
-                  Hacer transferencia
-                </Button>
+                  {loadingTransferPage ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      aria-label="confirmar orden"
+                      size="large"
+                      onClick={handleTransfer}
+                      sx={{
+                        color: palette.primary[50],
+                        width: '90%'
+                      }}
+                    >
+                      Hacer transferencia
+                    </Button>
+                  )}
 
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-                  <InfoOutlined
-                    color="info"
-                    sx={{
-                      fontSize: 20,
-                      mr: 0.2
-                    }}
-                  />
-                  <small>
-                    Si ya ha realizado la transferencia haga click en el boton e
-                    introduzca el numero de la transferencia para que podamos
-                    validarla
-                  </small>
+                  <Box
+                    sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}
+                  >
+                    <InfoOutlined
+                      color="info"
+                      sx={{
+                        fontSize: 20,
+                        mr: 0.2
+                      }}
+                    />
+                    <small
+                      style={{
+                        fontSize: 15
+                      }}
+                    >
+                      Si ya ha realizado o planea realizar la transferencia haga
+                      click en el boton e introduzca el numero de la
+                      transferencia para que podamos validarla
+                    </small>
+                  </Box>
                 </Box>
-              </Box>
-            )}
+              )}
           </Card>
         </Grid>
       </Grid>
@@ -141,21 +156,32 @@ const OrderPage: FC<OrderPageProps> = ({ order }) => {
 export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async ({ req, query }) => {
     const { userId } = req.auth
-    const data = await findOrderById(query.id as string)
-    const order = data as any as IOrderModel
 
-    if (userId !== order.user.clerkId) {
+    try {
+      const data = await findOrderById(query.id as string)
+      const order = data as any as IOrderModel
+
+      if (userId !== order.user.clerkId) {
+        return {
+          redirect: {
+            destination: '/',
+            permanent: false
+          }
+        }
+      }
+
+      return {
+        props: {
+          order: JSON.parse(JSON.stringify(order))
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ file: [id].tsx ~ line 164 ~ error', error)
       return {
         redirect: {
           destination: '/',
           permanent: false
         }
-      }
-    }
-
-    return {
-      props: {
-        order: JSON.parse(JSON.stringify(order))
       }
     }
   }

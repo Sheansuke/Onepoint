@@ -23,7 +23,7 @@ export const OrderInfo: FC<OrderInfoProps> = ({order}) => {
       {order?.paymentType && (
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="subtitle1">Tipo de pago</Typography>
-          <Typography variant="subtitle1">{order.paymentType}</Typography>
+          <Typography variant="subtitle1">{order.paymentType?.name}</Typography>
         </Box>
       )}
 
