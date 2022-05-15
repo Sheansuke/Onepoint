@@ -54,7 +54,7 @@ export const CartInfo: FC<CartInfoProps> = ({
       } else {
         return showNotification('Debes seleccionar un dia de entrega!', 'warn')
       }
-    } else{
+    } else {
       setIsLoadingConfirm(true)
       return router.push('/cart/resume')
     }

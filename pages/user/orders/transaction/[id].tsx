@@ -31,6 +31,8 @@ interface FormData {
   code: string
 }
 
+// TODO: improve design
+
 const TransactionPage: FC<TransactionPageProps> = ({ order }) => {
   const router = useRouter()
   const { palette } = useTheme()
@@ -62,7 +64,7 @@ const TransactionPage: FC<TransactionPageProps> = ({ order }) => {
       })
   }
   return (
-    <ContentLayout title={`orden: pepetronico`}>
+    <ContentLayout title={`orden: ${order.id.slice(0,8)}`}>
       <Grid container spacing={8}>
         <Grid item xs={12} md={6}>
           <Card
