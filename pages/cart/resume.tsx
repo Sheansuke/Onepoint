@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async ({ req }) => {
     const { userId } = req?.auth
     const { cartState } = req?.cookies
-    const cookieState = JSON.parse(cartState) as ICartState
+    const cookieState = cartState ? JSON.parse(cartState) as ICartState : null
 
     if (!userId)
       return {
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
         }
       }
 
-    if (!cookieState.deliveryDate && cookieState.paymentType.id !== 2)
+    if (!cookieState?.deliveryDate && cookieState?.paymentType.id !== 2)
       return {
         redirect: {
           destination: '/cart',
