@@ -1,6 +1,6 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
 import { Typography, Divider, Box } from '@mui/material'
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
 
 interface AddressInfoProps {

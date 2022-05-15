@@ -7,12 +7,11 @@ import {
   SupervisedUserCircleOutlined
 } from '@mui/icons-material'
 import {
-  HomeOutlined,
   AssignmentOutlined,
   ShoppingCartOutlined,
   DashboardOutlined,
-  ProductionQuantityLimits
-} from '@mui/icons-material'
+  ProductionQuantityLimits,
+} from '@mui/icons-material';
 
 interface NavItem {
   navigateTo: string

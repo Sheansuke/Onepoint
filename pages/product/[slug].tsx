@@ -9,11 +9,10 @@ import {
   useTheme
 } from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { ProductsTestData } from '@utils/ProductsTestData'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react';
 import { IProductModel } from '../../interfaces/models/IProductModel'
 import { useCartState } from '@hooks/useCartState'
 import { useRouter } from 'next/router'

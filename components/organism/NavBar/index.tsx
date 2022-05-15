@@ -6,7 +6,7 @@ import {
   ShoppingCartOutlined
 } from '@mui/icons-material'
 import { AppBar, Badge, Box, IconButton, Toolbar } from '@mui/material'
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice'
 import { RootState } from 'redux/store'

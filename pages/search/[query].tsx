@@ -4,7 +4,7 @@ import { ProductList } from '@organism/ProductList'
 import { ProductsTestData } from '@utils/ProductsTestData'
 import { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { IProductModel } from '../../interfaces/models/IProductModel'
 
 interface SearchPageProps {

@@ -6,7 +6,7 @@ import {
     useTheme,
     CircularProgress
   } from '@mui/material'
-  import React, { FC } from 'react'
+  import { FC } from 'react';
   import { ContentLayout } from '@organism/layouts/ContentLayout'
   import { CartProductCard } from '@molecules/CartProductCard/index'
   import { useRouter } from 'next/router'

@@ -3,7 +3,7 @@ import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
 import { useCartState } from '@hooks/useCartState'
 import { IOrderModel } from '@interfaces/models'
-import { InfoOutlined, Router } from '@mui/icons-material'
+import { InfoOutlined } from '@mui/icons-material'
 import {
   Box,
   Grid,
@@ -14,11 +14,9 @@ import {
   useTheme
 } from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { dateTwoDaysValidation } from '@utils/dateTwoDaysValidation'
 import { GetServerSideProps } from 'next'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { format } from 'date-fns'
 import { showNotification } from '@utils/showNotification'
 import { updateOrderRequest } from '../../../../api/axiosRequest/orderRequest'
 import { useRouter } from 'next/router'
@@ -30,8 +28,6 @@ interface TransactionPageProps {
 interface FormData {
   code: string
 }
-
-// TODO: improve design
 
 const TransactionPage: FC<TransactionPageProps> = ({ order }) => {
   const router = useRouter()
@@ -65,8 +61,8 @@ const TransactionPage: FC<TransactionPageProps> = ({ order }) => {
   }
   return (
     <ContentLayout title={`orden: ${order.id.slice(0,8)}`}>
-      <Grid container spacing={8}>
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={8}  >
+        <Grid item xs={12} md={6}  >
           <Card
             sx={{
               p: 2
@@ -122,10 +118,15 @@ const TransactionPage: FC<TransactionPageProps> = ({ order }) => {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} >
           <Card
             sx={{
-              p: 2
+              p: 2,
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: 4
             }}
           >
             <SelectDeliveryDate />

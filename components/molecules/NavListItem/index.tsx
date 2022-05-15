@@ -1,5 +1,5 @@
 import { IconProps, ListItem, ListItemText } from '@mui/material'
-import React, { FC, ReactElement } from 'react'
+import { FC, ReactElement } from 'react';
 
 interface NavListItemProps {
   onClick?: () => void

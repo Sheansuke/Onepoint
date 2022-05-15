@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavListItem } from '@molecules/NavListItem'

@@ -1,6 +1,6 @@
 import { IOrderModel } from '@interfaces/models'
 import { Typography, Divider, Box } from '@mui/material'
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { format } from 'date-fns';
 
 export interface OrderInfoProps {

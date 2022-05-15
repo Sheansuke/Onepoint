@@ -15,10 +15,9 @@ import {
   useTheme
 } from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { showNotification } from '@utils/showNotification'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react';
 import { CartProductCard } from '../../../components/molecules/CartProductCard/index'
 
 interface OrderPageProps {

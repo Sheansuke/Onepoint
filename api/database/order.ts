@@ -1,4 +1,3 @@
-import { IOrderModel } from '@interfaces/models'
 import { Order, PaymentType } from '@prisma/client'
 import prisma from '@prisma/prismaClient'
 

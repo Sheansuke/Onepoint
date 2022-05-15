@@ -3,7 +3,6 @@ import { Order, PaymentType } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { IApiResponse } from '../../../interfaces/api/IApiResponse'
 import { updateOrder } from '../../../api/database/cart'
-import { IOrderModel } from '../../../interfaces/models/IOrderModel'
 
 type Data = {
   name: string

@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { closeSearchModal } from '@redux/slices/uiSlice'
 import { useRouter } from 'next/router'
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'

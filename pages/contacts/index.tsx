@@ -6,7 +6,7 @@ import {
 import { Card, Grid, SxProps, Theme, Typography } from '@mui/material'
 import { CSSProperties } from '@mui/styled-engine'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import React, { FC } from 'react'
+import { FC } from 'react';
 
 interface ContactsPageProps {
   // name?: string;

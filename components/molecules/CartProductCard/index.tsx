@@ -7,7 +7,7 @@ import {
 } from '@mui/icons-material'
 import { Box, Button, Card, IconButton, Typography } from '@mui/material'
 import Image from 'next/image'
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { ICartProduct } from '../../../interfaces/frontend/ICartProduct'
 
 interface CartProductCardProps {
