@@ -2,6 +2,7 @@ import { NavBar } from '@organism/NavBar'
 import { setInitialState } from '@redux/slices/cartSlice'
 import dynamic from 'next/dynamic'
 import React, { FC, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { useDispatch } from 'react-redux'
 
 interface MainLayoutProps {
@@ -19,7 +20,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const cartState = localStorage.getItem('cartState')
+    const cartState = Cookies.get('cartState')
     if (cartState) {
       dispatch(setInitialState(JSON.parse(cartState)))
     } else {

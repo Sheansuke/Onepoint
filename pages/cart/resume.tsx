@@ -4,6 +4,7 @@ import Cart from '../../components/organism/Cart/index'
 import { findUniqueDeliveryAddressByClerkId } from '../../api/database/user'
 import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
+import { ICartState } from '../../redux/slices/cartSlice'
 
 export interface ResumePageProps {
   deliveryAddress: IDeliveryAddressModel
@@ -22,10 +23,21 @@ const ResumePage: FC<ResumePageProps> = ({ deliveryAddress }) => {
 export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async ({ req }) => {
     const { userId } = req?.auth
+    const { cartState } = req?.cookies
+    const cookieState = JSON.parse(cartState) as ICartState
+
     if (!userId)
       return {
         redirect: {
           destination: '/user/address',
+          permanent: false
+        }
+      }
+
+    if (!cookieState.deliveryDate && cookieState.paymentType.id !== 2)
+      return {
+        redirect: {
+          destination: '/cart',
           permanent: false
         }
       }

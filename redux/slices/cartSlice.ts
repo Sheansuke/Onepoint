@@ -2,6 +2,7 @@ import { PaymentType } from '@prisma/client'
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
 import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
 import { showNotification } from '../../utils/showNotification'
+import Cookies from 'js-cookie';
 
 
 
@@ -73,7 +74,7 @@ export const cartSlice = createSlice({
               // ACCOUNTING
               state.subTotal += action.payload.price * action.payload.quantity
               state.total = state.subTotal * state.tax + state.subTotal
-              localStorage.setItem('cartState', JSON.stringify(state))
+              Cookies.set('cartState', JSON.stringify(state))
             }
           }
           return product
@@ -86,7 +87,7 @@ export const cartSlice = createSlice({
         // ACCOUNTING
         state.subTotal += action.payload.price * action.payload.quantity
         state.total = state.subTotal * state.tax + state.subTotal
-        localStorage.setItem('cartState', JSON.stringify(state))
+        Cookies.set('cartState', JSON.stringify(state))
       }
     },
 
@@ -99,7 +100,7 @@ export const cartSlice = createSlice({
       state.numberOfItems -= action.payload.quantity
       state.subTotal -= action.payload.price * action.payload.quantity
       state.total = state.subTotal * state.tax + state.subTotal
-      localStorage.setItem('cartState', JSON.stringify(state))
+      Cookies.set('cartState', JSON.stringify(state))
     },
 
     setProductQuantity: (state, action: PayloadAction<ICartProduct>) => {
@@ -112,7 +113,7 @@ export const cartSlice = createSlice({
             state.numberOfItems -= 1
             state.subTotal -= product.price
             state.total = state.subTotal * state.tax + state.subTotal
-            localStorage.setItem('cartState', JSON.stringify(state))
+            Cookies.set('cartState', JSON.stringify(state))
           } else if (action.payload.quantity > 0) {
             if (product.quantity < product.inStock) {
               product.quantity += 1
@@ -121,7 +122,7 @@ export const cartSlice = createSlice({
               state.numberOfItems += 1
               state.subTotal += product.price
               state.total = state.subTotal * state.tax + state.subTotal
-              localStorage.setItem('cartState', JSON.stringify(state))
+              Cookies.set('cartState', JSON.stringify(state))
             } else {
               showNotification(
                 'Ya no queda mas de este producto en stock',
@@ -136,12 +137,12 @@ export const cartSlice = createSlice({
 
     setPaymentType: (state, action: PayloadAction<PaymentType>) => {
       state.paymentType = action.payload
-      localStorage.setItem('cartState', JSON.stringify(state))
+      Cookies.set('cartState', JSON.stringify(state))
     },
 
     setDeliveryDate: (state, action: PayloadAction<string>) => {
       state.deliveryDate = action.payload
-      localStorage.setItem('cartState', JSON.stringify(state))
+      Cookies.set('cartState', JSON.stringify(state))
     },
     clearCartState: state => {
       state.items = []
@@ -153,7 +154,7 @@ export const cartSlice = createSlice({
       state.numberOfItems = 0
       state.subTotal = 0
       state.total = 0
-      localStorage.removeItem('cartState')
+      Cookies.remove('cartState')
     }
   }
 })
