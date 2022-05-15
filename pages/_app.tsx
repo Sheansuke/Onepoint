@@ -10,9 +10,11 @@ import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
 import { mainTheme } from '../themes'
 import { MainLayout } from '@organism/layouts/MainLayout'
 import { ToastContainer } from 'react-toastify'
-import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import createEmotionCache from '../themes/createEmotionCache';
+import CssBaseline from '@mui/material/CssBaseline'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import createEmotionCache from '../themes/createEmotionCache'
+import MUICookieConsent from 'material-ui-cookie-consent'
+
 import 'react-toastify/dist/ReactToastify.css'
 
 // REACT QUERY
@@ -28,58 +30,64 @@ const publicPages = [
 ]
 
 interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
+  emotionCache?: EmotionCache
 }
 
 // Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
+const clientSideEmotionCache = createEmotionCache()
 
 function MyApp(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
   const { pathname } = useRouter()
 
   // Check if the current route matches a public page
   const isPublicPage = publicPages.includes(pathname)
 
   return (
-    <Provider store={store}>
-      <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={mainTheme}>
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <QueryClientProvider client={queryClient}>
-          <ClerkProvider {...pageProps}>
-            <MainLayout>
-              {isPublicPage ? (
-                <Component {...pageProps} />
-              ) : (
-                <>
-                  <SignedInWrapper>
+    <>
+      <MUICookieConsent
+        cookieName="onepointCookiesConsent"
+        message="Onepoint usa Cookies para mejorar tu experiencia de compra y ofrecerte una mejor experiencia de usuario. Si continúas navegando, consideramos que aceptas su uso."
+      />
+      <Provider store={store}>
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={mainTheme}>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <QueryClientProvider client={queryClient}>
+              <ClerkProvider {...pageProps}>
+                <MainLayout>
+                  {isPublicPage ? (
                     <Component {...pageProps} />
-                  </SignedInWrapper>
-                  <SignedOutWrapper>
-                    <RedirectToSignIn />
-                  </SignedOutWrapper>
-                </>
-              )}
-            </MainLayout>
-          </ClerkProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-        <ToastContainer />
-        <CssBaseline />
-      </ThemeProvider>
-      </CacheProvider>
-    </Provider>
+                  ) : (
+                    <>
+                      <SignedInWrapper>
+                        <Component {...pageProps} />
+                      </SignedInWrapper>
+                      <SignedOutWrapper>
+                        <RedirectToSignIn />
+                      </SignedOutWrapper>
+                    </>
+                  )}
+                </MainLayout>
+              </ClerkProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+            <ToastContainer />
+            <CssBaseline />
+          </ThemeProvider>
+        </CacheProvider>
+      </Provider>
+    </>
   )
 }
 
