@@ -14,8 +14,8 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from '../themes/createEmotionCache'
 import MUICookieConsent from 'material-ui-cookie-consent'
-
 import 'react-toastify/dist/ReactToastify.css'
+import "../styles/globals.css"
 
 // REACT QUERY
 const queryClient = new QueryClient()
