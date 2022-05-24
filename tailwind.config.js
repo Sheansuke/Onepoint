@@ -1,7 +1,38 @@
 module.exports = {
-  content: ['./pages/**/*.{js,ts,jsx,tsx}','./components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}'
+  ],
+  daisyui: {
+    themes:[
+      {
+        mytheme: {
+          
+          "primary": "#14b8a6",
+                   
+          "secondary": "#0f172a",
+                   
+          "accent": "#1FB2A6",
+                   
+          "neutral": "#191D24",
+                   
+          "base-100": "#f8fafc",
+                   
+          "info": "#0ea5e9",
+                   
+          "success": "#36D399",
+                   
+          "warning": "#f59e0b",
+                   
+          "error": "#ef4444",
+                   },
+      }
+    ]
+  },
   theme: {
-    extend: {},
+    extend: {
+      
+    },
     colors: {
       main: {
         primary: '#14b8a6',
@@ -14,7 +45,7 @@ module.exports = {
         600: '#0d9488',
         700: '#0f766e',
         800: '#115e59',
-        900: '#134e4a' 
+        900: '#134e4a'
       },
       main2: {
         primary: '#0f172a',
@@ -42,7 +73,7 @@ module.exports = {
         800: '#991b1b',
         900: '#7f1d1d'
       },
-      mainInfo: {
+      mainWarning: {
         primary: '#f59e0b',
         50: '#fffbeb',
         100: '#fef3c7',
@@ -54,6 +85,19 @@ module.exports = {
         700: '#b45309',
         800: '#92400e',
         900: '#78350f'
+      },
+      mainInfo: {
+        primary: '#0ea5e9',
+        50: '#f0f9ff',
+        100: '#E0F2FE',
+        200: '#BAE6FD',
+        300: '#7DD3FC',
+        400: '#38BDF8',
+        500: '#0EA5E9',
+        600: '#0284C7',
+        700: '#0369A1',
+        800: '#075985',
+        900: '#0C4A6E'
       }
     },
     fontFamily: {

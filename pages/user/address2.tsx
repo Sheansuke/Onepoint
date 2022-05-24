@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { findUniqueDeliveryAddressByClerkId } from '../../api/database/user'
 import { showNotification } from '../../utils/showNotification'
 import { tw } from '@utils/tailwindClass'
+import { Button } from '@atoms/Button'
 
 interface AdressPageProps {
   deliveryAddress: IDeliveryAddressModel
@@ -49,8 +50,8 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
   return (
     <ContentLayout title="Direccion de entrega">
       <form onSubmit={handleSubmit(onSaved)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-10 place-items-center">
-          <div className=" w-full sm:max-w-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-10 pt-10 place-items-center">
+          <div className=" w-full sm:max-w-xl">
             <label className="label">
               <span className="text-main2-400">Nombre</span>
             </label>
@@ -62,7 +63,7 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
             />
           </div>
 
-          <div className="w-full sm:max-w-lg">
+          <div className="w-full sm:max-w-xl">
             <label className="label">
               <span className="text-main2-400">Nombre</span>
             </label>
@@ -74,7 +75,7 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
             />
           </div>
 
-          <div className="w-full sm:max-w-lg">
+          <div className="w-full sm:max-w-xl">
             <label className="label">
               <span className="text-main2-400">Nombre</span>
             </label>
@@ -86,7 +87,7 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
             />
           </div>
 
-          <div className="w-full sm:max-w-lg">
+          <div className="w-full sm:max-w-xl">
             <label className="label">
               <span className="text-main2-400">Nombre</span>
             </label>
@@ -98,7 +99,7 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
             />
           </div>
 
-          <div className="w-full sm:max-w-lg">
+          <div className="w-full sm:max-w-xl">
             <label className="label">
               <span className="text-main2-400">Nombre</span>
             </label>
@@ -110,7 +111,7 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
             />
           </div>
 
-          <div className="w-full sm:max-w-lg">
+          <div className="w-full sm:max-w-xl">
             <label className="label">
               <span className="text-main2-400">Nombre</span>
             </label>
@@ -124,17 +125,13 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
         </div>
 
         <div className="text-center mt-10">
-          <button
+          <Button
             type="submit"
-            className={tw(
-              'btn bg-main-primary text-main-50 border-none',
-              'w-56',
-              isLoadingPost && 'loading'
-            )}
-            disabled={isLoadingPost}
-          >
-            Guardar
-          </button>
+            text="Guardar"
+            colorTheme="main"
+            isLoading={isLoadingPost}
+            tailwindClass="w-56 bg-main-primary text-main-50  hover:bg-main-700"
+          />
         </div>
       </form>
     </ContentLayout>

@@ -6,7 +6,7 @@ interface ContentLayoutProps {
 }
 export const ContentLayout: FC<ContentLayoutProps> = ({ children, title }) => {
   return (
-    <div className="m-4  xl:mx-auto pt-20 max-w-[1440px] ">
+    <div className="m-4 xl:mx-auto pt-20 max-w-[1440px] ">
       <h1 className="text-3xl font-bold">{title ?? ''}</h1>
       {children}
     </div>
