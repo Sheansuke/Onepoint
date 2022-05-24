@@ -10,6 +10,7 @@ import { FC } from 'react'
 // TODO: CREATE 404 PAGE
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
+// TODO: si no se encuentra producto exacto buscado tomar la primera palabra y buscar por tags para sugerir algo al cliente
 
 interface IHomePageProps {
   products: IProductModel[]

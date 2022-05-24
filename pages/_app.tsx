@@ -15,7 +15,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from '../themes/createEmotionCache'
 import MUICookieConsent from 'material-ui-cookie-consent'
 import 'react-toastify/dist/ReactToastify.css'
-// import "../styles/globals.css"
+import '../styles/globals.css'
 
 // REACT QUERY
 const queryClient = new QueryClient()
@@ -83,7 +83,6 @@ function MyApp(props: MyAppProps) {
               <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
             <ToastContainer />
-            <CssBaseline />
           </ThemeProvider>
         </CacheProvider>
       </Provider>

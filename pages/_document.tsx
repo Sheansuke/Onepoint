@@ -11,7 +11,8 @@ export default class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang='es'>
+          // data-theme is and attribute to daisy ui
+            <Html lang='es' data-theme="light">
                 <Head>
                     <link
                         rel="stylesheet"

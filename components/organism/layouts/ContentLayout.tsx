@@ -1,24 +1,14 @@
-import { Box, Typography } from '@mui/material'
 import React, { FC } from 'react'
 
 interface ContentLayoutProps {
   children?: React.ReactNode | React.ReactNode[]
   title?: string
 }
-
-export const ContentLayout: FC<ContentLayoutProps> = ({ children,title }) => {
+export const ContentLayout: FC<ContentLayoutProps> = ({ children, title }) => {
   return (
-    <Box
-      sx={{
-        margin: '80px auto',
-        maxWidth: '1440px',
-        padding: '0px 20px'
-      }}
-    >
-      <Typography variant="h1" component="h1" fontWeight="bold">
-        {title ?? ""}
-      </Typography>
+    <div className="m-4  xl:mx-auto pt-20 max-w-[1440px] ">
+      <h1 className="text-3xl font-bold">{title ?? ''}</h1>
       {children}
-    </Box>
+    </div>
   )
 }
