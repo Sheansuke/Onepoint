@@ -2,22 +2,15 @@ import { createOrUpdateDeliveryAddressRequest } from '@api/axiosRequest/userRequ
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
 import { useUser } from '@clerk/nextjs'
 import { IDeliveryAddressModel } from '@interfaces/models'
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  InputLabel,
-  TextField,
-  useTheme
-} from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { FC, useState } from 'react';
+import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { findUniqueDeliveryAddressByClerkId } from '../../api/database/user'
 import { showNotification } from '../../utils/showNotification'
+import { tw } from '@utils/tailwindClass'
+import { Button } from '@atoms/Button'
 
 interface AdressPageProps {
   deliveryAddress: IDeliveryAddressModel
@@ -32,16 +25,11 @@ interface FormData {
   phone: string
 }
 
-const AddressPage: FC<AdressPageProps> = ({ deliveryAddress }) => {
+const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
   const { user } = useUser()
-  const { palette } = useTheme()
   const router = useRouter()
-  const [isLoadingPost, setIsLoadingPost] = useState(false)
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = useForm<FormData>({
+  const [isLoadingPost, setIsLoadingPost] = useState<boolean>(false)
+  const { handleSubmit, register } = useForm<FormData>({
     defaultValues: deliveryAddress
   })
 
@@ -62,108 +50,93 @@ const AddressPage: FC<AdressPageProps> = ({ deliveryAddress }) => {
   return (
     <ContentLayout title="Direccion de entrega">
       <form onSubmit={handleSubmit(onSaved)}>
-        <Grid container spacing={4} mt={2}>
-          <Grid item xs={12} md={6}>
-            <InputLabel>Nombre</InputLabel>
-            <TextField
-              fullWidth
-              {...register('name', {
-                required: 'El nombre es requerido'
-              })}
-              error={!!errors.name}
-              helperText={errors.name && errors.name.message}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6}>
-            <InputLabel>Apellido</InputLabel>
-            <TextField
-              fullWidth
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-10 pt-10 place-items-center">
+          <div className=" w-full sm:max-w-xl">
+            <label className="label">
+              <span className="text-main2-400">Nombre</span>
+            </label>
+            <input
+              className="input input-bordered w-full"
               {...register('lastName', {
                 required: 'El apellido es requerido'
               })}
-              error={!!errors.lastName}
-              helperText={errors.lastName && errors.lastName.message}
             />
-          </Grid>
+          </div>
 
-          <Grid item xs={12} md={6}>
-            <InputLabel>Sector</InputLabel>
-            <TextField
-              fullWidth
+          <div className="w-full sm:max-w-xl">
+            <label className="label">
+              <span className="text-main2-400">Nombre</span>
+            </label>
+            <input
+              className="input input-bordered w-full"
+              {...register('lastName', {
+                required: 'El apellido es requerido'
+              })}
+            />
+          </div>
+
+          <div className="w-full sm:max-w-xl">
+            <label className="label">
+              <span className="text-main2-400">Nombre</span>
+            </label>
+            <input
+              className="input input-bordered w-full "
               {...register('sector', {
                 required: 'El sector es requerido'
               })}
-              error={!!errors.sector}
-              helperText={errors.sector && errors.sector.message}
             />
-          </Grid>
+          </div>
 
-          <Grid item xs={12} md={6}>
-            <InputLabel>Calle</InputLabel>
-            <TextField
-              fullWidth
+          <div className="w-full sm:max-w-xl">
+            <label className="label">
+              <span className="text-main2-400">Nombre</span>
+            </label>
+            <input
+              className="input input-bordered w-full "
               {...register('street', {
                 required: 'La calle es requerida'
               })}
-              error={!!errors.street}
-              helperText={errors.street && errors.street.message}
             />
-          </Grid>
+          </div>
 
-          <Grid item xs={12} md={6}>
-            <InputLabel>Lugar de referencia</InputLabel>
-            <TextField
-              fullWidth
+          <div className="w-full sm:max-w-xl">
+            <label className="label">
+              <span className="text-main2-400">Nombre</span>
+            </label>
+            <input
+              className="input input-bordered w-full "
               {...register('referencePlace', {
                 required: 'El lugar de referencia es requerido'
               })}
-              error={!!errors.referencePlace}
-              helperText={
-                errors.referencePlace && errors.referencePlace.message
-              }
             />
-          </Grid>
+          </div>
 
-          <Grid item xs={12} md={6}>
-            <InputLabel>Telefono / Celular</InputLabel>
-            <TextField
-              fullWidth
+          <div className="w-full sm:max-w-xl">
+            <label className="label">
+              <span className="text-main2-400">Nombre</span>
+            </label>
+            <input
+              className="input input-bordered w-full "
               {...register('phone', {
                 required: 'El numero es requerido'
               })}
-              error={!!errors.phone}
-              helperText={errors.phone && errors.phone.message}
             />
-          </Grid>
-        </Grid>
+          </div>
+        </div>
 
-        <Box
-          sx={{
-            mt: 5,
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
-          {isLoadingPost ? (
-            <CircularProgress />
-          ) : (
-            <Button
-              type="submit"
-              size="large"
-              sx={{
-                color: palette.primary[50]
-              }}
-            >
-              Guardar
-            </Button>
-          )}
-        </Box>
+        <div className="text-center mt-10">
+          <Button
+            type="submit"
+            text="Guardar"
+            colorTheme="main"
+            isLoading={isLoadingPost}
+            tailwindClass="w-56 bg-main-primary text-main-50  hover:bg-main-700"
+          />
+        </div>
       </form>
     </ContentLayout>
   )
 }
-
 
 export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   async ({ req }) => {
@@ -187,4 +160,4 @@ export const getServerSideProps: GetServerSideProps = withServerSideAuth(
   }
 )
 
-export default AddressPage
+export default Address2Page

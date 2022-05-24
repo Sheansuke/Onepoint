@@ -1,19 +1,11 @@
 import dynamic from 'next/dynamic'
-import { NextMaterialLink } from '@atoms/NextMaterialLink'
-import {
-  MenuOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined
-} from '@mui/icons-material'
-import { AppBar, Badge, Box, IconButton, Toolbar } from '@mui/material'
-import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice'
 import { RootState } from 'redux/store'
-
-interface NavBarProps {
-  // name?: string;
-}
+import { CartIcon } from 'components/icons/CartIcon'
+import { MenuIcon } from 'components/icons/MenuIcon'
+import { SearchIcon } from 'components/icons/SearchIcon'
+import { NextMaterialLink } from '@atoms/NextMaterialLink'
 
 const SearchModal = dynamic(
   () => import('@molecules/SearchModal').then(module => module.SearchModal),
@@ -22,7 +14,7 @@ const SearchModal = dynamic(
   }
 )
 
-export const NavBar: FC<NavBarProps> = () => {
+export const NavBar = () => {
   const dispatch = useDispatch()
   const { numberOfItems } = useSelector((state: RootState) => state.cartState)
 
@@ -35,74 +27,45 @@ export const NavBar: FC<NavBarProps> = () => {
   }
 
   return (
-    <AppBar>
+    <>
       <SearchModal />
 
-      <Toolbar
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          m: 1
-        }}
-      >
-        <Box>
-          <IconButton
-          aria-label='abrir menu'
-            size="small"
-            sx={{ m: 0, p: 0 }}
+      <div className="navbar px-4">
+        {/* MENU */}
+        <div className="navbar-start">
+          <button
+            className="btn btn-ghost btn-circle"
             onClick={handleOpenSideMenu}
           >
-            <MenuOutlined
-              color="secondary"
-              sx={{
-                fontSize: 40
-              }}
-            />
-          </IconButton>
-        </Box>
+            <MenuIcon tailwindClass="w-8 h-8" />
+          </button>
+        </div>
 
-        <Box
-          sx={{
-            display: 'flex'
-          }}
-        >
-          <Box
-            sx={{
-              mr: 2
-            }}
+        {/* TITLE */}
+        <div className="navbar-center">
+          <NextMaterialLink href="/">
+            <a className="hover:cursor-pointer normal-case text-2xl text-main-primary font-bold ">
+              Onepoint
+            </a>
+          </NextMaterialLink>
+        </div>
+
+        {/* SEARCH AND CART */}
+        <div className="navbar-end">
+          <button
+            className="btn btn-ghost btn-circle"
+            onClick={handleOpenSearchModal}
           >
-            <IconButton
-            aria-label='buscar'
-              size="small"
-              sx={{ m: 0, p: 0 }}
-              onClick={handleOpenSearchModal}
-            >
-              <SearchOutlined
-                color="secondary"
-                sx={{
-                  fontSize: 40
-                }}
-              />
-            </IconButton>
-          </Box>
+            <SearchIcon tailwindClass="w-8 h-8" />
+          </button>
 
-          <Box>
-            <NextMaterialLink href="/cart">
-              <Badge
-                badgeContent={numberOfItems >= 9 ? '+9' : numberOfItems}
-                color="info"
-              >
-                <ShoppingCartOutlined
-                  color="secondary"
-                  sx={{
-                    fontSize: 40
-                  }}
-                />
-              </Badge>
-            </NextMaterialLink>
-          </Box>
-        </Box>
-      </Toolbar>
-    </AppBar>
+          <NextMaterialLink href="/cart">
+            <button className="btn btn-ghost btn-circle">
+              <CartIcon tailwindClass="w-8 h-8" indicator={numberOfItems} />
+            </button>
+          </NextMaterialLink>
+        </div>
+      </div>
+    </>
   )
 }
