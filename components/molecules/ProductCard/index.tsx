@@ -50,6 +50,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
             width={410}
             height={410}
             alt={product.title}
+            className="hover:cursor-pointer"
           />
         </Box>
       </NextMaterialLink>

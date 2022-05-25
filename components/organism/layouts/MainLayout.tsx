@@ -29,14 +29,12 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   }, [])
 
   return (
-    <>
+    <SideMenu>
       <nav>
         <NavBar />
       </nav>
 
-      <SideMenu />
-
       <main>{children}</main>
-    </>
+    </SideMenu>
   )
 }

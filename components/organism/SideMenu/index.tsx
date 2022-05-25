@@ -1,33 +1,18 @@
-import { FC, useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
+import { FC, useEffect, useState } from 'react'
 import { NavListItem } from '@molecules/NavListItem'
-import { Box, Divider, Drawer, List, Typography, useTheme } from '@mui/material'
-import { RootState } from 'redux/store'
-import { closeSideMenu } from '@redux/slices/uiSlice'
 import { NavItemsData, NavItemsAdminData } from './NavItemsData'
 import { useQuery } from 'react-query'
 import { getUserRequest } from '../../../api/axiosRequest/userRequest'
+import { NextMaterialLink } from '@atoms/NextMaterialLink'
 
-export const SideMenu: FC = () => {
-  const router = useRouter()
-  const { palette } = useTheme()
+interface ISideMenuProps {
+  children: React.ReactNode | React.ReactNode[]
+}
+
+// TODO: add avatar user icon to header
+export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
   const { data } = useQuery('user', () => getUserRequest())
-
-  // redux
-  const { isSideMenuOpen } = useSelector((state: RootState) => state.uiState)
-  const dispatch = useDispatch()
-
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
-
-  const navigateTo = (url: string) => {
-    router.push(url)
-    handleClose()
-  }
-
-  const handleClose = () => {
-    dispatch(closeSideMenu())
-  }
 
   useEffect(() => {
     if (data) {
@@ -40,64 +25,44 @@ export const SideMenu: FC = () => {
   }, [data])
 
   return (
-    <Drawer
-      open={isSideMenuOpen}
-      onClose={handleClose}
-      anchor="left"
-      sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
-    >
-      <Typography
-        variant="h1"
-        color="primary"
-        sx={{
-          mt: 2,
-          mb: 2,
-          ml: 1,
-          fontWeight: 400
-        }}
-      >
-        Onepoint
-      </Typography>
-      <Box sx={{ width: 275 }}>
-        <List>
-          {/* CLIENTE */}
+    <div className="drawer">
+      <input id="sideMenu" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">{children}</div>
+      <div className="drawer-side">
+        <label htmlFor="sideMenu" className="drawer-overlay"></label>
+
+        {/* USER PANEL */}
+        <ul className="menu p-2 overflow-y-auto w-80 bg-base-100">
+          {/* TITLE */}
+          <div className="mb-4 ">
+            <p className="normal-case text-3xl text-main-primary font-bold ">
+              Onepoint
+            </p>
+          </div>
+
           {NavItemsData.map((item, index) => (
-            <NavListItem
-              key={index}
-              text={item.text}
-              icon={item.icon}
-              onClick={() => navigateTo(item.navigateTo)}
-            />
+            <NextMaterialLink key={index} href={item.navigateTo}>
+              <label htmlFor="sideMenu">
+                <NavListItem text={item.text} icon={item.icon} />
+              </label>
+            </NextMaterialLink>
           ))}
 
           {/* ADMIN PANEL */}
           {isAdmin && (
             <>
-              <Divider
-                style={{
-                  marginTop: 10
-                }}
-              />
-              <Typography
-                sx={{
-                  color: palette.secondary[400],
-                  ml: 1
-                }}
-              >
-                Admin Panel
-              </Typography>
+              <div className="divider mt-8">Admin Panel</div>
               {NavItemsAdminData.map((item, index) => (
-                <NavListItem
-                  key={index}
-                  text={item.text}
-                  icon={item.icon}
-                  onClick={() => navigateTo(item.navigateTo)}
-                />
+                <NextMaterialLink key={index} href={item.navigateTo}>
+                  <label htmlFor="sideMenu">
+                    <NavListItem text={item.text} icon={item.icon} />
+                  </label>
+                </NextMaterialLink>
               ))}
             </>
           )}
-        </List>
-      </Box>
-    </Drawer>
+        </ul>
+      </div>
+    </div>
   )
 }

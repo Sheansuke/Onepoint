@@ -33,12 +33,13 @@ export const NavBar = () => {
       <div className="navbar px-4">
         {/* MENU */}
         <div className="navbar-start">
-          <button
+          <label
+            htmlFor="sideMenu"
             className="btn btn-ghost btn-circle"
             onClick={handleOpenSideMenu}
           >
             <MenuIcon tailwindClass="w-8 h-8" />
-          </button>
+          </label>
         </div>
 
         {/* TITLE */}

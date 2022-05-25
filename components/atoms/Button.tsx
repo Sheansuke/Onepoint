@@ -1,4 +1,3 @@
-import { TypeColorThemes } from '@interfaces/styles/IColorThemes'
 import { tw } from '@utils/tailwindClass'
 import { FC, ReactNode } from 'react'
 
@@ -26,8 +25,8 @@ export const Button: FC<ButtonProps> = ({
       className={tw('btn border-none', isLoading && 'loading', tailwindClass)}
       disabled={isLoading}
     >
-      {text}
       {!isLoading && children}
+      {text}
     </button>
   )
 }

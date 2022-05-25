@@ -1,17 +1,23 @@
-import { IconProps, ListItem, ListItemText } from '@mui/material'
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useCallback } from 'react'
 
 interface NavListItemProps {
-  onClick?: () => void
-  icon?: ReactElement<IconProps>
+  icon?: ReactElement
   text: string
 }
 
-export const NavListItem: FC<NavListItemProps> = ({onClick,icon,text}) => {
+export const NavListItem: FC<NavListItemProps> = ({ icon, text }) => {
+  // this functions closed drawer with the input checkbox id = sideMenu
+  const handleClick = useCallback(() => {
+    const sideMenu = document.getElementById('sideMenu') as HTMLInputElement
+    sideMenu.checked = false
+  }, [])
+
   return (
-    <ListItem button aria-label='icono' onClick={onClick}>
-      {icon && icon}
-      <ListItemText primary={text ?? "No text"} sx={{ ml: 1 }} />
-    </ListItem>
+    <li>
+      <a type="button" onClick={handleClick} className="text-lg">
+        {icon && icon}
+        {text}
+      </a>
+    </li>
   )
 }
