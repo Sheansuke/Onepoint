@@ -1,28 +1,13 @@
-import { SearchOutlined } from '@mui/icons-material'
-import {
-  Modal,
-  Box,
-  TextField,
-  InputAdornment,
-  Button,
-  useTheme,
-  CircularProgress,
-  Typography
-} from '@mui/material'
+import { Button } from '@atoms/Button'
 import { closeSearchModal } from '@redux/slices/uiSlice'
 import { useRouter } from 'next/router'
-import { FC, useState } from 'react';
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
+import { SearchIcon } from 'components/icons/SearchIcon'
 
-interface SearchModalProps {
-  // name?: string;
-}
-
-
-export const SearchModal: FC<SearchModalProps> = () => {
-  const { palette } = useTheme()
+export const SearchModal = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false)
 
   const router = useRouter()
@@ -54,94 +39,50 @@ export const SearchModal: FC<SearchModalProps> = () => {
     })
   }
 
-  return (
-    <Modal
-      open={isSearchModalOpen}
-      onClose={handleCloseModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '20%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          bgcolor: 'background.paper',
-          borderRadius: 5,
-          boxShadow: 24,
-          width: '80%',
-          maxWidth: '500px',
-          p: 2
-        }}
-      >
-        {isSearching ? (
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 2
-          }}>
-            <CircularProgress />
-            <Typography> Buscando...</Typography>
-          </Box>
-        ) : (
-          <form onSubmit={handleSubmit(handleSubmitForm)}>
-            <TextField
-              id="input-with-icon-textfield"
-              label="Buscar producto"
-              {...register('search', {
-                required: true
-              })}
-              InputProps={{
-                autoComplete: 'off',
-                autoFocus: true,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchOutlined />
-                  </InputAdornment>
-                )
-              }}
-              variant="outlined"
-              helperText="Presione enter o el boton buscar"
-              error={errors.search ? true : false}
-              sx={{
-                width: '100%'
-              }}
-            />
+  if (!isSearchModalOpen) return
 
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                mt: 2
-              }}
-            >
+  return (
+    <div className="modal modal-open ">
+      <div className="modal-box absolute mb-96 ">
+        <form onSubmit={handleSubmit(handleSubmitForm)}>
+
+
+          <div className="form-control">
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Buscan producto"
+                className="input input-bordered w-full"
+                {...register('search', {
+                  required: true
+                })}
+              />
               <Button
-              aria-label='cancelar'
-                variant="text"
-                sx={{
-                  color: palette.error.main,
-                  mr: 2
-                }}
-                onClick={handleCloseModal}
-              >
-                Cancelar
-              </Button>
-              <Button
-                aria-label='buscar producto'
                 type="submit"
-                sx={{
-                  color: palette.primary[50]
-                }}
+                isLoading={isSearching}
+                tailwindClass="btn btn-square bg-main-primary text-main-50  hover:bg-main-700"
               >
-                Buscar producto
+                <SearchIcon />
               </Button>
-            </Box>
-          </form>
-        )}
-      </Box>
-    </Modal>
+            </div>
+
+            <label className="label">
+              <span className="label-text-alt">Presione enter o el boton de busqueda</span>
+            </label>
+          </div>
+
+          {/* BUTTONS */}
+          <div className="flex justify-end mt-4">
+            <label
+              htmlFor="searchModal"
+              className="btn btn-ghost modal-button text-mainError-primary mr-4"
+              onClick={handleCloseModal}
+            >
+              Cancelar
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
   )
 }

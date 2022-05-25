@@ -1,22 +1,22 @@
 import { TypeColorThemes } from '@interfaces/styles/IColorThemes'
 import { tw } from '@utils/tailwindClass'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 interface ButtonProps {
   type: 'submit' | 'button'
-  colorTheme: TypeColorThemes
+  text?: string
   tailwindClass?: string
-  isLoading: boolean
-  text: string
+  isLoading?: boolean
+  children?: ReactNode
   onClick?: () => void
 }
 
 export const Button: FC<ButtonProps> = ({
   type,
-  colorTheme,
   tailwindClass,
-  isLoading,
-  text,
+  isLoading = false,
+  text = '',
+  children,
   onClick
 }) => {
   return (
@@ -26,7 +26,8 @@ export const Button: FC<ButtonProps> = ({
       className={tw('btn border-none', isLoading && 'loading', tailwindClass)}
       disabled={isLoading}
     >
-      {text ?? ''}
+      {text}
+      {!isLoading && children}
     </button>
   )
 }

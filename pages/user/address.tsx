@@ -128,7 +128,6 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
           <Button
             type="submit"
             text="Guardar"
-            colorTheme="main"
             isLoading={isLoadingPost}
             tailwindClass="w-56 bg-main-primary text-main-50  hover:bg-main-700"
           />

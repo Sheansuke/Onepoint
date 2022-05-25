@@ -13,7 +13,6 @@ export const NextMaterialLink: FC<NextMaterialLinkProps> = ({
   href,
   prefetch = true,
   key,
-  underline = false,
   children
 }) => {
   return (
