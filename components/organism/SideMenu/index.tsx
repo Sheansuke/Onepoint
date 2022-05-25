@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react'
-import { NavListItem } from '@molecules/NavListItem'
+import { NavListItem } from '@atoms/NavListItem'
 import { NavItemsData, NavItemsAdminData } from './NavItemsData'
 import { useQuery } from 'react-query'
 import { getUserRequest } from '../../../api/axiosRequest/userRequest'
