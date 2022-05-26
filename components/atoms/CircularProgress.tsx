@@ -1,11 +1,22 @@
+import { tw } from '@utils/tailwindClass'
+import { FC } from 'react'
+
+interface ICircularProgressProps {
+  tailwindClass?: string
+}
 
 // simple circular progress XD
-export const CircularProgress = () => {
+export const CircularProgress: FC<ICircularProgressProps> = ({
+  tailwindClass
+}) => {
   return (
     <button
       type="button"
       arial-label="loading progress"
-      className="btn btn-ghost loading text-mainInfo-primary"
+      className={tw(
+        tailwindClass,
+        'btn btn-ghost loading text-mainInfo-primary'
+      )}
     />
   )
 }
