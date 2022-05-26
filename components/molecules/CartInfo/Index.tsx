@@ -33,6 +33,7 @@ export const CartInfo: FC<CartInfoProps> = ({
   const [isLoadingPost, setIsLoadingPost] = useState<boolean>(false)
 
   const handleConfirm = () => {
+    // check if deliveryDate exist and the date is valid
     if (cartState.paymentType.id === 1) {
       if (cartState.deliveryDate) {
         const isValidDate = dateTwoDaysValidation(
