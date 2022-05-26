@@ -1,71 +1,41 @@
-import {
-  CodeOutlined,
-  ContactPhoneOutlined,
-  EmailOutlined
-} from '@mui/icons-material'
-import { Card, Grid, SxProps, Theme, Typography } from '@mui/material'
-import { CSSProperties } from '@mui/styled-engine'
+import { AtIcon } from '@icons/AtIcon'
+import { CodeIcon } from '@icons/CodeIcon'
+import { HeadsetIcon } from '@icons/HeadsetIcon'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { FC } from 'react';
 
-interface ContactsPageProps {
-  // name?: string;
-}
-
-const styles: { [key: string]: CSSProperties | SxProps<Theme> } = {
-  infoContainer: {
-    textAlign: 'center',
-    
-  },
-  icon: {
-    fontSize: 50,
-
-  },
-  card: {
-      height: 150,
-      
-     
-  }
-}
-
-const ContactsPage: FC<ContactsPageProps> = () => {
+const ContactsPage = () => {
   return (
     <ContentLayout title="Contactos">
-      <Grid container spacing={5} mt={2}>
+      <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-10">
+        
         {/* NUMEROS */}
-        <Grid item sx={styles.infoContainer} xs={12} md={4}>
-          <Card sx={styles.card}>
-            <ContactPhoneOutlined sx={styles.icon} color="primary" />
-            <Typography variant="h2" fontWeight="bold">
-              Telefonos
-            </Typography>
-            <Typography variant="subtitle1">829-689-8329</Typography>
-            <Typography variant="subtitle1">829-420-9077</Typography>
-          </Card>
-        </Grid>
+        <div className="text-center">
+          <div className="card shadow-lg h-40">
+            <HeadsetIcon tailwindClass='w-14 h-14 self-center text-main-primary mb-2'/>
+            <p className="font-bold text-xl">Telefonos</p>
+            <p className="text-lg">829-689-8329</p>
+            <p className="text-lg">829-420-9077</p>
+          </div>
+        </div>
 
         {/* CORREOS */}
-        <Grid item sx={styles.infoContainer} xs={12} md={4}>
-          <Card sx={styles.card}>
-            <EmailOutlined sx={styles.icon} color="primary"  />
-            <Typography variant="h2" fontWeight="bold">
-              Emails
-            </Typography>
-            <Typography variant="subtitle1">onepointrd@gmail.com</Typography>
-          </Card>
-        </Grid>
+        <div className="text-center">
+          <div className="card shadow-lg h-40">
+            <AtIcon tailwindClass='w-14 h-14 self-center text-main-primary mb-2'/>
+            <p className="text-lg font-bold ">Emails</p>
+            <p className="text-lg">onepointrd@gmail.com</p>
+          </div>
+        </div>
 
         {/* DESARROLLADOR WEB */}
-        <Grid item sx={styles.infoContainer} xs={12} md={4}>
-          <Card sx={styles.card}>
-            <CodeOutlined sx={styles.icon} color="primary"  />
-            <Typography variant="h2" fontWeight="bold">
-              Desarrollador web
-            </Typography>
-            <Typography variant="subtitle1">suerojean@gmail.com</Typography>
-          </Card>
-        </Grid>
-      </Grid>
+        <div className="text-center">
+          <div className="card shadow-lg h-40 ">
+            <CodeIcon tailwindClass='w-14 h-14 self-center text-main-primary mb-2' />
+            <p className="text-lg">Desarrollador web</p>
+            <p className="text-lg">suerojean@gmail.com</p>
+          </div>
+        </div>
+      </div>
     </ContentLayout>
   )
 }
