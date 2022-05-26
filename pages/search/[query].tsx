@@ -1,10 +1,14 @@
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { ProductList } from '@organism/ProductList'
 import { ProductsTestData } from '@utils/ProductsTestData'
 import { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
 import { FC } from 'react';
 import { IProductModel } from '../../interfaces/models/IProductModel'
+
+const ProductList = dynamic(() =>
+  import('@organism/ProductList').then(module => module.ProductList)
+)
 
 interface SearchPageProps {
   products: IProductModel[]
@@ -27,6 +31,8 @@ const SearchPage: FC<SearchPageProps> = ({ products, query }) => {
   )
 }
 
+
+// change ProductsTestData to real data
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const query = ctx.query.query as string
   const queryRegex = new RegExp(query, 'gi')

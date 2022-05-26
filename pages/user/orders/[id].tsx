@@ -4,13 +4,24 @@ import { CircularProgress } from '@atoms/CircularProgress'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
 import { WarningIcon } from '@icons/WarningIcon'
 import { IOrderModel } from '@interfaces/models'
-import { AddressInfo } from '@molecules/AddressInfo'
-import { OrderInfo } from '@molecules/OrderInfo/OrderInfo'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { GetServerSideProps } from 'next'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
-import { CartProductCard } from '../../../components/molecules/CartProductCard/index'
+
+
+const CartProductCard = dynamic(() =>
+  import('@molecules/CartProductCard').then(module => module.CartProductCard)
+)
+
+const OrderInfo = dynamic(() =>
+  import('@molecules/OrderInfo/OrderInfo').then(module => module.OrderInfo)
+)
+
+const AddressInfo = dynamic(() =>
+  import('@molecules/AddressInfo').then(module => module.AddressInfo)
+)
 
 interface OrderPageProps {
   order: IOrderModel

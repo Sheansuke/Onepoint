@@ -1,5 +1,4 @@
 import { findOrderById } from '@api/database/order'
-import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
 import { useCartState } from '@hooks/useCartState'
 import { IOrderModel } from '@interfaces/models'
@@ -12,6 +11,12 @@ import { updateOrderRequest } from '../../../../api/axiosRequest/orderRequest'
 import { useRouter } from 'next/router'
 import { WarningIcon } from '@icons/WarningIcon'
 import { Button } from '@atoms/Button'
+import dynamic from 'next/dynamic'
+
+const SelectDeliveryDate = dynamic(() =>
+  import('@atoms/SelectDeliveryDate').then(module => module.SelectDeliveryDate)
+)
+
 
 interface TransactionPageProps {
   order: IOrderModel
