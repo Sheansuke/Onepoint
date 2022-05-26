@@ -1,5 +1,5 @@
 import { tw } from '@utils/tailwindClass'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 interface MinusIconProps {
     tailwindClass?: string
