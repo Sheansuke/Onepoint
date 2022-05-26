@@ -32,7 +32,7 @@
       "@constants": [
         "constants"
       ],
-      "@icons": [
+      "@icons/*": [
         "components/icons/*"
       ]
     },

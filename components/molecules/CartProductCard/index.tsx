@@ -1,13 +1,10 @@
+import { Button } from '@atoms/Button'
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
 import { useCartState } from '@hooks/useCartState'
-import {
-  RemoveCircleOutline,
-  ControlPointOutlined,
-  DeleteOutline
-} from '@mui/icons-material'
-import { Box, Button, Card, IconButton, Typography } from '@mui/material'
+import { MinusIcon } from '@icons/MinusIcon'
+import { PlusIcon } from '@icons/PlusIcon'
 import Image from 'next/image'
-import { FC } from 'react';
+import { FC } from 'react'
 import { ICartProduct } from '../../../interfaces/frontend/ICartProduct'
 
 interface CartProductCardProps {
@@ -23,59 +20,32 @@ export const CartProductCard: FC<CartProductCardProps> = ({
     useCartState()
 
   return (
-    <Card
-      sx={{
-        display: 'flex',
-        p: 2,
-        mt: 2
-      }}
-    >
-      <Box>
+    <div className="flex p-2 mt-2 shadow-lg rounded-lg">
+      <div>
         <NextMaterialLink href={`/product/${product.slug}`}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
+          <div className="flex justify-center">
             <Image
               src={product.imageUrl}
               width={100}
               height={100}
               alt={product.title}
             />
-          </Box>
+          </div>
         </NextMaterialLink>
-      </Box>
+      </div>
 
-      <Box
-        sx={{
-          ml: 2,
-          width: '100%'
-        }}
-      >
+      <div className="ml-2 w-full">
         {/* TEXT */}
-        <Box>
-          <Typography variant="h2" fontWeight="bold">
-            {product.title}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            fontWeight="bold"
-            sx={{
-              color: 'text.secondary'
-            }}
-          >
-            {`$${product.price}`}
-          </Typography>
-        </Box>
+        <div>
+          <p className="font-bold text-xl">{product.title}</p>
+          <p className="text-lg text-main2-600">{`$${product.price}`}</p>
+        </div>
 
         {/* INCREMENT DECREMENT ICONS */}
         {canEdit && (
-          <Box sx={{ display: 'flex', gap: 1, mt: 0.5 }}>
-            <IconButton
-              aria-label="disminuir cantidad"
-              sx={{ p: 0, m: 0 }}
+          <div className="flex gap-2 mt-1">
+            <button
+              aria-label="incrementar cantidad"
               onClick={() =>
                 handleSetProductQuantity({
                   ...product,
@@ -83,18 +53,13 @@ export const CartProductCard: FC<CartProductCardProps> = ({
                 })
               }
             >
-              <RemoveCircleOutline fontSize="large" color="primary" />
-            </IconButton>
-            <Typography
-              variant="subtitle1"
-              fontWeight="bold"
-              color="text.primary"
-            >
-              {product.quantity}
-            </Typography>
-            <IconButton
-              aria-label="aumentar cantidad"
-              sx={{ p: 0, m: 0 }}
+              <MinusIcon tailwindClass="w-8 h-8 text-main-primary " />
+            </button>
+
+            <p className="text-xl">{product.quantity}</p>
+
+            <button
+              aria-label="disminuir cantidad"
               onClick={() =>
                 handleSetProductQuantity({
                   ...product,
@@ -102,38 +67,29 @@ export const CartProductCard: FC<CartProductCardProps> = ({
                 })
               }
             >
-              <ControlPointOutlined fontSize="large" color="primary" />
-            </IconButton>
-          </Box>
+              {' '}
+              <PlusIcon tailwindClass="w-8 h-8 text-main-primary " />
+            </button>
+          </div>
         )}
 
         {/* REMOVE ICON */}
-        <Box
-          sx={{
-            mt: 1,
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }}
-        >
+        <div className="flex justify-end">
+          {/* canEdit */}
           {canEdit ? (
             <Button
-              aria-label="eliminar producto"
-              color="error"
+              type="button"
+              arialLabel="eliminar producto"
+              tailwindClass="btn-ghost border-none text-mainError-primary"
               onClick={() => handleRemoveProductFromCart(product)}
             >
-              <DeleteOutline
-                sx={{
-                  mr: 0.2,
-                  fontSize: 20
-                }}
-              />{' '}
               Eliminar
             </Button>
           ) : (
-            <Typography>Cantidad: {product.quantity}</Typography>
+            <p className="m-2">Cantidad: {product.quantity}</p>
           )}
-        </Box>
-      </Box>
-    </Card>
+        </div>
+      </div>
+    </div>
   )
 }

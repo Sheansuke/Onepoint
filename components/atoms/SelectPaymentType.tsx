@@ -3,7 +3,6 @@ import { useCartState } from '@hooks/useCartState'
 import { PaymentType } from '@prisma/client'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Button } from './Button'
 
 export const SelectPaymentType = () => {
   const { data, isLoading } = useQuery('paymentTypes', () =>
