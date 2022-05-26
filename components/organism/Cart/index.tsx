@@ -7,6 +7,8 @@ import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
 import { CircularProgress } from '@atoms/CircularProgress'
 import { Button } from '@atoms/Button'
 
+
+// dynamic import
 const CartInfo = dynamic(() =>
   import('@molecules/CartInfo').then(module => module.CartInfo)
 )
