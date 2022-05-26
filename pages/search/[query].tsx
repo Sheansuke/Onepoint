@@ -1,4 +1,3 @@
-import { Box } from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { ProductList } from '@organism/ProductList'
 import { ProductsTestData } from '@utils/ProductsTestData'
@@ -20,9 +19,9 @@ const SearchPage: FC<SearchPageProps> = ({ products, query }) => {
         description={`Onepoint resultados de la busqueda: ${query}`}
       />
       <ContentLayout title={`Buscando por: ${query}`}>
-        <Box sx={{ mt: 5 }}>
+        <div className='mt-10'>
           <ProductList products={products} />
-        </Box>
+        </div>
       </ContentLayout>
     </>
   )

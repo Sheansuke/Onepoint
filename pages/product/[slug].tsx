@@ -1,30 +1,22 @@
-import { ControlPointOutlined, RemoveCircleOutline } from '@mui/icons-material'
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  TextField,
-  Typography,
-  useTheme
-} from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
-import { FC, useState } from 'react';
+import { FC, useState } from 'react'
 import { IProductModel } from '../../interfaces/models/IProductModel'
 import { useCartState } from '@hooks/useCartState'
 import { useRouter } from 'next/router'
-import { showNotification } from '../../utils/showNotification';
-import { findManyProducts, findUniqueProduct } from '../../api/database/product';
+import { showNotification } from '../../utils/showNotification'
+import { findManyProducts, findUniqueProduct } from '../../api/database/product'
+import { MinusIcon } from '@icons/MinusIcon'
+import { PlusIcon } from '@icons/PlusIcon'
+import { Button } from '@atoms/Button'
 
 interface ProductBySlugPageProps {
   product: IProductModel
 }
 
 const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
-  const { palette } = useTheme()
   const router = useRouter()
   const { handleAddProductToCart } = useCartState()
   const [quantity, setQuantity] = useState(1)
@@ -42,10 +34,11 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
   }
 
   const handleAddToCart = (product: IProductModel, quantity: number) => {
-   if (quantity === 0) return showNotification("El valor minimo aceptado es de: 1","error")
+    if (quantity === 0)
+      return showNotification('El valor minimo aceptado es de: 1', 'error')
 
-   handleAddProductToCart(product, quantity)
-   router.push('/cart')
+    handleAddProductToCart(product, quantity)
+    router.push('/cart')
   }
 
   return (
@@ -55,100 +48,63 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
         description={`Descripción del producto ${product?.title}`}
       />
       <ContentLayout>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
+        <div className="grid grid-cols-1 md:grid-cols-2 md:pt-10">
+          <div className="flex justify-center">
             <Image
               src={product.imageUrl}
               width={500}
               height={500}
               alt={product.title}
             />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Typography variant="h1" component="h1" fontWeight="bold">
-              {product.title}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              fontWeight="bold"
-              color="text.secondary"
-            >
-              {`$${product.price}`}
-            </Typography>
+          </div>
+          <div>
+            <p className="text-2xl font-bold">{product.title}</p>
+            <p className="text-xl text-main2-600">{`$${product.price}`}</p>
 
-            <Box sx={{ mt: 2 }}>
-              <Typography
-                variant="subtitle1"
-                fontWeight="bold"
-                color="text.secondary"
-              >
-                Descripcion:
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                {`${product.description}`}
-              </Typography>
-            </Box>
+            <div className="mt-8">
+              <p className="text-main2-500 font-bold text-lg">Descripcion:</p>
+              <p className="text-lg">{`${product.description}`}</p>
+            </div>
 
-            <Box
-              sx={{ mt: 4, display: 'flex', gap: 2, justifyContent: 'center' }}
-            >
-              <IconButton
-                aria-label="disminuir cantidad"
-                sx={{ p: 0, m: 0 }}
+            <div className="mt-8 flex gap-4 justify-center">
+              <button
+                aria-label="incrementar cantidad"
                 onClick={decrementQuantity}
               >
-                <RemoveCircleOutline fontSize="large" color="primary" />
-              </IconButton>
-              <Typography
-                variant="subtitle1"
-                fontWeight="bold"
-                color="text.primary"
-              >
-                <TextField
-                  value={quantity}
-                  onChange={e => setQuantity(Number(e.target.value))}
-                  size="small"
-                  inputProps={{
-                    min: 1,
-                  }}
-                  sx={{ input: { textAlign: 'center'}, width: '3.5rem' }}
-                />
-              </Typography>
-              <IconButton sx={{ p: 0, m: 0 }} onClick={incrementQuantity}>
-                <ControlPointOutlined fontSize="large" color="primary" />
-              </IconButton>
-            </Box>
+                <MinusIcon tailwindClass="w-8 h-8 text-main-primary " />
+              </button>
 
-            <Typography
-              variant="subtitle1"
-              fontWeight="bold"
-              color="text.primary"
-              textAlign="center"
-              sx={{
-                mt: 4
-              }}
-            >
+              <input
+                type="text"
+                value={quantity}
+                onChange={e => setQuantity(Number(e.target.value))}
+                className="text-center w-16 input input-bordered"
+              />
+
+              <button
+                aria-label="disminuir cantidad"
+                onClick={incrementQuantity}
+              >
+                <PlusIcon tailwindClass="w-8 h-8 text-main-primary " />
+              </button>
+            </div>
+
+            <p className="mt-8 font-bold text-center text-xl">
               {` Total: $${quantity * product.price}`}
-            </Typography>
-            <Box
-              sx={{
-                display: 'flex'
-              }}
-            >
+            </p>
+
+            <div>
               <Button
-                aria-label="agregar al carrito"
-                size="large"
-                sx={{
-                  color: palette.primary[50],
-                  width: '100%'
-                }}
+                type="button"
+                arialLabel="agregar al carrito"
+                tailwindClass='w-full mt-6 border-none bg-main-primary text-main-50  hover:bg-main-700'
                 onClick={() => handleAddToCart(product, quantity)}
               >
                 Agregar al carrito
               </Button>
-            </Box>
-          </Grid>
-        </Grid>
+            </div>
+          </div>
+        </div>
       </ContentLayout>
     </>
   )
