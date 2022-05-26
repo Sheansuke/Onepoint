@@ -30,12 +30,13 @@ export const SelectPaymentType = () => {
     <div>
       {isLoading ? (
         <div className="flex justify-center items-center">
-          <Button
+          <button
             type="button"
-            arialLabel='cargando tipos de pago'
-            tailwindClass="btn btn-ghost border-none loading"
-            text="Cargando tipos de pago..."
-          />
+            aria-label="cargando tipos de pago"
+            className="btn btn-ghost loading text-mainInfo-primary"
+          >
+            Cargando tipos de pago...
+          </button>
         </div>
       ) : (
         <select

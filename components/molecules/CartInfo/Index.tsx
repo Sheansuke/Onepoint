@@ -2,15 +2,6 @@ import { FC, useState } from 'react'
 import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate'
 import { SelectPaymentType } from '@atoms/SelectPaymentType'
 import { useCartState } from '@hooks/useCartState'
-import { InfoOutlined } from '@mui/icons-material'
-import {
-  Box,
-  Button,
-  Card,
-  CircularProgress,
-  Typography,
-  useTheme
-} from '@mui/material'
 import { showNotification } from '../../../utils/showNotification'
 import { useRouter } from 'next/router'
 import { AddressInfo } from '@molecules/AddressInfo'
@@ -22,6 +13,9 @@ import {
 } from '../../../api/axiosRequest/cartRequest'
 import { OrderInfo } from '@molecules/OrderInfo/OrderInfo'
 import { IOrderModel } from '@interfaces/models'
+import { Button } from '@atoms/Button'
+import { WarningIcon } from '../../icons/WarningIcon'
+import { CircularProgress } from '@atoms/CircularProgress'
 
 interface CartInfoProps {
   canEdit?: boolean
@@ -32,7 +26,6 @@ export const CartInfo: FC<CartInfoProps> = ({
   canEdit = true,
   deliveryAddress
 }) => {
-  const { palette } = useTheme()
   const router = useRouter()
   const { cartState, handleClearState } = useCartState()
 
@@ -88,107 +81,75 @@ export const CartInfo: FC<CartInfoProps> = ({
   }
 
   return (
-    <Card
-      sx={{
-        p: 2
-      }}
-    >
+    <div className="card p-4 shadow-lg">
       {canEdit && (
-        <Box mb={1}>
-          <Typography variant="subtitle1" fontWeight={500}>
-            Tipo de pago
-          </Typography>
+        <div className="mb-1">
+          <p className="text-lg">Tipo de pago</p>
           <SelectPaymentType />
 
           {cartState.paymentType?.id === 1 && (
-            <Box
-              sx={{
-                mt: 2,
-                mb: 4
-              }}
-            >
+            <div className="mt-2 mb-4">
               <SelectDeliveryDate tailwindClass="w-full" />
-            </Box>
+            </div>
           )}
-        </Box>
+        </div>
       )}
 
+      {/* address info */}
       {!canEdit && (
-        <Box mb={4}>
+        <div className="mb-6">
           <AddressInfo deliveryAddress={deliveryAddress} />
-        </Box>
+        </div>
       )}
 
       {/* order info */}
-      <OrderInfo order={cartState as any as IOrderModel} />
+      <div className="mt-2">
+        <OrderInfo order={cartState as any as IOrderModel} />
+      </div>
 
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          mt: 2,
-          flexDirection: 'column'
-        }}
-      >
+      <div className="flex justify-center items-center flex-col mt-4">
         {canEdit ? (
           <>
+            {/* isLoadingConfirm */}
             {isLoadingConfirm ? (
-              <CircularProgress />
+              <CircularProgress/>
             ) : (
               <Button
-                aria-label="confirmar orden"
-                size="large"
+                type="button"
+                arialLabel="confirmar orden"
                 onClick={handleConfirm}
-                sx={{
-                  color: palette.primary[50],
-                  width: '90%'
-                }}
+                tailwindClass="border-none w-full bg-main-primary text-main-50  hover:bg-main-700"
               >
                 Confirmar Orden
               </Button>
             )}
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-              <InfoOutlined
-                color="info"
-                sx={{
-                  fontSize: 20,
-                  mr: 0.2
-                }}
-              />
+            <div className="mt-1 flex justify-center items-center">
+              <WarningIcon tailwindClass="text-mainWarning-primary" />
               <small>
                 Si no selecciona un metodo de pago por defecto sera:{' '}
                 <strong>efectivo contra entrega</strong>
               </small>
-            </Box>
+            </div>
           </>
         ) : (
           <>
             {isLoadingPost ? (
-              <CircularProgress />
+              <CircularProgress/>
             ) : (
               <>
-                <Button
-                  aria-label="editar orden"
-                  size="large"
-                  variant="text"
+                <a
+                  type="button"
                   onClick={handleEdit}
-                  sx={{
-                    color: '#0284C7',
-                    width: '90%'
-                  }}
+                  className=" text-lg border-none text-mainInfo-primary mb-2 hover:cursor-pointer"
                 >
                   Editar la orden
-                </Button>
+                </a>
                 <Button
-                  aria-label="confirmar orden"
-                  size="large"
+                  type="button"
+                  arialLabel="realizar orden"
                   onClick={handlePostOrder}
-                  sx={{
-                    color: palette.primary[50],
-                    width: '90%'
-                  }}
+                  tailwindClass="border-none w-full bg-main-primary text-main-50  hover:bg-main-700"
                 >
                   Realizar la orden
                 </Button>
@@ -196,7 +157,7 @@ export const CartInfo: FC<CartInfoProps> = ({
             )}
           </>
         )}
-      </Box>
-    </Card>
+      </div>
+    </div>
   )
 }

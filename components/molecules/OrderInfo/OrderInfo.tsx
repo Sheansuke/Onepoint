@@ -1,64 +1,59 @@
 import { IOrderModel } from '@interfaces/models'
-import { Typography, Divider, Box } from '@mui/material'
-import { FC } from 'react';
-import { format } from 'date-fns';
+import { FC } from 'react'
+import { format } from 'date-fns'
 
 export interface OrderInfoProps {
   order: IOrderModel
 }
 
-export const OrderInfo: FC<OrderInfoProps> = ({order}) => {
+export const OrderInfo: FC<OrderInfoProps> = ({ order }) => {
   return (
     <>
-      <Typography variant="h1" fontWeight={500}>
-        Orden
-      </Typography>
+      <h2 className="text-3xl">Orden</h2>
 
-      <Divider
-        sx={{
-          mb: 2
-        }}
-      />
+      <div className="divider mt-1" />
 
       {order?.paymentType && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="subtitle1">Tipo de pago</Typography>
-          <Typography variant="subtitle1">{order.paymentType?.name}</Typography>
-        </Box>
+        <div className="flex justify-between">
+          <p className="text-lg">Tipo de pago</p>
+          <p className="text-lg">{order.paymentType?.name}</p>
+        </div>
       )}
 
       {order?.deliveryDate && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="subtitle1">Fecha de entrega</Typography>
-          <Typography variant="subtitle1">{format(new Date(order.deliveryDate),"dd-MM-yyyy")}</Typography>
-        </Box>
+        <div className="flex justify-between">
+          <p className="text-lg">Fecha de entrega</p>
+          <p className="text-lg">
+            {format(new Date(order.deliveryDate), 'dd-MM-yyyy')}
+          </p>
+        </div>
       )}
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">No. Productos</Typography>
-        <Typography variant="subtitle1">{`${order.numberOfItems}`}</Typography>
-      </Box>
+      <div className="flex justify-between">
+        <p className="text-lg">No. Productos</p>
+        <p className="text-lg">{`${order.numberOfItems}`}</p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Sub Total</Typography>
-        <Typography variant="subtitle1">{`$${order.subTotal}`}</Typography>
-      </Box>
+      <div className="flex justify-between">
+        <p className="text-lg">Sub Total</p>
+        <p className="text-lg">{`$${order.subTotal}`}</p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">{`Impuestos (${process.env.NEXT_PUBLIC_TAX_RATE}%)`}</Typography>
-        <Typography variant="subtitle1">{`$${
+      <div className="flex justify-between">
+        <p className="text-lg">{`Impuestos (${process.env.NEXT_PUBLIC_TAX_RATE}%)`}</p>
+        <p className="text-lg">{`$${
           order.subTotal * order.tax
-        }`}</Typography>
-      </Box>
+        }`}</p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <Typography variant="h2" mr={10} fontWeight="bold">
+      <div className="flex justify-center mt-6">
+        <p className="font-bold text-xl mr-20">
           Total:
-        </Typography>
-        <Typography variant="h2" ml={10} fontWeight="bold">
+        </p>
+        <p className="font-bold text-xl ml-20">
           {`$${order.total}`}
-        </Typography>
-      </Box>
+        </p>
+      </div>
     </>
   )
 }

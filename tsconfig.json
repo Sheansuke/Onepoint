@@ -31,6 +31,9 @@
       ],
       "@constants": [
         "constants"
+      ],
+      "@icons": [
+        "components/icons/*"
       ]
     },
     "target": "es5",

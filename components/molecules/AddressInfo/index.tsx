@@ -1,6 +1,5 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
-import { Typography, Divider, Box } from '@mui/material'
-import { FC } from 'react';
+import { FC } from 'react'
 import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
 
 interface AddressInfoProps {
@@ -14,54 +13,46 @@ export const AddressInfo: FC<AddressInfoProps> = ({
 }) => {
   return (
     <>
-      <Typography variant="h1" fontWeight={500}>
-        Direccion
-      </Typography>
+      <h2 className="text-3xl">Direccion</h2>
 
-      <Divider
-        sx={{
-          mb: 2
-        }}
-      />
+      <div className="divider mt-1" />
 
       {!isOrderPage && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <NextMaterialLink underline href="/user/address">
-            <Typography variant="subtitle1" color="#0284C7">
+        <div>
+          <NextMaterialLink href="/user/address">
+            <a className="underline text-lg text-mainInfo-primary">
               Editar direccion
-            </Typography>
+            </a>
           </NextMaterialLink>
-        </Box>
+        </div>
       )}
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Nombre</Typography>
-        <Typography variant="subtitle1">
+      <div className="flex justify-between">
+        <p className="text-lg">Nombre</p>
+        <p className="text-lg">
           {deliveryAddress?.name} {deliveryAddress?.lastName}
-        </Typography>
-      </Box>
+        </p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Sector</Typography>
-        <Typography variant="subtitle1">{deliveryAddress?.sector}</Typography>
-      </Box>
+      <div className="flex justify-between">
+        <p className="text-lg">Sector</p>
+        <p className="text-lg">{deliveryAddress?.sector}</p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Calle</Typography>
-        <Typography variant="subtitle1">{deliveryAddress?.street}</Typography>
-      </Box>
+      <div className="flex justify-between">
+        <p className="text-lg">Calle</p>
+        <p className="text-lg">{deliveryAddress?.street}</p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Lugar de referencia</Typography>
-        <Typography variant="subtitle1">
-          {deliveryAddress?.referencePlace}
-        </Typography>
-      </Box>
+      <div className="flex justify-between">
+        <p className="text-lg">Lugar de referencia</p>
+        <p className="text-lg">{deliveryAddress?.referencePlace}</p>
+      </div>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="subtitle1">Celular / Telefono</Typography>
-        <Typography variant="subtitle1">{deliveryAddress?.phone}</Typography>
-      </Box>
+      <div className="flex justify-between">
+        <p className="text-lg">Celular / Telefono</p>
+        <p className="text-lg">{deliveryAddress?.phone}</p>
+      </div>
     </>
   )
 }
