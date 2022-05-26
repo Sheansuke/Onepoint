@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 import { FC } from 'react';
-import { IProductModel } from '../../interfaces/models/IProductModel'
+import { IProductModel } from '@interfaces/models/IProductModel'
 
 const ProductList = dynamic(() =>
   import('@organism/ProductList').then(module => module.ProductList)

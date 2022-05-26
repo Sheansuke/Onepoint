@@ -2,9 +2,9 @@ import { NextMaterialLink } from '@atoms/NextMaterialLink'
 import { useCartState } from '@hooks/useCartState'
 import Image from 'next/image'
 import { FC } from 'react'
-import { IProductModel } from '../../../interfaces/models/IProductModel'
+import { IProductModel } from '@interfaces/models/IProductModel'
 import { Button } from '@atoms/Button'
-import { CartAddIcon } from 'components/icons/CartAddIcon'
+import { CartAddIcon } from '@icons/CartAddIcon'
 
 interface ProductCardProps {
   product: IProductModel

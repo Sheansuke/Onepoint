@@ -1,3 +1,4 @@
+import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs'
 import { store } from '../redux/store'
@@ -9,7 +10,6 @@ import { MainLayout } from '@organism/layouts/MainLayout'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../styles/globals.css'
-import { AppProps } from 'next/app'
 
 // REACT QUERY
 const queryClient = new QueryClient()

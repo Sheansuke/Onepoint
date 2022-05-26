@@ -1,6 +1,6 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
 import { FC } from 'react'
-import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
 
 interface AddressInfoProps {
   deliveryAddress?: IDeliveryAddressModel

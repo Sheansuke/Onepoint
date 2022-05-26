@@ -7,8 +7,8 @@ import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { findUniqueDeliveryAddressByClerkId } from '../../api/database/user'
-import { showNotification } from '../../utils/showNotification'
+import { findUniqueDeliveryAddressByClerkId } from '@api/database/user'
+import { showNotification } from '@utils/showNotification'
 import { Button } from '@atoms/Button'
 
 interface AdressPageProps {

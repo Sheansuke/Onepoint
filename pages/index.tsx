@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
-import { ContentLayout } from '../components/organism/layouts/ContentLayout'
-import { ProductList } from '../components/organism/ProductList/index'
-import { findManyProducts } from '../api/database/product'
-import { IProductModel } from '../interfaces/models/IProductModel'
+import { ContentLayout } from '@organism/layouts/ContentLayout'
+import { ProductList } from '@organism/ProductList/index'
+import { findManyProducts } from '@api/database/product'
+import { IProductModel } from '@interfaces/models/IProductModel'
 import { FC } from 'react'
 
 // TODO: CREATE 404 PAGE

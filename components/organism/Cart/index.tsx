@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { useRouter } from 'next/router'
 import { useCartState } from '@hooks/useCartState'
-import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
 import { CircularProgress } from '@atoms/CircularProgress'
 import { Button } from '@atoms/Button'
 

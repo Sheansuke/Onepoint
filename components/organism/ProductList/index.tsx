@@ -1,6 +1,10 @@
+import dynamic from 'next/dynamic'
 import { FC } from 'react'
-import { ProductCard } from '../../molecules/ProductCard/index'
-import { IProductModel } from '../../../interfaces/models/IProductModel'
+import { IProductModel } from '@interfaces/models/IProductModel'
+
+const ProductCard = dynamic(() =>
+  import('@molecules/ProductCard').then(module => module.ProductCard)
+)
 
 interface ProductListProps {
   products?: IProductModel[]

@@ -1,9 +1,14 @@
 import { FC, useEffect, useState } from 'react'
-import { NavListItem } from '@atoms/NavListItem'
 import { NavItemsData, NavItemsAdminData } from './NavItemsData'
 import { useQuery } from 'react-query'
-import { getUserRequest } from '../../../api/axiosRequest/userRequest'
+import { getUserRequest } from '@api/axiosRequest/userRequest'
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
+import dynamic from 'next/dynamic'
+
+
+const NavListItem = dynamic(() =>
+  import('@atoms/NavListItem').then(module => module.NavListItem)
+)
 
 interface ISideMenuProps {
   children: React.ReactNode | React.ReactNode[]

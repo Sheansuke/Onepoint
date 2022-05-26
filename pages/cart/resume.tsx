@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
-import Cart from '../../components/organism/Cart/index'
-import { findUniqueDeliveryAddressByClerkId } from '../../api/database/user'
-import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel'
+import Cart from '@organism/Cart/index'
+import { findUniqueDeliveryAddressByClerkId } from '@api/database/user'
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
-import { ICartState } from '../../redux/slices/cartSlice'
+import { ICartState } from '@redux/slices/cartSlice'
 
 export interface ResumePageProps {
   deliveryAddress: IDeliveryAddressModel

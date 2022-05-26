@@ -1,4 +1,3 @@
-import { NavBar } from '@organism/NavBar'
 import { setInitialState } from '@redux/slices/cartSlice'
 import dynamic from 'next/dynamic'
 import React, { FC, useEffect } from 'react'
@@ -8,6 +7,14 @@ import { useDispatch } from 'react-redux'
 interface MainLayoutProps {
   children: React.ReactNode | React.ReactNode[]
 }
+
+
+const NavBar = dynamic(
+  () => import('@organism/NavBar').then(module => module.NavBar),
+  {
+    ssr: true
+  }
+)
 
 const SideMenu = dynamic(
   () => import('@organism/SideMenu').then(module => module.SideMenu),
