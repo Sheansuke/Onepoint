@@ -1,7 +1,7 @@
 import  prisma  from '@prisma/prismaClient'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IUserCreated } from '../../../interfaces/clerk'
-import { IApiResponse } from '../../../interfaces/api'
+import { IUserCreated } from '@interfaces/clerk'
+import { IApiResponse } from '@interfaces/api'
 
 type RequestBody = IUserCreated
 

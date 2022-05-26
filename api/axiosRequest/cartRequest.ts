@@ -1,6 +1,6 @@
 import { API_CART_URL } from '@constants'
 import axios from 'axios'
-import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
+import { ICartProduct } from '@interfaces/frontend/ICartProduct'
 import { IDeliveryAddressModel } from '@interfaces/models'
 import { PaymentType } from '@prisma/client'
 

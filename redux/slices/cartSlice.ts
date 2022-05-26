@@ -1,7 +1,7 @@
 import { PaymentType } from '@prisma/client'
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
-import { ICartProduct } from '../../interfaces/frontend/ICartProduct'
-import { showNotification } from '../../utils/showNotification'
+import { ICartProduct } from '@interfaces/frontend/ICartProduct'
+import { showNotification } from '@utils/showNotification'
 import Cookies from 'js-cookie';
 
 

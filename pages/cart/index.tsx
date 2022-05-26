@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Cart from '../../components/organism/Cart/index'
+import Cart from '@organism/Cart/index'
 
 const CartPage: FC = () => {
   return <Cart title="Carrito" />

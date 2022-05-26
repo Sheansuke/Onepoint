@@ -1,8 +1,8 @@
 import { API_USER_URL } from '@constants'
 import axios from 'axios'
-import { IDeliveryAddressModel } from '../../interfaces/models/IDeliveryAddressModel'
-import { IApiResponse } from '../../interfaces/api/IApiResponse';
-import { IUserModel } from '../../interfaces/models/IUserModel';
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
+import { IApiResponse } from '@interfaces/api/IApiResponse';
+import { IUserModel } from '@interfaces/models/IUserModel';
 
 export const userRequest = axios.create({
   baseURL: API_USER_URL

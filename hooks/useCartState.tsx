@@ -11,7 +11,7 @@ import {
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
-import { IProductModel } from '../interfaces/models/IProductModel'
+import { IProductModel } from '@interfaces/models/IProductModel'
 
 export const useCartState = () => {
   const dispatch = useDispatch()

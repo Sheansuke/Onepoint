@@ -1,8 +1,8 @@
 import { User } from '@prisma/client'
 import { withAuth } from '@clerk/nextjs/api'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IApiResponse } from '../../../interfaces/api/IApiResponse'
-import { findUniqueUserByClerkId } from '../../../api/database/user'
+import { IApiResponse } from '@interfaces/api/IApiResponse'
+import { findUniqueUserByClerkId } from '@api/database/user'
 
 export default withAuth(
   async (req: NextApiRequest, res: NextApiResponse<IApiResponse<User>>) => {

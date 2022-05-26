@@ -1,8 +1,8 @@
 import { findManyOrderPaymentType } from '@api/database/order'
 import { Order, PaymentType } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IApiResponse } from '../../../interfaces/api/IApiResponse'
-import { updateOrder } from '../../../api/database/cart'
+import { IApiResponse } from '@interfaces/api/IApiResponse'
+import { updateOrder } from '@api/database/cart'
 
 type Data = {
   name: string

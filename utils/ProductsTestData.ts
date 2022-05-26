@@ -1,4 +1,4 @@
-import { IProductModel } from '../interfaces/models/IProductModel'
+import { IProductModel } from '@interfaces/models/IProductModel'
 
 export const ProductsTestData: IProductModel[] = [
   {
