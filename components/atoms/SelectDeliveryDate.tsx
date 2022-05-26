@@ -1,21 +1,21 @@
 import { useCartState } from '@hooks/useCartState'
-import { InfoOutlined } from '@mui/icons-material'
-import { Box, Button, useTheme } from '@mui/material'
 import { dateTwoDaysValidation } from '@utils/dateTwoDaysValidation'
 import { showNotification } from '@utils/showNotification'
+import { tw } from '@utils/tailwindClass'
+import { WarningIcon } from 'components/icons/WarningIcon'
 import { format } from 'date-fns'
-import { FC, useState } from 'react';
+import { FC, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { Button } from './Button'
 
 interface SelectDeliveryDateProps {
-  buttonWidth?: number
+  tailwindClass?: string | undefined
 }
 
 export const SelectDeliveryDate: FC<SelectDeliveryDateProps> = ({
-  buttonWidth
+  tailwindClass
 }) => {
-  const { palette } = useTheme()
   const { handleSetDeliveryDate } = useCartState()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -36,58 +36,39 @@ export const SelectDeliveryDate: FC<SelectDeliveryDateProps> = ({
   return (
     <>
       {isOpen && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: -1000
-          }}
-        >
+        <div>
           <DatePicker
             startOpen={isOpen}
             onChange={date => handleAccept(date)}
-            // onSelect={handleAccept}
             onCalendarClose={() => setIsOpen(false)}
             minDate={new Date()}
             withPortal
           />
-        </Box>
+        </div>
       )}
-      <Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
+      <div>
+        <div>
           <Button
-            aria-label="elegir dia de entrega"
+            type="button"
+            arialLabel="elegir dia de entrega"
             onClick={toggleOpen}
-            size="large"
-            variant="outlined"
-            sx={{
-              borderColor: palette.primary[500],
-              color: palette.primary[500],
-              width: buttonWidth ? buttonWidth : '100%'
-            }}
+            tailwindClass={tw(`
+            ${tailwindClass}
+            btn-outline border-primary text-main-primary hover:bg-main-primary hover:text-main-50 hover:border-none
+            `)}
           >
             Elegir dia de entrega
           </Button>
-        </Box>
+        </div>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-          <InfoOutlined
-            color="info"
-            sx={{
-              fontSize: 20,
-              mr: 0.2
-            }}
-          />
+        <div className="flex justify-center items-center mt-1">
+          <WarningIcon tailwindClass="text-mainWarning-primary mr-1" />
           <small>
             Debe seleccionar un dia de entrega de 2 dias despues de la fecha
             actual
           </small>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   )
 }

@@ -4,7 +4,8 @@ import { FC, ReactNode } from 'react'
 interface ButtonProps {
   type: 'submit' | 'button'
   text?: string
-  tailwindClass?: string
+  arialLabel: string
+  tailwindClass?: string | undefined
   isLoading?: boolean
   children?: ReactNode
   onClick?: () => void
@@ -15,14 +16,16 @@ export const Button: FC<ButtonProps> = ({
   tailwindClass,
   isLoading = false,
   text = '',
+  arialLabel,
   children,
   onClick
 }) => {
   return (
     <button
+      aria-label={arialLabel}
       type={type}
       onClick={onClick}
-      className={tw('btn border-none', isLoading && 'loading', tailwindClass)}
+      className={tw('btn', isLoading && 'loading', tailwindClass)}
       disabled={isLoading}
     >
       {!isLoading && children}

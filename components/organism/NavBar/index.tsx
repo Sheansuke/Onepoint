@@ -54,6 +54,7 @@ export const NavBar = () => {
         {/* SEARCH AND CART */}
         <div className="navbar-end">
           <button
+          aria-label="search icon"
             className="btn btn-ghost btn-circle"
             onClick={handleOpenSearchModal}
           >
@@ -61,7 +62,7 @@ export const NavBar = () => {
           </button>
 
           <NextMaterialLink href="/cart">
-            <button className="btn btn-ghost btn-circle">
+            <button aria-label="cart icon" className="btn btn-ghost btn-circle">
               <CartIcon tailwindClass="w-8 h-8" indicator={numberOfItems} />
             </button>
           </NextMaterialLink>

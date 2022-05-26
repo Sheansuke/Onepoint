@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState } from 'react'
 import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate'
 import { SelectPaymentType } from '@atoms/SelectPaymentType'
 import { useCartState } from '@hooks/useCartState'
@@ -107,7 +107,7 @@ export const CartInfo: FC<CartInfoProps> = ({
                 mb: 4
               }}
             >
-              <SelectDeliveryDate />
+              <SelectDeliveryDate tailwindClass="w-full" />
             </Box>
           )}
         </Box>

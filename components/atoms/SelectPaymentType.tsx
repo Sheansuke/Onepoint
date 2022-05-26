@@ -1,16 +1,11 @@
 import { getAllOrderPaymentTypeRequest } from '@api/axiosRequest/orderRequest'
 import { useCartState } from '@hooks/useCartState'
-import { FormControl, Select, MenuItem, CircularProgress, Box, Typography } from '@mui/material'
 import { PaymentType } from '@prisma/client'
-
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import { Button } from './Button'
 
-interface SelectPaymentTypeProps {
-  // name?: string;
-}
-
-export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
+export const SelectPaymentType = () => {
   const { data, isLoading } = useQuery('paymentTypes', () =>
     getAllOrderPaymentTypeRequest()
   )
@@ -23,34 +18,39 @@ export const SelectPaymentType: FC<SelectPaymentTypeProps> = () => {
   const handleChange = (event: React.ChangeEvent<any>) => {
     setPaymentType(event.target.value)
     const paymentTypeState = data?.find(
-      (item: PaymentType) => item.id === event.target.value
+      (item: PaymentType) => item?.id === Number(event.target?.value)
     )
     handleSetPaymentType(paymentTypeState)
-    if (paymentTypeState.id === 2) {
+    if (paymentTypeState?.id === 2) {
       handleSetDeliveryDate(undefined)
     }
   }
 
   return (
-    <FormControl fullWidth>
+    <div>
       {isLoading ? (
-        <Box display="flex" alignItems="center">
-        <CircularProgress />  <Typography variant='subtitle2' ml={1}>Cargando tipos de pago...</Typography>
-        </Box>
+        <div className="flex justify-center items-center">
+          <Button
+            type="button"
+            arialLabel='cargando tipos de pago'
+            tailwindClass="btn btn-ghost border-none loading"
+            text="Cargando tipos de pago..."
+          />
+        </div>
       ) : (
-        <Select
-          labelId="selectPaymentTypeLabel"
+        <select
           id="selectPaymentType"
           value={paymentType}
           onChange={handleChange}
+          className="select w-full select-bordered"
         >
           {data?.map((paymentType: PaymentType) => (
-            <MenuItem key={paymentType.id} value={paymentType.id}>
-              {paymentType.name}
-            </MenuItem>
+            <option key={paymentType.id} value={paymentType?.id}>
+              {paymentType?.name}
+            </option>
           ))}
-        </Select>
+        </select>
       )}
-    </FormControl>
+    </div>
   )
 }

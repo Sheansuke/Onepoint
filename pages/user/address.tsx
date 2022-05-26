@@ -9,7 +9,6 @@ import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { findUniqueDeliveryAddressByClerkId } from '../../api/database/user'
 import { showNotification } from '../../utils/showNotification'
-import { tw } from '@utils/tailwindClass'
 import { Button } from '@atoms/Button'
 
 interface AdressPageProps {
@@ -127,9 +126,10 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
         <div className="text-center mt-10">
           <Button
             type="submit"
+            arialLabel="guardar"
             text="Guardar"
             isLoading={isLoadingPost}
-            tailwindClass="w-56 bg-main-primary text-main-50  hover:bg-main-700"
+            tailwindClass="border-none w-56 bg-main-primary text-main-50  hover:bg-main-700"
           />
         </div>
       </form>

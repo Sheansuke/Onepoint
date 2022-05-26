@@ -31,7 +31,7 @@ export const CartProductCard: FC<CartProductCardProps> = ({
       }}
     >
       <Box>
-        <NextMaterialLink href={`/product/${product.slug}`} prefetch={false}>
+        <NextMaterialLink href={`/product/${product.slug}`}>
           <Box
             sx={{
               display: 'flex',

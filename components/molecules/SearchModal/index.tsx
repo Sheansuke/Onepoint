@@ -45,8 +45,6 @@ export const SearchModal = () => {
     <div className="modal modal-open ">
       <div className="modal-box absolute mb-96 ">
         <form onSubmit={handleSubmit(handleSubmitForm)}>
-
-
           <div className="form-control">
             <div className="input-group">
               <input
@@ -58,16 +56,19 @@ export const SearchModal = () => {
                 })}
               />
               <Button
+                arialLabel="search icon"
                 type="submit"
                 isLoading={isSearching}
-                tailwindClass="btn btn-square bg-main-primary text-main-50  hover:bg-main-700"
+                tailwindClass="btn btn-square border-none bg-main-primary text-main-50  hover:bg-main-700"
               >
                 <SearchIcon />
               </Button>
             </div>
 
             <label className="label">
-              <span className="label-text-alt">Presione enter o el boton de busqueda</span>
+              <span className="label-text-alt">
+                Presione enter o el boton de busqueda
+              </span>
             </label>
           </div>
 

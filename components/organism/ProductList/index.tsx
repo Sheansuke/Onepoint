@@ -1,5 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
-import { FC } from 'react';
+import { FC } from 'react'
 import { ProductCard } from '../../molecules/ProductCard/index'
 import { IProductModel } from '../../../interfaces/models/IProductModel'
 
@@ -9,24 +8,18 @@ interface ProductListProps {
 
 export const ProductList: FC<ProductListProps> = ({ products = [] }) => {
   return (
-    <Grid container spacing={4}>
+    <>
       {products.length > 0 ? (
-        products.map((product, index) => (
-          <Grid item key={index} xs={12} sm={6} md={3}>
-            <ProductCard product={product} />
-          </Grid>
-        ))
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+          {products.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       ) : (
-        <Box
-          sx={{
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'center'
-          }}
-        >
-          <Typography mt={5}>No se encontraron productos...</Typography>
-        </Box>
+        <div className="flex justify-center">
+          <p className="mt-5">No se encontraron productos...</p>
+        </div>
       )}
-    </Grid>
+    </>
   )
 }

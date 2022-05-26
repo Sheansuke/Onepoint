@@ -1,24 +1,16 @@
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
-import { AddShoppingCartOutlined } from '@mui/icons-material'
-import {
-  Box,
-  Button,
-  Card,
-  Chip,
-  Typography,
-  useTheme
-} from '@mui/material'
 import { useCartState } from '@hooks/useCartState'
 import Image from 'next/image'
-import { FC } from 'react';
+import { FC } from 'react'
 import { IProductModel } from '../../../interfaces/models/IProductModel'
+import { Button } from '@atoms/Button'
+import { CartAddIcon } from 'components/icons/CartAddIcon'
 
 interface ProductCardProps {
   product: IProductModel
 }
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
-  const { palette } = useTheme()
   const { handleAddProductToCart } = useCartState()
 
   const handleProductToCard = (product: IProductModel, quantity: number) => {
@@ -26,25 +18,19 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   }
 
   return (
-    <Card
-      sx={{
-        p: 2,
-        position: 'relative'
-      }}
-    >
+    <div className="card p-4 bg-base-100 shadow-xl relative ">
       {product.inStock > 0 ? (
-        <Chip label="Disponible" color="primary" variant="outlined" />
+        <div className="badge badge-outline badge-primary absolute z-50">
+          Disponible
+        </div>
       ) : (
-        <Chip label="Agotado" color="secondary" variant="outlined" />
+        <div className="badge badge-outline badge-error absolute z-50">
+          Agotado
+        </div>
       )}
 
-      <NextMaterialLink href={`/product/${product.slug}`} prefetch={false}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center'
-          }}
-        >
+      <NextMaterialLink href={`/product/${product.slug}`}>
+        <figure>
           <Image
             src={product.imageUrl}
             width={410}
@@ -52,51 +38,26 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
             alt={product.title}
             className="hover:cursor-pointer"
           />
-        </Box>
+        </figure>
       </NextMaterialLink>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          gap: 2,
-          mt: 4,
-          height: 100
-        }}
-      >
-        <Box>
-          <Typography variant="h2" fontWeight="bold">
-            {product.title}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            fontWeight="bold"
-            sx={{
-              color: 'text.secondary'
-            }}
-          >
-            {`$${product.price}`}
-          </Typography>
-        </Box>
 
-        <Box sx={{ alignSelf: 'flex-end' }}>
+      <div className="flex justify-between gap-2 mt-4">
+        <div>
+          <p className="font-bold text-xl">{product.title}</p>
+          <p className="text-lg text-main2-600">{`$${product.price}`}</p>
+        </div>
+
+        <div>
           <Button
-            aria-label="Agregar al carrito"
+            type="button"
+            arialLabel="Agregar al carrito"
             onClick={() => handleProductToCard(product, 1)}
-            sx={{
-              width: 60,
-              height: 60,
-              borderRadius: '100%'
-            }}
+            tailwindClass="rounded-full border-none w-16 h-16 bg-main-primary text-main-50  hover:bg-main-700"
           >
-            <AddShoppingCartOutlined
-              sx={{
-                fontSize: 34,
-                color: palette.primary[50]
-              }}
-            />
+            <CartAddIcon tailwindClass="w-8 h-8" />
           </Button>
-        </Box>
-      </Box>
-    </Card>
+        </div>
+      </div>
+    </div>
   )
 }
