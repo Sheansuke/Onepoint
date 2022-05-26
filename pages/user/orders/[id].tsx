@@ -1,23 +1,15 @@
 import { findOrderById } from '@api/database/order'
+import { Button } from '@atoms/Button'
+import { CircularProgress } from '@atoms/CircularProgress'
 import { withServerSideAuth } from '@clerk/nextjs/ssr'
+import { WarningIcon } from '@icons/WarningIcon'
 import { IOrderModel } from '@interfaces/models'
 import { AddressInfo } from '@molecules/AddressInfo'
 import { OrderInfo } from '@molecules/OrderInfo/OrderInfo'
-import { InfoOutlined } from '@mui/icons-material'
-import {
-  Box,
-  Button,
-  Card,
-  Chip,
-  CircularProgress,
-  Grid,
-  Typography,
-  useTheme
-} from '@mui/material'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { FC, useState } from 'react';
+import { FC, useState } from 'react'
 import { CartProductCard } from '../../../components/molecules/CartProductCard/index'
 
 interface OrderPageProps {
@@ -27,7 +19,6 @@ interface OrderPageProps {
 const OrderPage: FC<OrderPageProps> = ({ order }) => {
   const [loadingTransferPage, setLoadingTransferPage] = useState(false)
   const router = useRouter()
-  const { palette } = useTheme()
 
   const handleTransfer = () => {
     setLoadingTransferPage(true)
@@ -35,119 +26,76 @@ const OrderPage: FC<OrderPageProps> = ({ order }) => {
   }
   return (
     <ContentLayout title={`orden: ${order.id.slice(0, 8)}`}>
-      <Typography
-        variant="subtitle1"
-        fontWeight={500}
-        sx={{
-          color: palette.info.main
-        }}
-      >
+      <p className="text-lg text-mainWarning-primary">
         Estado: {order.status.name}
-      </Typography>
-      <Box mt={1}>
+      </p>
+      <div className="mt-2">
         {order.isPaid ? (
-          <Chip label="Pagada" variant="outlined" color="primary" />
+          <div className="badge badge-outline badge-primary text-lg p-3">
+            Pagada
+          </div>
         ) : (
-          <Chip label="No pagada" variant="outlined" color="error" />
+          <div className="badge badge-outline badge-error text-lg p-3 ">
+            No pagada
+          </div>
         )}
-      </Box>
+      </div>
 
-      <Grid container spacing={8}>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            height: 400,
-            overFlowY: 'scroll'
-          }}
-        >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="max-h-96  overflow-y-auto p-2">
           {order?.items.map((product, index) => (
-            <Grid item key={product.id}>
-              <CartProductCard key={index} product={product} canEdit={false} />
-            </Grid>
+            <CartProductCard key={index} product={product} canEdit={false} />
           ))}
-        </Grid>
+        </div>
 
-        <Grid item xs={12} md={6}>
-          <Card
-            sx={{
-              p: 2
-            }}
-          >
-            <Box mb={4}>
+        <div>
+          <div className="card shadow-lg p-4">
+            <div className="mb-8">
               <AddressInfo
                 isOrderPage
                 deliveryAddress={order.user.deliveryAddress}
               />
-            </Box>
+            </div>
 
             <OrderInfo order={order} />
 
             {order.isPaid && (
-              <Chip
-                label="Pagada"
-                variant="outlined"
-                color="primary"
-                sx={{
-                  display: 'flex',
-                  mt: 2
-                }}
-              />
+              <div className="badge badge-outline badge-primary text-lg p-4 mt-2 w-full">
+                Pagada
+              </div>
             )}
 
             {order.paymentType.id !== 1 &&
-              !order.isPaid && order.status.id !== 3 && !order.transactionId &&(
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    mt: 2,
-                    flexDirection: 'column'
-                  }}
-                >
+              !order.isPaid &&
+              order.status.id !== 3 &&
+              !order.transactionId && (
+                <div className="flex flex-col items-center justify-center mt-4">
                   {loadingTransferPage ? (
                     <CircularProgress />
                   ) : (
                     <Button
-                      aria-label="confirmar orden"
-                      size="large"
+                      type="button"
+                      arialLabel="hacer transferencia"
                       onClick={handleTransfer}
-                      sx={{
-                        color: palette.primary[50],
-                        width: '90%'
-                      }}
+                      tailwindClass="border-none w-full bg-main-primary text-main-50  hover:bg-main-700"
                     >
                       Hacer transferencia
                     </Button>
                   )}
 
-                  <Box
-                    sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}
-                  >
-                    <InfoOutlined
-                      color="info"
-                      sx={{
-                        fontSize: 20,
-                        mr: 0.2
-                      }}
-                    />
-                    <small
-                      style={{
-                        fontSize: 15
-                      }}
-                    >
+                  <div className="flex justify-center mt-2">
+                    <WarningIcon tailwindClass="text-mainWarning-primary w-8 h-8 mr-1" />
+                    <small>
                       Si ya ha realizado o planea realizar la transferencia haga
                       click en el boton e introduzca el numero de la
                       transferencia para que podamos validarla
                     </small>
-                  </Box>
-                </Box>
+                  </div>
+                </div>
               )}
-          </Card>
-        </Grid>
-      </Grid>
+          </div>
+        </div>
+      </div>
     </ContentLayout>
   )
 }
