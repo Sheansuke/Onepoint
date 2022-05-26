@@ -1,12 +1,19 @@
 import { FC } from 'react'
+import dynamic from 'next/dynamic'
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { CartProductCard } from '@molecules/CartProductCard/index'
 import { useRouter } from 'next/router'
 import { useCartState } from '@hooks/useCartState'
-import { CartInfo } from '@molecules/CartInfo/Index'
 import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
 import { CircularProgress } from '@atoms/CircularProgress'
 import { Button } from '@atoms/Button'
+
+const CartInfo = dynamic(() =>
+  import('@molecules/CartInfo').then(module => module.CartInfo)
+)
+
+const CartProductCard = dynamic(() =>
+  import('@molecules/CartProductCard').then(module => module.CartProductCard)
+)
 
 interface ICart {
   canEdit?: boolean
