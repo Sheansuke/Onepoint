@@ -8,7 +8,7 @@ import { CircularProgress } from '@atoms/CircularProgress'
 import { Button } from '@atoms/Button'
 
 const CartInfo = dynamic(() =>
-  import('@molecules/CartInfo/index').then(module => module.CartInfo)
+  import('components/molecules/CartInfo').then(module => module.CartInfo)
 )
 
 const CartProductCard = dynamic(() =>
