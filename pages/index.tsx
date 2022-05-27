@@ -9,8 +9,6 @@ import { FC } from 'react'
 // TODO: CREATE 404 PAGE
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
-// TODO: refactor inputs
-// TODO: added loading screen with router.on
 interface IHomePageProps {
   products: IProductModel[]
 }

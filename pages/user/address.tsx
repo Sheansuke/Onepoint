@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { findUniqueDeliveryAddressByClerkId } from '@api/database/user'
 import { showNotification } from '@utils/showNotification'
 import { Button } from '@atoms/Button'
+import { Input } from '@atoms/Input'
 
 interface AdressPageProps {
   deliveryAddress: IDeliveryAddressModel
@@ -28,7 +29,11 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
   const { user } = useUser()
   const router = useRouter()
   const [isLoadingPost, setIsLoadingPost] = useState<boolean>(false)
-  const { handleSubmit, register } = useForm<FormData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm<FormData>({
     defaultValues: deliveryAddress
   })
 
@@ -50,87 +55,81 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
     <ContentLayout title="Direccion de entrega">
       <form onSubmit={handleSubmit(onSaved)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-10 pt-10 place-items-center">
-          <div className=" w-full sm:max-w-xl">
-            <label className="label">
-              <span className="text-main2-400">Nombre</span>
-            </label>
-            <input
-              className="input input-bordered w-full"
-              {...register('lastName', {
-                required: 'El apellido es requerido'
-              })}
-            />
-          </div>
-
-          <div className="w-full sm:max-w-xl">
-            <label className="label">
-              <span className="text-main2-400">Nombre</span>
-            </label>
-            <input
-              className="input input-bordered w-full"
-              {...register('lastName', {
-                required: 'El apellido es requerido'
-              })}
-            />
-          </div>
-
-          <div className="w-full sm:max-w-xl">
-            <label className="label">
-              <span className="text-main2-400">Nombre</span>
-            </label>
-            <input
-              className="input input-bordered w-full "
-              {...register('sector', {
-                required: 'El sector es requerido'
-              })}
-            />
-          </div>
-
-          <div className="w-full sm:max-w-xl">
-            <label className="label">
-              <span className="text-main2-400">Nombre</span>
-            </label>
-            <input
-              className="input input-bordered w-full "
-              {...register('street', {
-                required: 'La calle es requerida'
-              })}
-            />
-          </div>
-
-          <div className="w-full sm:max-w-xl">
-            <label className="label">
-              <span className="text-main2-400">Nombre</span>
-            </label>
-            <input
-              className="input input-bordered w-full "
-              {...register('referencePlace', {
-                required: 'El lugar de referencia es requerido'
-              })}
-            />
-          </div>
-
-          <div className="w-full sm:max-w-xl">
-            <label className="label">
-              <span className="text-main2-400">Nombre</span>
-            </label>
-            <input
-              className="input input-bordered w-full "
-              {...register('phone', {
-                required: 'El numero es requerido'
-              })}
-            />
-          </div>
-        </div>
-
-        <div className="text-center mt-10">
-          <Button
-            type="submit"
-            arialLabel="guardar"
-            text="Guardar"
-            isLoading={isLoadingPost}
-            tailwindClass="border-none w-56 bg-main-primary text-main-50  hover:bg-main-700"
+          <Input
+            tailwindClass="w-full sm:max-w-xl"
+            label="Nombre"
+            hasError={errors.name?.message}
+            rest={{
+              ...register('name', {
+                required: 'El nombre es requerido'
+              })
+            }}
           />
+
+          <Input
+            tailwindClass="w-full sm:max-w-xl"
+            label="Apellido"
+            hasError={errors.lastName?.message}
+            rest={{
+              ...register('lastName', {
+                required: 'El apellido es requerido'
+              })
+            }}
+          />
+
+          <Input
+            tailwindClass="w-full sm:max-w-xl"
+            label="Sector"
+            hasError={errors.sector?.message}
+            rest={{
+              ...register('sector', {
+                required: 'El sector es requerido'
+              })
+            }}
+          />
+
+          <Input
+            tailwindClass="w-full sm:max-w-xl"
+            label="Calle"
+            hasError={errors.street?.message}
+            rest={{
+              ...register('street', {
+                required: 'La calle es requerida'
+              })
+            }}
+          />
+
+          <Input
+            tailwindClass="w-full sm:max-w-xl"
+            label="Lugar de referencia"
+            hasError={errors.referencePlace?.message}
+            rest={{
+              ...register('referencePlace', {
+                required: 'El lugar de referencia es requerido'
+              })
+            }}
+          />
+
+          <Input
+            tailwindClass="w-full sm:max-w-xl"
+            label="Telefono / Celular"
+            hasError={errors.phone?.message}
+            rest={{
+              ...register('phone', {
+                required: 'El numero es requerido'
+              })
+            }}
+          />
+
+          <div className="text-center mt-10">
+            <Button
+              type="submit"
+              arialLabel="guardar"
+              text="Guardar"
+              isLoading={isLoadingPost}
+              tailwindClass="border-none w-56 bg-main-primary text-main-50  hover:bg-main-700"
+            />
+          </div>
         </div>
       </form>
     </ContentLayout>
