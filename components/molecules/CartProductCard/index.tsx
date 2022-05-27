@@ -22,7 +22,7 @@ export const CartProductCard: FC<CartProductCardProps> = ({
     useCartState()
 
   return (
-    <div className="flex p-2 mt-2 shadow-lg rounded-lg">
+    <div className="flex p-2 mt-2 shadow-lg rounded-lg bg-neutral">
       <div>
         <NextMaterialLink href={`/product/${product.slug}`}>
           <div className="flex justify-center">
@@ -31,6 +31,7 @@ export const CartProductCard: FC<CartProductCardProps> = ({
               width={100}
               height={100}
               alt={product.title}
+             
             />
           </div>
         </NextMaterialLink>

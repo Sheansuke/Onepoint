@@ -37,7 +37,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
         <label htmlFor="sideMenu" className="drawer-overlay"></label>
 
         {/* USER PANEL */}
-        <ul className="menu p-2 overflow-y-auto w-80 bg-base-100">
+        <ul className="menu p-2 overflow-y-auto w-80 bg-neutral">
           {/* TITLE */}
           <div className="mb-4 ">
             <p className="normal-case text-3xl text-main-primary font-bold ">

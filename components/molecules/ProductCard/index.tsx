@@ -18,7 +18,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   }
 
   return (
-    <div className="card p-4 bg-base-100 shadow-xl relative ">
+    <div className="card p-4 bg-neutral shadow-xl relative ">
       {product.inStock > 0 ? (
         <div className="badge badge-outline badge-primary absolute z-50">
           Disponible
@@ -36,7 +36,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
             width={410}
             height={410}
             alt={product.title}
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer "
           />
         </figure>
       </NextMaterialLink>

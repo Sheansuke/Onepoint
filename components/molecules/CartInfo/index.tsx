@@ -82,7 +82,7 @@ export const CartInfo: FC<CartInfoProps> = ({
   }
 
   return (
-    <div className="card p-4 shadow-lg">
+    <div className="card p-4 shadow-lg bg-neutral">
       {canEdit && (
         <div className="mb-1">
           <p className="text-lg">Tipo de pago</p>
