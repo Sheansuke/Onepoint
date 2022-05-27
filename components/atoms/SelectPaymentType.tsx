@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 
 export const SelectPaymentType = () => {
-  const { data, isLoading } = useQuery('paymentTypes', () =>
+  const { data, isLoading,error } = useQuery('paymentTypes', () =>
     getAllOrderPaymentTypeRequest()
   )
   const { cartState, handleSetPaymentType, handleSetDeliveryDate } =
@@ -23,6 +23,11 @@ export const SelectPaymentType = () => {
     if (paymentTypeState?.id === 2) {
       handleSetDeliveryDate(undefined)
     }
+  }
+
+
+  if (error){
+    return <div className='text-error text-center'>No se pudieron cargar los tipos de pago, revisa tu conexion</div>
   }
 
   return (

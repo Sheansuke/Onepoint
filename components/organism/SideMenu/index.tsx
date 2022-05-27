@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import { getUserRequest } from '@api/axiosRequest/userRequest'
 import { NextMaterialLink } from '@atoms/NextMaterialLink'
 import dynamic from 'next/dynamic'
-
+import { showNotification } from '../../../utils/showNotification'
 
 const NavListItem = dynamic(() =>
   import('@atoms/NavListItem').then(module => module.NavListItem)
@@ -16,7 +16,8 @@ interface ISideMenuProps {
 
 // TODO: add avatar user icon to header
 export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
-  const { data } = useQuery('user', () => getUserRequest())
+  const { data, error } = useQuery('user', () => getUserRequest())
+
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
   useEffect(() => {
@@ -26,6 +27,8 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
       if (userRole === 'admin') {
         setIsAdmin(true)
       }
+    } else if (error) {
+      showNotification('No se pudo comprobar el usuario correctamente', 'error')
     }
   }, [data])
 

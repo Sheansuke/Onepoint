@@ -11,8 +11,6 @@ import { FC } from 'react'
 // TODO: clerk is in development mode
 // TODO: refactor inputs
 // TODO: added loading screen with router.on
-// TODO: loading and error state in fetch
-// TODO: change background color and images style
 interface IHomePageProps {
   products: IProductModel[]
 }
