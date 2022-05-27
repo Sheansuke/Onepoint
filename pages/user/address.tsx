@@ -120,16 +120,15 @@ const Address2Page: FC<AdressPageProps> = ({ deliveryAddress }) => {
               })
             }}
           />
-
-          <div className="text-center mt-10">
-            <Button
-              type="submit"
-              arialLabel="guardar"
-              text="Guardar"
-              isLoading={isLoadingPost}
-              tailwindClass="border-none w-56 bg-main-primary text-main-50  hover:bg-main-700"
-            />
-          </div>
+        </div>
+        <div className="text-center mt-10">
+          <Button
+            type="submit"
+            arialLabel="guardar"
+            text="Guardar"
+            isLoading={isLoadingPost}
+            tailwindClass="border-none w-56 bg-main-primary text-main-50  hover:bg-main-700"
+          />
         </div>
       </form>
     </ContentLayout>
