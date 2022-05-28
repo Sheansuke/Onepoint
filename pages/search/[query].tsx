@@ -1,10 +1,10 @@
 import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { ProductsTestData } from '@utils/ProductsTestData'
 import { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
-import { FC } from 'react';
+import { FC } from 'react'
 import { IProductModel } from '@interfaces/models/IProductModel'
+import { findManyProducstByTitle } from '../../api/database/product'
 
 const ProductList = dynamic(() =>
   import('@organism/ProductList').then(module => module.ProductList)
@@ -23,7 +23,7 @@ const SearchPage: FC<SearchPageProps> = ({ products, query }) => {
         description={`Onepoint resultados de la busqueda: ${query}`}
       />
       <ContentLayout title={`Buscando por: ${query}`}>
-        <div className='mt-10'>
+        <div className="mt-10">
           <ProductList products={products} />
         </div>
       </ContentLayout>
@@ -32,25 +32,24 @@ const SearchPage: FC<SearchPageProps> = ({ products, query }) => {
 }
 
 
-// change ProductsTestData to real data
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const query = ctx.query.query as string
-  const queryRegex = new RegExp(query, 'gi')
 
-  // first find by tags if not found find by name
-  const products = ProductsTestData.filter(product => {
-    const isMatch = product.tags.filter(tag => tag.match(queryRegex))
-     const success = isMatch && isMatch.length > 0 ? true : false
-     if (!success){
-       return product.title.match(queryRegex)
-     }
-      return success
-  })
+  try {
+    const products = await findManyProducstByTitle(query)
 
-  return {
-    props: {
-      products,
-      query: ctx.query.query
+    return {
+      props: {
+        products,
+        query: ctx.query.query
+      }
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
     }
   }
 }
