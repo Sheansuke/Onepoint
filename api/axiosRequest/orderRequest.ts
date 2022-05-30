@@ -1,6 +1,6 @@
 import { API_ORDER_URL } from '@constants'
 import { IApiResponse } from '@interfaces/api'
-import { PaymentType } from '@prisma/client'
+import { PaymentType } from '@prisma/client';
 import axios from 'axios'
 import { IOrderModel } from '@interfaces/models/IOrderModel'
 
@@ -20,3 +20,4 @@ export const updateOrderRequest = async (order: IOrderModel) => {
     throw new Error(error)
   }
 }
+

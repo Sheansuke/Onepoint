@@ -1,27 +1,27 @@
-import { User } from '@prisma/client'
+import { Order } from '@prisma/client';
 import { withAuth } from '@clerk/nextjs/api'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { IApiResponse } from '@interfaces/api/IApiResponse'
-import { findUniqueUserByClerkId } from '@api/database/user'
+import { findManyOrdersByUserId } from '../../../api/database/order';
 
 export default withAuth(
-  async (req: NextApiRequest, res: NextApiResponse<IApiResponse<User>>) => {
+  async (req: NextApiRequest, res: NextApiResponse<IApiResponse<Order[]>>) => {
     const { userId } = (req as any).auth
 
     if (userId) {
       try {
-        const user = await findUniqueUserByClerkId(userId)
+        const orders = await findManyOrdersByUserId(userId)
         return res.status(200).json({
-          data: user,
-          message: 'Usuario encontrado',
+          data: orders,
+          message: 'Ordenes encontradas',
           statusCode: 200
         })
       } catch (error) {
         console.log('🚀 ~ file: [clerkId].ts ~ line 21 ~ error', error)
 
-        return res.status(400).json({
+        return res.status(200).json({
           data: null,
-          message: 'Usuario no encontrado',
+          message: 'Ordenes no encontradas',
           statusCode: 400
         })
       }

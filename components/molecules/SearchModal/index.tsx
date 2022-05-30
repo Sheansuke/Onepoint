@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
 import { SearchIcon } from '@icons/SearchIcon'
 
+
+//TODO: adding autoFocus to input
 export const SearchModal = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false)
 
