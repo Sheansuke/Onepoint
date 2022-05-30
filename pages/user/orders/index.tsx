@@ -120,7 +120,7 @@ const OrdersPage = () => {
       <ContentLayout title="Mis ordenes realizadas">
         <div className="mt-5">
           <Table
-            data={data}
+            data={data || []}
             columns={tableColumns}
             emptyMessage="No se encontraron ordenes"
             tailwindClassTableColumns="bg-main-primary text-main-50 text-center"
