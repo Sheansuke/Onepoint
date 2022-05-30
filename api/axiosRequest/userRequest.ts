@@ -28,6 +28,6 @@ export const createOrUpdateDeliveryAddressRequest = async (
 export const getUserRequest = () => userRequest.get<IApiResponse<IUserModel>>("*").then(res => res.data)
 
 // user id is optained from the token by clerk auth in /api/user/orders.tsx
-export const getAllOrders = async () =>
-userRequest.get<IApiResponse<Order[]>>('/orders').then(res => res.data?.data)
+export const getAllOrders = async (page: number,limit: number) =>
+userRequest.get<IApiResponse<Order[]>>(`/orders?page=${page}&limit=${limit}`).then(res => res.data?.data)
 

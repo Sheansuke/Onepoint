@@ -6,6 +6,8 @@ import { getAllOrders } from '@api/axiosRequest/userRequest'
 import { CircularProgress } from '@atoms/CircularProgress'
 import { NextSeo } from 'next-seo'
 import { NextMaterialLink } from '../../../components/atoms/NextMaterialLink'
+import { usePagination } from '../../../hooks/usePagination'
+import { useEffect } from 'react'
 
 const tableColumns: ITableColumn[] = [
   {
@@ -18,7 +20,7 @@ const tableColumns: ITableColumn[] = [
     label: 'Orden',
     render: (row: IOrderModel) => (
       <NextMaterialLink href={`/user/orders/${row?.id}`}>
-        <a className='underline text-info'>ver esta orden</a>
+        <a className="underline text-info">ver esta orden</a>
       </NextMaterialLink>
     )
   },
@@ -78,10 +80,17 @@ const tableColumns: ITableColumn[] = [
   }
 ]
 
+// TODO: check limit to increase page number
 const OrdersPage = () => {
-  const { data, isLoading, error } = useQuery('userOrders', () =>
-    getAllOrders()
+  const { page, nextPage, previousPage } = usePagination()
+
+  const { data, isLoading, error, refetch } = useQuery('userOrders', () =>
+    getAllOrders(page, 10)
   )
+
+  useEffect(() => {
+    refetch()
+  }, [page])
 
   if (error) {
     return (
@@ -117,6 +126,21 @@ const OrdersPage = () => {
             tailwindClassTableColumns="bg-main-primary text-main-50 text-center"
             tailwindClassTableRows="text-center"
           />
+
+          <div className="btn-group flex justify-end mt-2  ">
+            <button
+              className="btn bg-primary  text-main-50"
+              onClick={previousPage}
+            >
+              «
+            </button>
+            <button className="btn bg-primary  text-main-50">
+              Pagina {page}
+            </button>
+            <button className="btn bg-primary  text-main-50" onClick={nextPage}>
+              »
+            </button>
+          </div>
         </div>
       </ContentLayout>
     </>
