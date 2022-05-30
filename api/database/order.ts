@@ -33,3 +33,23 @@ export const findManyOrderPaymentType = async (): Promise<PaymentType[]> => {
 
   return paymentTypes
 }
+
+export const findManyOrdersByUserId = async (userId: string): Promise<Order[]> => {
+  const orders = await prisma.order.findMany({
+    where:{
+      user: {
+        clerkId: userId
+      }
+    },
+    include: {
+      status: true,
+      paymentType: true
+    }
+  })
+
+  if (!orders) {
+    throw new Error('Fallo al intentar encontrar las ordenes')
+  }
+
+  return orders
+}
