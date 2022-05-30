@@ -34,9 +34,15 @@ export const findManyOrderPaymentType = async (): Promise<PaymentType[]> => {
   return paymentTypes
 }
 
-export const findManyOrdersByUserId = async (userId: string): Promise<Order[]> => {
+export const findManyOrdersByUserId = async (
+  userId: string,
+  page: number,
+  limit: number
+): Promise<Order[]> => {
   const orders = await prisma.order.findMany({
-    where:{
+    skip: (page - 1) * limit,
+    take: limit,
+    where: {
       user: {
         clerkId: userId
       }
