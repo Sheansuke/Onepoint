@@ -7,20 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
 import { SearchIcon } from '@icons/SearchIcon'
 
-
-//TODO: adding autoFocus to input
 export const SearchModal = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false)
 
   const router = useRouter()
 
-  const {
-    register,
-    handleSubmit,
-    clearErrors,
-    reset,
-    formState: { errors }
-  } = useForm()
+  const { register, handleSubmit, clearErrors, reset } = useForm()
 
   const { isSearchModalOpen } = useSelector((state: RootState) => state.uiState)
   const dispatch = useDispatch()
@@ -50,6 +42,7 @@ export const SearchModal = () => {
           <div className="form-control">
             <div className="input-group">
               <input
+                autoFocus
                 type="text"
                 placeholder="Buscan producto"
                 className="input input-bordered w-full"

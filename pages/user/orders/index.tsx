@@ -8,6 +8,7 @@ import { NextSeo } from 'next-seo'
 import { NextMaterialLink } from '../../../components/atoms/NextMaterialLink'
 import { usePagination } from '../../../hooks/usePagination'
 import { useEffect } from 'react'
+import { format } from 'date-fns';
 
 const tableColumns: ITableColumn[] = [
   {
@@ -76,11 +77,12 @@ const tableColumns: ITableColumn[] = [
   },
   {
     name: 'deliveryDate',
-    label: 'Fecha de entrega'
+    label: 'Fecha de entrega',
+    render: (row: IOrderModel) => <span>{format(new Date(row?.deliveryDate), 'dd/MM/yyyy')}</span>
   }
 ]
 
-// TODO: check limit to increase page number
+
 const OrdersPage = () => {
   const { page, nextPage, previousPage } = usePagination()
 

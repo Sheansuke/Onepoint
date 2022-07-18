@@ -22,27 +22,36 @@ export default withAuth(
       })
     }
 
-    if (userId) {
-      try {
-        const orders = await findManyOrdersByUserId(
-          userId,
-          Number(page),
-          Number(limit)
-        )
-        return res.status(200).json({
-          data: orders,
-          message: 'Ordenes encontradas',
-          statusCode: 200
-        })
-      } catch (error) {
-        console.log('🚀 ~ file: [clerkId].ts ~ line 21 ~ /api/user/orders.ts', error)
+    if (!userId) {
+      return res.status(400).json({
+        data: null,
+        message: 'No se ha podido identificar correctamente el usuario',
+        statusCode: 400
+      })
+    }
 
-        return res.status(200).json({
-          data: null,
-          message: 'Ordenes no encontradas',
-          statusCode: 400
-        })
-      }
+    try {
+      const orders = await findManyOrdersByUserId(
+        userId,
+        Number(page),
+        Number(limit)
+      )
+      return res.status(200).json({
+        data: orders,
+        message: 'Ordenes encontradas',
+        statusCode: 200
+      })
+    } catch (error) {
+      console.log(
+        '🚀 ~ file: [clerkId].ts ~ line 21 ~ /api/user/orders.ts',
+        error
+      )
+
+      return res.status(200).json({
+        data: null,
+        message: 'Ordenes no encontradas',
+        statusCode: 400
+      })
     }
   }
 )
