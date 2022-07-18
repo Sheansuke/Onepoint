@@ -20,7 +20,8 @@ const publicPages = [
   '/contacts',
   '/cart',
   '/product/[slug]',
-  '/search/[query]'
+  '/search/[query]',
+  "/test"
 ]
 
 function MyApp({ Component, pageProps }: AppProps) {

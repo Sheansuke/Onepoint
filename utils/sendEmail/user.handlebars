@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Confirmacion de compra:</title>
+
+    <style>
+      td {
+        padding: 0 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="color: #14b8a6 ;">{{companyName}}</h1>
+    <h2 >Hola {{name}}!</h2>
+    <p>Muchas gracias por tu compra!</p>
+    <p>A continuacion te proporcionamos los detalles de la misma!</p>
+
+    <h2 style="margin-top: 30px;">Orden: {{order.id}}</h2>
+    <div><span style="color: #f59e0b;">Estado:</span><span>{{order.status}}</span></div>
+    <div><span style="color: #0ea5e9;">Pagado: </span> <span>{{order.isPaid}}</span></div>
+    <div><span style="color: #0ea5e9;">Tipo de pago: </span> <span>{{order.paymentType}}</span></div>
+    <div><span style="color: #0ea5e9;">Cantidad de articulos: </span> <span>{{order.numberOfItems}}</span></div>
+    <div><span style="color: #0ea5e9;">Fecha de entrega: </span> <span>{{order.deliveryDate}}</span></div>
+    <div><span style="color: #0ea5e9;">Fecha de pago: </span> <span>{{order.paidAt}}</span></div>
+    <div><span style="color: #0ea5e9;">id de transferencia: </span> <span>{{order.transactionId}}</span></div>
+
+
+    <table style="margin-top: 30px;">
+      <thead>
+        <tr   >
+          <th >producto</th>
+          <th >precio</th>
+          <th >Cantidad</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        {{#each order.items}}
+          <tr>
+            <td >{{name}}</td>
+            <td >{{price}}</td>
+            <td >{{quantity}}</td>
+          
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+
+      <div style="margin-top: 30px;">
+        <div >
+          <strong >SubTotal:</strong>
+          <span>${{order.subTotal}}</span>
+        </div>
+        <div >
+          <strong >Impuesto:</strong>
+          <span>${{order.tax}}</span>
+        </div>
+        <div >
+          <strong >Total:</strong>
+          <span>${{order.total}}</span>
+        </div>
+      </div>
+  </body>
+</html>
