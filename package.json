@@ -22,7 +22,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^3.3.3",
+    "@clerk/nextjs": "^3.8.0",
     "@emotion/react": "^11.9.0",
     "@prisma/client": "^3.13.0",
     "@reduxjs/toolkit": "^1.8.1",
