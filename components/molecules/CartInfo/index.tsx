@@ -16,6 +16,7 @@ import { IOrderModel } from '@interfaces/models'
 import { Button } from '@atoms/Button'
 import { WarningIcon } from '../../icons/WarningIcon'
 import { CircularProgress } from '@atoms/CircularProgress'
+import { createEmailRequest } from '../../../api/axiosRequest/emailRequest'
 
 interface CartInfoProps {
   canEdit?: boolean
@@ -69,6 +70,7 @@ export const CartInfo: FC<CartInfoProps> = ({
     }
     createOrderRequest(newOrder)
       .then(order => {
+        createEmailRequest(`${order?.id}`, false)
         router.replace(`/user/orders/${order?.id}`)
         handleClearState()
       })
@@ -113,7 +115,7 @@ export const CartInfo: FC<CartInfoProps> = ({
           <>
             {/* isLoadingConfirm */}
             {isLoadingConfirm ? (
-              <CircularProgress/>
+              <CircularProgress />
             ) : (
               <Button
                 type="button"
@@ -136,7 +138,7 @@ export const CartInfo: FC<CartInfoProps> = ({
         ) : (
           <>
             {isLoadingPost ? (
-              <CircularProgress/>
+              <CircularProgress />
             ) : (
               <>
                 <a

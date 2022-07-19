@@ -2,7 +2,7 @@
 import axios from "axios"
 
 const sendEmail = () => {
-    axios.get('/api/test')
+    axios.get('/api/sendEmail')
 }
 
 
