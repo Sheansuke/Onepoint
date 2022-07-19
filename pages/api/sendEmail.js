@@ -62,7 +62,7 @@ const testDataAdmin = {
     transactionId: "",
   },
 }
-export default function (req, res) {
+export default function handler (req, res) {
   sendEmail(testDataUser)
   sendEmail(testDataAdmin)
 }

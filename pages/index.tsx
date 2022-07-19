@@ -9,7 +9,8 @@ import { FC } from 'react'
 // TODO: CREATE 404 PAGE
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
-// TODO: finish the email config
+// TODO: implement sendEmail function 
+// TODO: add experimental-edge in next config
 interface IHomePageProps {
   products: IProductModel[]
 }
