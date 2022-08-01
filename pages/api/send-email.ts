@@ -1,13 +1,13 @@
 import { sendEmail } from '../../utils/sendEmail'
 import { withAuth } from '@clerk/nextjs/api'
-import type { NextApiRequest } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import {
   findUniqueDeliveryAddressByClerkId,
   findUniqueUserByClerkId
 } from '@api/database/user'
 import { findOrderById } from '@api/database/order'
 
-export default withAuth(async (req: NextApiRequest) => {
+export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   const { userId } = (req as any).auth
   const { orderId, isUpdate } = req?.body
 
@@ -61,4 +61,10 @@ export default withAuth(async (req: NextApiRequest) => {
   }
   sendEmail(userDataEmail)
   sendEmail(adminDataEmail)
+  
+  return res.status(200).json({
+    data: null,
+    statusCode: 200,
+    message: 'Enviando correo al usuario'
+  })
 })
