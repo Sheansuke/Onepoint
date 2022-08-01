@@ -8,7 +8,7 @@ export const emailRequest = axios.create({
 export const createEmailRequest = async (orderId: string, isUpdate: boolean) => {
 
   try {
-    await emailRequest.post('/', {
+    await emailRequest.post('', {
       orderId,
       isUpdate,
     })
