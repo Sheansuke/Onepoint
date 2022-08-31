@@ -1,4 +1,4 @@
-import { sendEmail } from '../../utils/sendEmail'
+import {handler} from '../../utils/sendEmail/sendEmail'
 import { withAuth } from '@clerk/nextjs/api'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {
@@ -59,8 +59,8 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
     deliveryAddress,
     order: orderInfo
   }
-  sendEmail(userDataEmail)
-  sendEmail(adminDataEmail)
+  handler(userDataEmail)
+  handler(adminDataEmail)
   
   return res.status(200).json({
     data: null,

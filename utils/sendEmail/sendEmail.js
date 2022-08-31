@@ -50,7 +50,7 @@ const mailOptions = ({ template, to, subject, deliveryAddress, order }) => {
       }
     }
 
-    // FOR ADMIN
+  // FOR ADMIN
   return {
     from: `"Onepoint" <${process.env.FROM_EMAIL}>`, // sender address
     to: to, // list of receivers
@@ -77,14 +77,14 @@ const mailOptions = ({ template, to, subject, deliveryAddress, order }) => {
 }
 
 // trigger the sending of the E-mail
-export const sendEmail = ({
+exports.handler = async function ({
   /** user or admin */
   template,
   subject,
   to,
   deliveryAddress,
   order
-}) => {
+}) {
   const options = mailOptions({
     template: template,
     subject: subject,
