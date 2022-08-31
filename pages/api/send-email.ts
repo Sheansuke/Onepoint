@@ -1,4 +1,4 @@
-import {handler} from '../../utils/sendEmail/sendEmail'
+import {handler} from '../../.netlify/functions/sendEmail'
 import { withAuth } from '@clerk/nextjs/api'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {
