@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 const path = require('path')
 
 // initialize nodemailer
-const transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'suerojean@gmail.com',
@@ -77,7 +77,7 @@ const mailOptions = ({ template, to, subject, deliveryAddress, order }) => {
 }
 
 // trigger the sending of the E-mail
-export const sendEmail = async ({
+export const sendEmail = ({
   /** user or admin */
   template,
   subject,

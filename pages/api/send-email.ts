@@ -59,8 +59,8 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
     deliveryAddress,
     order: orderInfo
   }
-  await sendEmail(userDataEmail)
-  await sendEmail(adminDataEmail)
+  sendEmail(userDataEmail)
+  sendEmail(adminDataEmail)
   
   return res.status(200).json({
     data: null,
