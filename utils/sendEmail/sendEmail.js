@@ -77,14 +77,14 @@ const mailOptions = async ({ template, to, subject, deliveryAddress, order }) =>
 }
 
 // trigger the sending of the E-mail
-export const sendEmail = async ({
+exports.handler = async function ({
   /** user or admin */
   template,
   subject,
   to,
   deliveryAddress,
   order
-}) => {
+}) {
   const options = mailOptions({
     template: template,
     subject: subject,
@@ -92,7 +92,7 @@ export const sendEmail = async ({
     deliveryAddress: deliveryAddress,
     order: order
   })
-  await transporter.sendMail(options, function (error, info) {
+   await transporter.sendMail(options, function (error, info) {
     if (error) {
       return console.log(error)
     }
