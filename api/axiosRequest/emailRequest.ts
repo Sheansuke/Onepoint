@@ -13,6 +13,7 @@ export const createEmailRequest = async (orderId: string, isUpdate: boolean) => 
       isUpdate,
     })
   } catch (error) {
+    console.log("🚀 ~ file: emailRequest.ts ~ line 16 ~ createEmailRequest ~ error", error)
     throw new Error(error)
   }
 }

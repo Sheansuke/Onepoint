@@ -1,15 +1,28 @@
-
-import axios from "axios"
+import axios from 'axios'
 
 const sendEmail = () => {
-    axios.get('/api/sendEmail')
+  axios.post('/.netlify/functions/send-email', {
+    id: "order?.id",
+    items: ["order?.items","order?.items"],
+    numberOfItems: "order?.numberOfItems",
+    subTotal: "order?.subTotal",
+    tax: "order?.tax",
+    total: "order?.total",
+    status: "order?.status",
+    paymentType: "order?.paymentType",
+    deliveryDate: "order?.deliveryDate",
+    isPaid: "order?.isPaid" ? 'Si' : 'No',
+    paidAt: "order?.paidAt" || 'Aun no pagado',
+    transactionId: "order?.transactionId" || 'Sin transferencia realizada'
+  })
 }
 
+const ComponentName = () => {
+  return (
+    <button className="btn btn-primary" onClick={sendEmail}>
+      Hook Typescript
+    </button>
+  )
+}
 
- const ComponentName = () => { 
-
-return <button className='btn btn-primary' onClick={sendEmail}>Hook Typescript</button>; 
-
-};
-
-export default ComponentName;
+export default ComponentName

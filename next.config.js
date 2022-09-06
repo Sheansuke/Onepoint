@@ -6,9 +6,9 @@ const nextConfig = {
   images: {
     domains: ['res.cloudinary.com']
   },
-  // experimental: {
-  //   runtime: 'experimental-edge',
-  // },
+  experimental: {
+    runtime: 'experimental-edge',
+  },
 }
 
 module.exports = nextConfig

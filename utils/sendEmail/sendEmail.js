@@ -23,7 +23,7 @@ const handlebarOptions = {
 // use a template file with nodemailer
 transporter.use('compile', hbs(handlebarOptions))
 
-const mailOptions = async ({ template, to, subject, deliveryAddress, order }) => {
+const mailOptions = ({ template, to, subject, deliveryAddress, order }) => {
   if (template === 'user')
     return {
       from: `"Onepoint" <${process.env.FROM_EMAIL}>`, // sender address
