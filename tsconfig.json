@@ -2,46 +2,20 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@atoms/*": [
-        "components/atoms/*"
-      ],
-      "@molecules/*": [
-        "components/molecules/*"
-      ],
-      "@organism/*": [
-        "components/organism/*"
-      ],
-      "@interfaces/*": [
-        "interfaces/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ],
-      "@redux/slices/*": [
-        "redux/slices/*"
-      ],
-      "@api/*": [
-        "api/*"
-      ],
-      "@prisma/*": [
-        "prisma/*"
-      ],
-      "@constants": [
-        "constants"
-      ],
-      "@icons/*": [
-        "components/icons/*"
-      ]
+      "@atoms/*": ["components/atoms/*"],
+      "@molecules/*": ["components/molecules/*"],
+      "@organism/*": ["components/organism/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@redux/slices/*": ["redux/slices/*"],
+      "@api/*": ["api/*"],
+      "@prisma/*": ["prisma/*"],
+      "@constants": ["constants"],
+      "@icons/*": ["components/icons/*"]
     },
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -56,12 +30,6 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-, ".netlify/functions/send-email.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
