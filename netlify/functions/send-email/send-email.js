@@ -91,12 +91,7 @@ const handler = async (event) => {
   
   try {
     // transporter.sendMail(options)
-    transporter.sendMail({
-      from: 'suerojean@gmail.com',
-      to: 'suerojean@gmail.com',
-      subject: 'Sending Email using Node.js',
-      text: 'That was easy!'
-    })
+    transporter.sendMail(options)
     return {
       statusCode: 200,
       body: JSON.stringify({
