@@ -9,6 +9,9 @@ const handler = async (event) => {
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
+    type: "SMTP",
+    host: "smtp.gmail.com",
+    secure: true,
     auth: {
       user: 'suerojean@gmail.com',
       pass: process.env.GMAIL_APP_PASSWORD
