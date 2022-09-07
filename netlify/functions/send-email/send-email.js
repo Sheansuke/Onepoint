@@ -90,6 +90,7 @@ const handler = async (event) => {
 
   
   try {
+    // transporter.sendMail(options)
     transporter.sendMail(options)
     return {
       statusCode: 200,
