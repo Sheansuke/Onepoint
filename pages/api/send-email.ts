@@ -1,4 +1,4 @@
-import {handler} from '../../utils/sendEmail/sendEmail'
+import axios from 'axios'
 import { withAuth } from '@clerk/nextjs/api'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {
@@ -28,7 +28,7 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const orderInfo = {
-    id: order.id.slice(0, 8) ,
+    id: order.id.slice(0, 8),
     items: order?.items,
     numberOfItems: order?.numberOfItems,
     subTotal: order?.subTotal,
@@ -45,7 +45,9 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   // DATA FOR USER EMAIL
   const userDataEmail = {
     template: 'user',
-    subject: isUpdate ? "Se ha actualizado una de sus ordenes" : "Orden realizada con exito!",
+    subject: isUpdate
+      ? 'Se ha actualizado una de sus ordenes'
+      : 'Orden realizada con exito!',
     to: userEmail,
     deliveryAddress,
     order: orderInfo
@@ -54,16 +56,19 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   // DATA FOR ADMIN EMAIL
   const adminDataEmail = {
     template: 'admin',
-    subject: isUpdate ? "Se ha actualizado la siguiente orden" : 'Alguien ha realizado una orden!',
+    subject: isUpdate
+      ? 'Se ha actualizado la siguiente orden'
+      : 'Alguien ha realizado una orden!',
     to: process.env.FROM_EMAIL,
     deliveryAddress,
     order: orderInfo
   }
-  await handler(userDataEmail)
-  await handler(adminDataEmail)
-  
+
   return res.status(200).json({
-    data: null,
+    data: {
+      userDataEmail,
+      adminDataEmail
+    },
     statusCode: 200,
     message: 'Enviando correo al usuario'
   })

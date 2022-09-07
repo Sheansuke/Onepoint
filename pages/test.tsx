@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+// const sendEmail = () => {
+//   axios.post('/.netlify/functions/send-email')
+// }
 const sendEmail = () => {
   axios.post('/.netlify/functions/send-email', {
     id: "order?.id",
@@ -10,7 +13,7 @@ const sendEmail = () => {
     total: "order?.total",
     status: "order?.status",
     paymentType: "order?.paymentType",
-    deliveryDate: "order?.deliveryDate",
+    deliveryDate: {},
     isPaid: "order?.isPaid" ? 'Si' : 'No',
     paidAt: "order?.paidAt" || 'Aun no pagado',
     transactionId: "order?.transactionId" || 'Sin transferencia realizada'
