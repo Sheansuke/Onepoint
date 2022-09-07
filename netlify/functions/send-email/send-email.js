@@ -18,10 +18,10 @@ const handler = async (event) => {
   // point to the template folder
   const handlebarOptions = {
     viewEngine: {
-      partialsDir: path.resolve('netlify\functions\send-email'),
+      partialsDir: path.resolve('./netlify/functions/send-email'),
       defaultLayout: false
     },
-    viewPath: path.resolve('netlify\functions\send-email')
+    viewPath: path.resolve('./netlify/functions/send-email')
   }
 
   // use a template file with nodemailer
