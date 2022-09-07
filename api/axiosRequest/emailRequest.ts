@@ -15,8 +15,8 @@ export const createEmailRequest = async (
       isUpdate
     })
 
-    await axios.post('/.netlify/functions/send-email', data?.data?.data?.userDataEmail)
-    await axios.post('/.netlify/functions/send-email', data?.data?.data?.adminDataEmail)
+    await axios.post('netlify/functions/send-email', data?.data?.data?.userDataEmail)
+    await axios.post('netlify/functions/send-email', data?.data?.data?.adminDataEmail)
   } catch (error) {
     console.log(
       '🚀 ~ file: emailRequest.ts ~ line 16 ~ createEmailRequest ~ error',
