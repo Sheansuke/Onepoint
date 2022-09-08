@@ -80,6 +80,7 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
       order: {
         ...orderInfo,
         deliveryDate: orderInfo?.deliveryDate || "Sin seleccionar",
+        isPaid: orderInfo?.isPaid ? 'Si' : 'No',
         paidAt: orderInfo?.deliveryDate || "Aun sin pagar",
         transactionId: orderInfo?.transactionId || 'Sin transferencia realizada'
       }

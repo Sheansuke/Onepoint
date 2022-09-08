@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^3.8.0",
-    "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.9.0",
     "@netlify/functions": "^1.2.0",
     "@prisma/client": "^4.3.0",
