@@ -1,4 +1,4 @@
-import axios from 'axios'
+import sgMail from '@sendgrid/mail'
 import { withAuth } from '@clerk/nextjs/api'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {
@@ -6,6 +6,8 @@ import {
   findUniqueUserByClerkId
 } from '@api/database/user'
 import { findOrderById } from '@api/database/order'
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   const { userId } = (req as any).auth
@@ -48,9 +50,19 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
     subject: isUpdate
       ? 'Se ha actualizado una de sus ordenes'
       : 'Orden realizada con exito!',
+    template_id: process.env.TEMPLATE_ID,
     to: userEmail,
-    deliveryAddress,
-    order: orderInfo
+    from: process.env.FROM_EMAIL,
+    dynamic_template_data: {
+      name: `${deliveryAddress?.name} ${deliveryAddress?.lastName}`,
+      companyName: process.env.COMPANY_NAME,
+      order: {
+        ...orderInfo,
+        deliveryDate: orderInfo?.deliveryDate || "Sin seleccionar",
+        paidAt: orderInfo?.deliveryDate || "Aun sin pagar",
+        transactionId: orderInfo?.transactionId || 'Sin transferencia realizada'
+      }
+    }
   }
 
   // DATA FOR ADMIN EMAIL
@@ -60,16 +72,34 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
       ? 'Se ha actualizado la siguiente orden'
       : 'Alguien ha realizado una orden!',
     to: process.env.FROM_EMAIL,
-    deliveryAddress,
-    order: orderInfo
+    template_id: process.env.TEMPLATE_ID,
+    from: process.env.FROM_EMAIL,
+    dynamic_template_data: {
+      name: `${deliveryAddress?.name} ${deliveryAddress?.lastName}`,
+      companyName: process.env.COMPANY_NAME,
+      order: {
+        ...orderInfo,
+        deliveryDate: orderInfo?.deliveryDate || "Sin seleccionar",
+        paidAt: orderInfo?.deliveryDate || "Aun sin pagar",
+        transactionId: orderInfo?.transactionId || 'Sin transferencia realizada'
+      }
+    }
   }
 
-  return res.status(200).json({
-    data: {
-      userDataEmail,
-      adminDataEmail
-    },
-    statusCode: 200,
-    message: 'Enviando correo al usuario'
-  })
+  try {
+    sgMail.send(userDataEmail as any)
+    sgMail.send(adminDataEmail as any)
+
+    return res.status(200).json({
+      data: null,
+      statusCode: 200,
+      message: 'Enviando correo al usuario'
+    })
+  } catch (error) {
+    return res.status(409).json({
+      data: null,
+      statusCode: 409,
+      message: 'algo fallo al enviar correo a usuario'
+    })
+  }
 })
