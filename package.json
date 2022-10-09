@@ -25,7 +25,7 @@
     "@clerk/nextjs": "^3.8.0",
     "@emotion/react": "^11.9.0",
     "@netlify/functions": "^1.2.0",
-    "@prisma/client": "^4.3.0",
+    "@prisma/client": "^4.4.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@sendgrid/mail": "^7.7.0",
     "axios": "^0.27.2",
@@ -60,7 +60,7 @@
     "eslint-plugin-react": "^7.29.4",
     "postcss": "^8.4.13",
     "prettier": "^2.6.2",
-    "prisma": "^4.3.0",
+    "prisma": "^4.4.0",
     "tailwindcss": "^3.0.24",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
