@@ -88,7 +88,7 @@ export const createOrderApi = async (
       isPaid: false,
       paidAt: null,
       transactionId: null,
-      createAt: null
+      createAt:  new Date(Date.now())
 
 
     }
