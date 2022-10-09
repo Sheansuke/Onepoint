@@ -11,6 +11,7 @@ jobs:
       DATABASE_URL: postgresql://postgres:TVDg31CCIIrwQas73mBv@containers-us-west-37.railway.app:7853/railway
     steps:
       - uses: actions/checkout@v2
+      - run: npx prisma generate
       - run: npx prisma migrate deploy
         
         
