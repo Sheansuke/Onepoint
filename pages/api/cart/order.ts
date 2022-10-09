@@ -87,7 +87,10 @@ export const createOrderApi = async (
       deliveryDate: new Date(deliveryDate),
       isPaid: false,
       paidAt: null,
-      transactionId: null
+      transactionId: null,
+      createAt: null
+
+
     }
 
     // create order in database
