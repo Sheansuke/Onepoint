@@ -5,6 +5,7 @@ generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
   binaryTargets   = ["native", "linux-musl"]
+  
 }
 
 datasource db {

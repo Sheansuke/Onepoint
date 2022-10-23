@@ -8,11 +8,11 @@ jobs:
   prisma-deploy:
     runs-on: ubuntu-20.04
     env:
-      DATABASE_URL: postgresql://postgres:TVDg31CCIIrwQas73mBv@containers-us-west-37.railway.app:7853/railway
+      DATABASE_URL: postgresql://postgres:Z7cSMbqt9c3zc1NbcMgg@containers-us-west-37.railway.app:7853/railway
     steps:
       - uses: actions/checkout@v2
       - run: npx prisma generate
-      - run: npx prisma migrate deploy
+      # - run: npx prisma migrate deploy
       - run: npx prisma db push
         
         

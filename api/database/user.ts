@@ -78,6 +78,7 @@ export const findUniqueUserByClerkId = async (
         }
       })
 
+      
       if (!user) {
         throw new Error('No se encontro el usuario')
       }
