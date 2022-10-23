@@ -12,7 +12,7 @@ export const CircularProgress: FC<ICircularProgressProps> = ({
   return (
     <button
       type="button"
-      arial-label="loading progress"
+      aria-label="loading progress"
       className={tw(
         tailwindClass,
         'btn btn-ghost loading text-mainInfo-primary'
