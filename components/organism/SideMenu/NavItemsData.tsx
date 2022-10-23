@@ -57,10 +57,5 @@ export const NavItemsAdminData: NavItem[] = [
     text: 'Ordenes',
     icon: <OrdersIcon />,
     navigateTo: '/admin/Orders'
-  },
-  {
-    text: 'Usuarios',
-    icon: <UsersIcon />,
-    navigateTo: '/admin/users'
   }
 ]

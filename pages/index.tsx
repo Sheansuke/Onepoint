@@ -9,8 +9,8 @@ import { FC } from 'react'
 // TODO: CREATE 404 PAGE
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
-// TODO: implement sendEmail function 
-// TODO: add experimental-edge in next config
+// TODO: change all CLERK withServerSideAuth by https://clerk.dev/docs/nextjs/api-routes
+
 interface IHomePageProps {
   products: IProductModel[]
 }
