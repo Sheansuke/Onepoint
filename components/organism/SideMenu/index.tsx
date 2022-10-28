@@ -1,10 +1,16 @@
-import { FC, useEffect, useState } from 'react'
-import { NavItemsData, NavItemsAdminData } from './NavItemsData'
-import { useQuery } from 'react-query'
-import { getUserRequest } from '@api/axiosRequest/userRequest'
-import { NextMaterialLink } from '@atoms/NextMaterialLink'
-import dynamic from 'next/dynamic'
-import { showNotification } from '../../../utils/showNotification'
+import dynamic from 'next/dynamic';
+
+import { FC, useEffect, useState } from 'react';
+import { useClerk, SignedOut, SignedIn } from "@clerk/nextjs";
+import { useQuery } from 'react-query';
+
+import { getUserRequest } from '@api/axiosRequest/userRequest';
+import { NextMaterialLink } from '@atoms/NextMaterialLink';
+import { LoginIcon } from '@icons/LoginIcon';
+
+import { showNotification } from '../../../utils/showNotification';
+import { LogoutIcon } from '../../icons/LogoutIcon';
+import { NavItemsAdminData, NavItemsData } from './NavItemsData';
 
 const NavListItem = dynamic(() =>
   import('@atoms/NavListItem').then(module => module.NavListItem)
@@ -14,11 +20,11 @@ interface ISideMenuProps {
   children: React.ReactNode | React.ReactNode[]
 }
 
-// TODO: add avatar user icon to header
 export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
   const { data, error } = useQuery('user', () => getUserRequest())
-
+  const { openSignIn, signOut } = useClerk();
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
+
 
   useEffect(() => {
     if (data) {
@@ -32,6 +38,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
     }
   }, [data])
 
+
   return (
     <div className="drawer">
       <input id="sideMenu" type="checkbox" className="drawer-toggle" />
@@ -39,14 +46,22 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
       <div className="drawer-side">
         <label htmlFor="sideMenu" className="drawer-overlay"></label>
 
-        {/* USER PANEL */}
+
         <ul className="menu p-2 overflow-y-auto w-80 bg-neutral">
           {/* TITLE */}
-          <div className="mb-4 ">
+          <div className="mb-4">
             <p className="normal-case text-3xl text-main-primary font-bold ">
               Onepoint
             </p>
           </div>
+
+          {/* USER PANEL */}
+          <SignedOut>
+            <label htmlFor="sideMenu" onClick={() => openSignIn()}>
+              <NavListItem text="Iniciar Sesión" icon={<LoginIcon />} />
+            </label>
+          </SignedOut>
+
 
           {NavItemsData.map((item, index) => (
             <NextMaterialLink key={index} href={item.navigateTo}>
@@ -55,6 +70,16 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
               </label>
             </NextMaterialLink>
           ))}
+
+          <SignedIn>
+            <label htmlFor="sideMenu" onClick={() => {
+              signOut()
+              
+            }}>
+              <NavListItem text="Cerrar Sesión" icon={<LogoutIcon />} />
+            </label>
+        
+
 
           {/* ADMIN PANEL */}
           {isAdmin && (
@@ -69,8 +94,9 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
               ))}
             </>
           )}
+            </SignedIn>
         </ul>
       </div>
-    </div>
+    </div >
   )
 }

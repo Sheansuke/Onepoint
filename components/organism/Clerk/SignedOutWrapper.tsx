@@ -4,5 +4,5 @@ import { SignedOut } from '@clerk/nextjs'
 export const SignedOutWrapper: React.FC<{ children: JSX.Element }> = ({
   children
 }) => {
-  return <SignedOut>{children}</SignedOut>
+  return <SignedOut >{children}</SignedOut>
 }

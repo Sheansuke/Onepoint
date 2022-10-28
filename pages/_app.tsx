@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs'
+import { ClerkProvider, RedirectToSignUp } from '@clerk/nextjs'
 import { store } from '../redux/store'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                   </SignedInWrapper>
                   <SignedOutWrapper>
-                    <RedirectToSignIn />
+                    <RedirectToSignUp redirectUrl='/' afterSignUpUrl='/'  />
                   </SignedOutWrapper>
                 </>
               )}
