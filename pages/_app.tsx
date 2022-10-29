@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs'
+import { ClerkProvider, RedirectToSignUp } from '@clerk/nextjs'
 import { store } from '../redux/store'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -23,6 +23,9 @@ const publicPages = [
   '/search/[query]',
   "/test"
 ]
+
+
+// TODO: paused pull request until railway service will on again https://github.com/Sheansuke/Onepoint/pull/36
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
@@ -55,7 +58,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                   </SignedInWrapper>
                   <SignedOutWrapper>
-                    <RedirectToSignIn />
+                    <RedirectToSignUp redirectUrl='/' afterSignUpUrl='/'  />
                   </SignedOutWrapper>
                 </>
               )}
