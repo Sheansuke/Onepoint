@@ -1,10 +1,12 @@
-import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { GetServerSideProps } from 'next'
-import { NextSeo } from 'next-seo'
-import dynamic from 'next/dynamic'
-import { FC } from 'react'
-import { IProductModel } from '@interfaces/models/IProductModel'
-import { findManyProducstByTitle } from '../../api/database/product'
+import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
+import dynamic from 'next/dynamic';
+import { FC } from 'react';
+
+import { IProductModel } from '@interfaces/models/IProductModel';
+import { ContentLayout } from '@organism/layouts/ContentLayout';
+
+import { findManyProducstByTitle } from '../../api/database/product';
 
 const ProductList = dynamic(() =>
   import('@organism/ProductList').then(module => module.ProductList)

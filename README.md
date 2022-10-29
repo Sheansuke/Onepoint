@@ -86,3 +86,8 @@ un link que ngrok le proporcionara.
 
 Cada vez que levante ngrok http 3000, este genera una nueva url por lo que debera cambiarla en la
 integracion de SVIX en Clerk Dashboard
+
+
+## Al MOMENTO DE DESPLEGAR / DEPLOY
+1- Asegurese que dentro de .github/deploy.yml la variable de entorno "DATABASE_URL" este configurada con la URI de
+la base de datos de produccion, esto para que las migraciones de prisma se puedan efectuar

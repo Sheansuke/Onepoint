@@ -1,7 +1,7 @@
-import { AtIcon } from '@icons/AtIcon'
-import { CodeIcon } from '@icons/CodeIcon'
-import { HeadsetIcon } from '@icons/HeadsetIcon'
-import { ContentLayout } from '@organism/layouts/ContentLayout'
+import { AtIcon } from '@icons/AtIcon';
+import { CodeIcon } from '@icons/CodeIcon';
+import { HeadsetIcon } from '@icons/HeadsetIcon';
+import { ContentLayout } from '@organism/layouts/ContentLayout';
 
 const ContactsPage = () => {
   return (

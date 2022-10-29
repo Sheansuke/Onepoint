@@ -1,12 +1,12 @@
-import { FC } from 'react'
-import dynamic from 'next/dynamic'
-import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { useRouter } from 'next/router'
-import { useCartState } from '@hooks/useCartState'
-import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
-import { CircularProgress } from '@atoms/CircularProgress'
-import { Button } from '@atoms/Button'
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { FC } from 'react';
 
+import { Button } from '@atoms/Button';
+import { CircularProgress } from '@atoms/CircularProgress';
+import { useCartState } from '@hooks/useCartState';
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel';
+import { ContentLayout } from '@organism/layouts/ContentLayout';
 
 // dynamic import
 const CartInfo = dynamic(() =>

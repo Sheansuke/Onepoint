@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { withAuth } from '@clerk/nextjs/api'
-import { IApiResponse } from '@interfaces/api/IApiResponse'
-import { ICreateOrderRequest } from '@api/axiosRequest/cartRequest'
-import { findManyProductsByArrayId } from '@api/database/product'
-import { findUniqueUserByClerkId } from '@api/database/user'
-import { Order } from '@prisma/client'
-import { createOrder } from '@api/database/cart'
+import { ICreateOrderRequest } from '@api/axiosRequest/cartRequest';
+import { createOrder } from '@api/database/cart';
+import { findManyProductsByArrayId } from '@api/database/product';
+import { findUniqueUserByClerkId } from '@api/database/user';
+import { withAuth } from '@clerk/nextjs/api';
+import { IApiResponse } from '@interfaces/api/IApiResponse';
+import { Order } from '@prisma/client';
 
 export default withAuth(
   (req: NextApiRequest, res: NextApiResponse<IApiResponse<null>>) => {

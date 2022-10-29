@@ -30,6 +30,11 @@ export const uiSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { openSideMenu, closeSideMenu,openSearchModal,closeSearchModal } = uiSlice.actions
+export const {
+  openSideMenu,
+  closeSideMenu,
+  openSearchModal,
+  closeSearchModal
+} = uiSlice.actions
 
 export default uiSlice.reducer

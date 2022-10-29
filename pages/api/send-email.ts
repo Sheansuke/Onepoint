@@ -1,12 +1,9 @@
-import sgMail from '@sendgrid/mail'
-import { withAuth } from '@clerk/nextjs/api'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import {
-  findUniqueDeliveryAddressByClerkId,
-  findUniqueUserByClerkId
-} from '@api/database/user'
-import { findOrderById } from '@api/database/order'
+import { findOrderById } from '@api/database/order';
+import { findUniqueDeliveryAddressByClerkId, findUniqueUserByClerkId } from '@api/database/user';
+import { withAuth } from '@clerk/nextjs/api';
+import sgMail from '@sendgrid/mail';
 
+import type { NextApiRequest, NextApiResponse } from 'next'
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {

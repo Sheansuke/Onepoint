@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function FourOhFour() {
   return <div className='flex flex-col items-center mt-10'>

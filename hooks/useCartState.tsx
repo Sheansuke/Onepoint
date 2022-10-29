@@ -1,17 +1,14 @@
-import { ICartProduct } from '@interfaces/frontend/ICartProduct'
-import { PaymentType } from '@prisma/client'
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
+
+import { ICartProduct } from '@interfaces/frontend/ICartProduct';
+import { IProductModel } from '@interfaces/models/IProductModel';
+import { PaymentType } from '@prisma/client';
 import {
-  addProductToCart,
-  setProductQuantity,
-  removeProductFromCart,
-  setDeliveryDate,
-  setPaymentType,
-  clearCartState
-} from '@redux/slices/cartSlice'
-import { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'redux/store'
-import { IProductModel } from '@interfaces/models/IProductModel'
+    addProductToCart, clearCartState, removeProductFromCart, setDeliveryDate, setPaymentType,
+    setProductQuantity
+} from '@redux/slices/cartSlice';
 
 export const useCartState = () => {
   const dispatch = useDispatch()

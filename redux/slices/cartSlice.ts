@@ -1,10 +1,9 @@
-import { PaymentType } from '@prisma/client'
-import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
-import { ICartProduct } from '@interfaces/frontend/ICartProduct'
-import { showNotification } from '@utils/showNotification'
 import Cookies from 'js-cookie';
 
-
+import { ICartProduct } from '@interfaces/frontend/ICartProduct';
+import { PaymentType } from '@prisma/client';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
+import { showNotification } from '@utils/showNotification';
 
 export interface ICartState {
   isLoading?: boolean
