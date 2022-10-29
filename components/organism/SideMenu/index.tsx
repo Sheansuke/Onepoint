@@ -62,7 +62,6 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
             </label>
           </SignedOut>
 
-
           {NavItemsData.map((item, index) => (
             <NextMaterialLink key={index} href={item.navigateTo}>
               <label htmlFor="sideMenu">
@@ -70,6 +69,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
               </label>
             </NextMaterialLink>
           ))}
+          
 
           <SignedIn>
             <label htmlFor="sideMenu" onClick={() => {
@@ -79,7 +79,6 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
               <NavListItem text="Cerrar Sesión" icon={<LogoutIcon />} />
             </label>
         
-
 
           {/* ADMIN PANEL */}
           {isAdmin && (

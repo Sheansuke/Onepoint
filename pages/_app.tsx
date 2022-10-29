@@ -24,6 +24,9 @@ const publicPages = [
   "/test"
 ]
 
+
+// TODO: paused pull request until railway service will on again https://github.com/Sheansuke/Onepoint/pull/36
+
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
 
