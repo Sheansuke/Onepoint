@@ -1,6 +1,7 @@
-import { IOrderModel } from '@interfaces/models'
-import { FC } from 'react'
-import { format } from 'date-fns'
+import { format } from 'date-fns';
+import { FC } from 'react';
+
+import { IOrderModel } from '@interfaces/models';
 
 export interface OrderInfoProps {
   order: IOrderModel

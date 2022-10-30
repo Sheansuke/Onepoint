@@ -1,8 +1,9 @@
-import { getAllOrderPaymentTypeRequest } from '@api/axiosRequest/orderRequest'
-import { useCartState } from '@hooks/useCartState'
-import { PaymentType } from '@prisma/client'
-import React, { useState } from 'react'
-import { useQuery } from 'react-query'
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+
+import { getAllOrderPaymentTypeRequest } from '@api/axiosRequest/orderRequest';
+import { useCartState } from '@hooks/useCartState';
+import { PaymentType } from '@prisma/client';
 
 export const SelectPaymentType = () => {
   const { data, isLoading,error } = useQuery('paymentTypes', () =>

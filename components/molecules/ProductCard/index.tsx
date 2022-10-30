@@ -1,10 +1,11 @@
-import { NextMaterialLink } from '@atoms/NextMaterialLink'
-import { useCartState } from '@hooks/useCartState'
-import Image from 'next/image'
-import { FC } from 'react'
-import { IProductModel } from '@interfaces/models/IProductModel'
-import { Button } from '@atoms/Button'
-import { CartAddIcon } from '@icons/CartAddIcon'
+import Image from 'next/image';
+import { FC } from 'react';
+
+import { Button } from '@atoms/Button';
+import { NextMaterialLink } from '@atoms/NextMaterialLink';
+import { useCartState } from '@hooks/useCartState';
+import { CartAddIcon } from '@icons/CartAddIcon';
+import { IProductModel } from '@interfaces/models/IProductModel';
 
 interface ProductCardProps {
   product: IProductModel

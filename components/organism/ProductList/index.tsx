@@ -1,6 +1,7 @@
-import dynamic from 'next/dynamic'
-import { FC } from 'react'
-import { IProductModel } from '@interfaces/models/IProductModel'
+import dynamic from 'next/dynamic';
+import { FC } from 'react';
+
+import { IProductModel } from '@interfaces/models/IProductModel';
 
 const ProductCard = dynamic(() =>
   import('@molecules/ProductCard').then(module => module.ProductCard)

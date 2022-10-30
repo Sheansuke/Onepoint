@@ -1,7 +1,8 @@
-import { API_USER_URL } from '@constants'
-import axios from 'axios'
-import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
+import axios from 'axios';
+
+import { API_USER_URL } from '@constants';
 import { IApiResponse } from '@interfaces/api/IApiResponse';
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel';
 import { IUserModel } from '@interfaces/models/IUserModel';
 import { Order } from '@prisma/client';
 

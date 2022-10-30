@@ -1,11 +1,10 @@
 import dynamic from 'next/dynamic';
-
 import { FC, useEffect, useState } from 'react';
-import { useClerk, SignedOut, SignedIn } from "@clerk/nextjs";
 import { useQuery } from 'react-query';
 
 import { getUserRequest } from '@api/axiosRequest/userRequest';
 import { NextMaterialLink } from '@atoms/NextMaterialLink';
+import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs';
 import { LoginIcon } from '@icons/LoginIcon';
 
 import { showNotification } from '../../../utils/showNotification';

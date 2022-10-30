@@ -1,6 +1,6 @@
-import { API_SEND_EMAIL } from '@constants'
 import axios from 'axios'
 
+import { API_SEND_EMAIL } from '@constants'
 
 export const emailRequest = axios.create({
   baseURL: API_SEND_EMAIL
@@ -11,16 +11,10 @@ export const createEmailRequest = async (
   isUpdate: boolean
 ) => {
   try {
-    const data = await emailRequest.post('', {
+    await emailRequest.post('', {
       orderId,
       isUpdate
     })
-
-    // await axios.post('/.netlify/functions/send-email', data?.data?.data?.userDataEmail)
-    // await axios.post('/.netlify/functions/send-email', data?.data?.data?.adminDataEmail)
-   
-
-  
   } catch (error) {
     console.log(
       '🚀 ~ file: emailRequest.ts ~ line 16 ~ createEmailRequest ~ error',

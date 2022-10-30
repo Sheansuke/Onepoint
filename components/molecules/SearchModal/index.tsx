@@ -1,11 +1,12 @@
-import { Button } from '@atoms/Button'
-import { closeSearchModal } from '@redux/slices/uiSlice'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'redux/store'
-import { SearchIcon } from '@icons/SearchIcon'
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
+
+import { Button } from '@atoms/Button';
+import { SearchIcon } from '@icons/SearchIcon';
+import { closeSearchModal } from '@redux/slices/uiSlice';
 
 export const SearchModal = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false)

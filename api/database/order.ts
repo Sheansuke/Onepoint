@@ -1,5 +1,5 @@
-import { Order, PaymentType } from '@prisma/client'
-import prisma from '@prisma/prismaClient'
+import { Order, PaymentType } from '@prisma/client';
+import prisma from '@prisma/prismaClient';
 
 export const findOrderById = async (id: string): Promise<Order> => {
   const order = await prisma.order.findUnique({

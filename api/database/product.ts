@@ -1,14 +1,18 @@
-import { Product } from '@prisma/client'
-import prisma from '@prisma/prismaClient'
+import { Product } from '@prisma/client';
+import prisma from '@prisma/prismaClient';
 
 export const findManyProducts = async (): Promise<Product[]> => {
-  const products = await prisma.product.findMany()
+  try {
+    const products = await prisma.product.findMany()
 
-  if (!products) {
-    throw new Error('No se encontraron productos')
+    if (!products) {
+      throw new Error('No se encontraron productos')
+    }
+
+    return products
+  } catch (error) {
+    throw new Error(error)
   }
-
-  return products
 }
 
 export const findManyProductsByArrayId = async (
@@ -37,7 +41,6 @@ export const findManyProducstByTitle = async (
       title: {
         startsWith: title
       }
-
     }
   })
 
@@ -61,5 +64,3 @@ export const findUniqueProduct = async (slug: string): Promise<Product> => {
 
   return product
 }
-
-

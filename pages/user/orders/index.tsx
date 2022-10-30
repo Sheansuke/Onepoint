@@ -1,14 +1,16 @@
-import { ITableColumn, Table } from '@atoms/Table'
-import { IOrderModel } from '../../../interfaces/models/IOrderModel'
-import { ContentLayout } from '../../../components/organism/layouts/ContentLayout'
-import { useQuery } from 'react-query'
-import { getAllOrders } from '@api/axiosRequest/userRequest'
-import { CircularProgress } from '@atoms/CircularProgress'
-import { NextSeo } from 'next-seo'
-import { NextMaterialLink } from '../../../components/atoms/NextMaterialLink'
-import { usePagination } from '../../../hooks/usePagination'
-import { useEffect } from 'react'
 import { format } from 'date-fns';
+import { NextSeo } from 'next-seo';
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+
+import { getAllOrders } from '@api/axiosRequest/userRequest';
+import { CircularProgress } from '@atoms/CircularProgress';
+import { ITableColumn, Table } from '@atoms/Table';
+
+import { NextMaterialLink } from '../../../components/atoms/NextMaterialLink';
+import { ContentLayout } from '../../../components/organism/layouts/ContentLayout';
+import { usePagination } from '../../../hooks/usePagination';
+import { IOrderModel } from '../../../interfaces/models/IOrderModel';
 
 const tableColumns: ITableColumn[] = [
   {

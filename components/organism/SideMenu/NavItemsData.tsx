@@ -1,12 +1,11 @@
-import { ReactElement } from 'react'
-import { StoreIcon } from 'components/icons/StoreIcon'
-import { AddressIcon } from 'components/icons/AddressIcon'
-import { OrdersIcon } from 'components/icons/OrdersIcon'
-import { CartIcon } from 'components/icons/CartIcon'
-import { ContactIcon } from 'components/icons/ContactIcon'
-import { DashboardIcon } from 'components/icons/DashboardIcon'
-import { ProductsIcon } from 'components/icons/ProductsIcon'
-import { UsersIcon } from 'components/icons/UsersIcon'
+import { AddressIcon } from 'components/icons/AddressIcon';
+import { CartIcon } from 'components/icons/CartIcon';
+import { ContactIcon } from 'components/icons/ContactIcon';
+import { DashboardIcon } from 'components/icons/DashboardIcon';
+import { OrdersIcon } from 'components/icons/OrdersIcon';
+import { ProductsIcon } from 'components/icons/ProductsIcon';
+import { StoreIcon } from 'components/icons/StoreIcon';
+import { ReactElement } from 'react';
 
 interface NavItem {
   navigateTo: string

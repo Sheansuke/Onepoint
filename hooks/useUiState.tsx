@@ -1,12 +1,10 @@
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
+
 import {
-  closeSearchModal,
-  closeSideMenu,
-  openSearchModal,
-  openSideMenu
-} from '@redux/slices/uiSlice'
-import { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'redux/store'
+    closeSearchModal, closeSideMenu, openSearchModal, openSideMenu
+} from '@redux/slices/uiSlice';
 
 export const useCartState = () => {
   const dispatch = useDispatch()

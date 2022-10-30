@@ -1,15 +1,17 @@
-import { GetStaticProps } from 'next'
-import { NextSeo } from 'next-seo'
-import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { ProductList } from '@organism/ProductList/index'
-import { findManyProducts } from '@api/database/product'
-import { IProductModel } from '@interfaces/models/IProductModel'
-import { FC } from 'react'
+import { GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import { FC } from 'react';
 
-// TODO: CREATE 404 PAGE
+import { findManyProducts } from '@api/database/product';
+import { IProductModel } from '@interfaces/models/IProductModel';
+import { ContentLayout } from '@organism/layouts/ContentLayout';
+import { ProductList } from '@organism/ProductList/index';
+
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
 // TODO: change all CLERK withServerSideAuth by https://clerk.dev/docs/nextjs/api-routes
+// TODO: Complete Supabase migration
+// TODO: change email to onepoint email on all platform
 
 interface IHomePageProps {
   products: IProductModel[]
@@ -32,12 +34,21 @@ const HomePage: FC<IHomePageProps> = ({ products }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await findManyProducts()
-
-  return {
-    props: {
-      products
+  try {
+    const products = await findManyProducts()
+    return {
+      props: {
+        products
+      }
     }
+
+  } catch (error) {
+    return {
+      props: {
+        products: []
+      }
+    }
+    
   }
 }
 

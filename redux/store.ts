@@ -1,6 +1,7 @@
-import { configureStore,createListenerMiddleware  } from '@reduxjs/toolkit'
-import {uiSlice} from "./slices/uiSlice"
-import {cartSlice, removeProductFromCart,clearCartState} from "./slices/cartSlice"
+import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
+
+import { cartSlice, clearCartState, removeProductFromCart } from './slices/cartSlice';
+import { uiSlice } from './slices/uiSlice';
 
 const listenerMiddleware = createListenerMiddleware()
 

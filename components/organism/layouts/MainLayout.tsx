@@ -1,10 +1,11 @@
-import { setInitialState } from '@redux/slices/cartSlice'
-import dynamic from 'next/dynamic'
-import React, { FC, useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
-import { useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
-import { Button } from '@atoms/Button'
+import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React, { FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { Button } from '@atoms/Button';
+import { setInitialState } from '@redux/slices/cartSlice';
 
 interface MainLayoutProps {
   children: React.ReactNode | React.ReactNode[]

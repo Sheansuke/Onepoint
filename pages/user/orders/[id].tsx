@@ -1,15 +1,15 @@
-import { findOrderById } from '@api/database/order'
-import { Button } from '@atoms/Button'
-import { CircularProgress } from '@atoms/CircularProgress'
-import { withServerSideAuth } from '@clerk/nextjs/ssr'
-import { WarningIcon } from '@icons/WarningIcon'
-import { IOrderModel } from '@interfaces/models'
-import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { GetServerSideProps } from 'next'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import { FC, useState } from 'react'
+import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
 
+import { findOrderById } from '@api/database/order';
+import { Button } from '@atoms/Button';
+import { CircularProgress } from '@atoms/CircularProgress';
+import { withServerSideAuth } from '@clerk/nextjs/ssr';
+import { WarningIcon } from '@icons/WarningIcon';
+import { IOrderModel } from '@interfaces/models';
+import { ContentLayout } from '@organism/layouts/ContentLayout';
 
 const CartProductCard = dynamic(() =>
   import('@molecules/CartProductCard').then(module => module.CartProductCard)

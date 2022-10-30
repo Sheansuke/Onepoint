@@ -1,5 +1,5 @@
-import { Order } from '@prisma/client'
-import prisma from '@prisma/prismaClient'
+import { Order } from '@prisma/client';
+import prisma from '@prisma/prismaClient';
 
 export const createOrder = async (newOrder: Order): Promise<Order> => {
   const order = await prisma.order.create({

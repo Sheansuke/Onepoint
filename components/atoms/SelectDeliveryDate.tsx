@@ -1,13 +1,16 @@
-import { useCartState } from '@hooks/useCartState'
-import { dateTwoDaysValidation } from '@utils/dateTwoDaysValidation'
-import { showNotification } from '@utils/showNotification'
-import { tw } from '@utils/tailwindClass'
-import { WarningIcon } from 'components/icons/WarningIcon'
-import { format } from 'date-fns'
-import { FC, useState } from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { Button } from './Button'
+import 'react-datepicker/dist/react-datepicker.css';
+
+import { WarningIcon } from 'components/icons/WarningIcon';
+import { format } from 'date-fns';
+import { FC, useState } from 'react';
+import DatePicker from 'react-datepicker';
+
+import { useCartState } from '@hooks/useCartState';
+import { dateTwoDaysValidation } from '@utils/dateTwoDaysValidation';
+import { showNotification } from '@utils/showNotification';
+import { tw } from '@utils/tailwindClass';
+
+import { Button } from './Button';
 
 interface SelectDeliveryDateProps {
   tailwindClass?: string | undefined

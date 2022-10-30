@@ -1,11 +1,12 @@
-import dynamic from 'next/dynamic'
-import { useDispatch, useSelector } from 'react-redux'
-import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice'
-import { RootState } from 'redux/store'
-import { CartIcon } from '@icons/CartIcon'
-import { MenuIcon } from '@icons/MenuIcon'
-import { SearchIcon } from '@icons/SearchIcon'
-import { NextMaterialLink } from '@atoms/NextMaterialLink'
+import dynamic from 'next/dynamic';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
+
+import { NextMaterialLink } from '@atoms/NextMaterialLink';
+import { CartIcon } from '@icons/CartIcon';
+import { MenuIcon } from '@icons/MenuIcon';
+import { SearchIcon } from '@icons/SearchIcon';
+import { openSearchModal, openSideMenu } from '@redux/slices/uiSlice';
 
 const SearchModal = dynamic(
   () => import('@molecules/SearchModal').then(module => module.SearchModal),

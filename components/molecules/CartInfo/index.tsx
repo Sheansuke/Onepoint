@@ -1,22 +1,21 @@
-import { FC, useState } from 'react'
-import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate'
-import { SelectPaymentType } from '@atoms/SelectPaymentType'
-import { useCartState } from '@hooks/useCartState'
-import { showNotification } from '../../../utils/showNotification'
-import { useRouter } from 'next/router'
-import { AddressInfo } from '@molecules/AddressInfo'
-import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel'
-import { dateTwoDaysValidation } from '../../../utils/dateTwoDaysValidation'
-import {
-  createOrderRequest,
-  ICreateOrderRequest
-} from '../../../api/axiosRequest/cartRequest'
-import { OrderInfo } from '@molecules/OrderInfo/OrderInfo'
-import { IOrderModel } from '@interfaces/models'
-import { Button } from '@atoms/Button'
-import { WarningIcon } from '../../icons/WarningIcon'
-import { CircularProgress } from '@atoms/CircularProgress'
-import { createEmailRequest } from '../../../api/axiosRequest/emailRequest'
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
+
+import { Button } from '@atoms/Button';
+import { CircularProgress } from '@atoms/CircularProgress';
+import { SelectDeliveryDate } from '@atoms/SelectDeliveryDate';
+import { SelectPaymentType } from '@atoms/SelectPaymentType';
+import { useCartState } from '@hooks/useCartState';
+import { IOrderModel } from '@interfaces/models';
+import { AddressInfo } from '@molecules/AddressInfo';
+import { OrderInfo } from '@molecules/OrderInfo/OrderInfo';
+
+import { createOrderRequest, ICreateOrderRequest } from '../../../api/axiosRequest/cartRequest';
+import { createEmailRequest } from '../../../api/axiosRequest/emailRequest';
+import { IDeliveryAddressModel } from '../../../interfaces/models/IDeliveryAddressModel';
+import { dateTwoDaysValidation } from '../../../utils/dateTwoDaysValidation';
+import { showNotification } from '../../../utils/showNotification';
+import { WarningIcon } from '../../icons/WarningIcon';
 
 interface CartInfoProps {
   canEdit?: boolean

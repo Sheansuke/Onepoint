@@ -1,5 +1,6 @@
-import { tw } from '@utils/tailwindClass'
-import React, { FC } from 'react'
+import { FC } from 'react';
+
+import { tw } from '@utils/tailwindClass';
 
 interface InputProps {
   tailwindClass?: string | undefined

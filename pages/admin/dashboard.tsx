@@ -1,12 +1,12 @@
-import { GetServerSideProps, NextPage } from 'next'
-import { getAuth } from "@clerk/nextjs/server";
-import { isUserAdmin } from '../../utils/isUserAdmin';
-import { findManyOrdersOnlyCount, findManyProductsOnlyCount } from '../../api/database/dashboard';
+import { GetServerSideProps, NextPage } from 'next';
 import { FC } from 'react';
+
 import { Stat } from '@atoms/Stat';
+import { getAuth } from '@clerk/nextjs/server';
 import { ContentLayout } from '@organism/layouts/ContentLayout';
 
-
+import { findManyOrdersOnlyCount, findManyProductsOnlyCount } from '../../api/database/dashboard';
+import { isUserAdmin } from '../../utils/isUserAdmin';
 
 interface IDashboardPage {
   allOrders: number, isPaidOrders: number, noPaidOrders: number,

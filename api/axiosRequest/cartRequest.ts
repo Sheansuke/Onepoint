@@ -1,8 +1,9 @@
-import { API_CART_URL } from '@constants'
-import axios from 'axios'
-import { ICartProduct } from '@interfaces/frontend/ICartProduct'
-import { IDeliveryAddressModel } from '@interfaces/models'
-import { PaymentType } from '@prisma/client'
+import axios from 'axios';
+
+import { API_CART_URL } from '@constants';
+import { ICartProduct } from '@interfaces/frontend/ICartProduct';
+import { IDeliveryAddressModel } from '@interfaces/models';
+import { PaymentType } from '@prisma/client';
 
 export const cartRequest = axios.create({
   baseURL: API_CART_URL

@@ -1,8 +1,10 @@
-import { API_ORDER_URL } from '@constants'
-import { IApiResponse } from '@interfaces/api'
+import axios from 'axios';
+
+import { API_ORDER_URL } from '@constants';
+import { IApiResponse } from '@interfaces/api';
+import { IOrderModel } from '@interfaces/models/IOrderModel';
 import { PaymentType } from '@prisma/client';
-import axios from 'axios'
-import { IOrderModel } from '@interfaces/models/IOrderModel'
+
 import { createEmailRequest } from './emailRequest';
 
 export const orderRequest = axios.create({

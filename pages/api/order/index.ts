@@ -1,12 +1,9 @@
-import { findManyOrderPaymentType } from '@api/database/order'
-import { Order, PaymentType } from '@prisma/client'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { IApiResponse } from '@interfaces/api/IApiResponse'
-import { updateOrder } from '@api/database/cart'
+import { updateOrder } from '@api/database/cart';
+import { findManyOrderPaymentType } from '@api/database/order';
+import { IApiResponse } from '@interfaces/api/IApiResponse';
+import { Order, PaymentType } from '@prisma/client';
 
-type Data = {
-  name: string
-}
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default function handler(
   req: NextApiRequest,

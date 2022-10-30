@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { IApiResponse } from '@interfaces/api/IApiResponse'
-import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel'
-import { upSertDeliveryAddress } from '@api/database/user'
+import { upSertDeliveryAddress } from '@api/database/user';
+import { IApiResponse } from '@interfaces/api/IApiResponse';
+import { IDeliveryAddressModel } from '@interfaces/models/IDeliveryAddressModel';
 
 type Data = IApiResponse<Partial<IDeliveryAddressModel>>
 

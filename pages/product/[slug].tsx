@@ -1,16 +1,17 @@
-import { ContentLayout } from '@organism/layouts/ContentLayout'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import { NextSeo } from 'next-seo'
-import Image from 'next/image'
-import { FC, useState } from 'react'
-import { IProductModel } from '@interfaces/models/IProductModel'
-import { useCartState } from '@hooks/useCartState'
-import { useRouter } from 'next/router'
-import { showNotification } from '@utils/showNotification'
-import { findManyProducts, findUniqueProduct } from '@api/database/product'
-import { MinusIcon } from '@icons/MinusIcon'
-import { PlusIcon } from '@icons/PlusIcon'
-import { Button } from '@atoms/Button'
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
+
+import { findManyProducts, findUniqueProduct } from '@api/database/product';
+import { Button } from '@atoms/Button';
+import { useCartState } from '@hooks/useCartState';
+import { MinusIcon } from '@icons/MinusIcon';
+import { PlusIcon } from '@icons/PlusIcon';
+import { IProductModel } from '@interfaces/models/IProductModel';
+import { ContentLayout } from '@organism/layouts/ContentLayout';
+import { showNotification } from '@utils/showNotification';
 
 interface ProductBySlugPageProps {
   product: IProductModel
@@ -49,19 +50,21 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
       />
       <ContentLayout>
         <div className="grid grid-cols-1 md:grid-cols-2 md:pt-10 gap-10">
+
+          {/* IMAGE COLUMN */}
           <div className="flex justify-center card shadow-lg">
             <Image
               src={product.imageUrl}
               width={500}
               height={500}
               alt={product.title}
-            
             />
           </div>
+
+          {/* DESCRIPTION COLUMN */}
           <div>
             <p className="text-2xl font-bold">{product.title}</p>
             <p className="text-xl text-main2-600">{`$${product.price}`}</p>
-
             <div className="mt-8">
               <p className="text-main2-500 font-bold text-lg">Descripcion:</p>
               <p className="text-lg">{`${product.description}`}</p>
@@ -98,7 +101,7 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
               <Button
                 type="button"
                 arialLabel="agregar al carrito"
-                tailwindClass='w-full mt-6 border-none bg-main-primary text-main-50  hover:bg-main-700'
+                tailwindClass="w-full mt-6 border-none bg-main-primary text-main-50  hover:bg-main-700"
                 onClick={() => handleAddToCart(product, quantity)}
               >
                 Agregar al carrito
@@ -122,7 +125,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ctx => {
   const slug = ctx.params?.slug as string
-
   const product = await findUniqueProduct(slug)
 
   if (!product) {

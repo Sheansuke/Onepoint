@@ -1,15 +1,18 @@
-import { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import { ClerkProvider, RedirectToSignUp } from '@clerk/nextjs'
-import { store } from '../redux/store'
-import { Provider } from 'react-redux'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
-import { SignedOutWrapper, SignedInWrapper } from '@organism/Clerk'
-import { MainLayout } from '@organism/layouts/MainLayout'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import '../styles/globals.css'
+import 'react-toastify/dist/ReactToastify.css';
+import '../styles/globals.css';
+
+import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
+import { ClerkProvider, RedirectToSignUp } from '@clerk/nextjs';
+import { SignedInWrapper, SignedOutWrapper } from '@organism/Clerk';
+import { MainLayout } from '@organism/layouts/MainLayout';
+
+import { store } from '../redux/store';
 
 // REACT QUERY
 const queryClient = new QueryClient()
@@ -23,9 +26,6 @@ const publicPages = [
   '/search/[query]',
   "/test"
 ]
-
-
-// TODO: paused pull request until railway service will on again https://github.com/Sheansuke/Onepoint/pull/36
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
