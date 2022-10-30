@@ -8,7 +8,7 @@ jobs:
   prisma-deploy:
     runs-on: ubuntu-20.04
     env:
-      DATABASE_URL: postgresql://postgres:LicFm5bEaqKQAdiH@db.ivvktztsrqbjuivdletj.supabase.co:5432/postgres
+      DATABASE_URL: ${{ env.DATABASE_PROD_URL }}
     steps:
       - uses: actions/checkout@v2
       - run: npx prisma generate
