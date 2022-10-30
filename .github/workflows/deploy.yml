@@ -8,7 +8,7 @@ jobs:
   prisma-deploy:
     runs-on: ubuntu-20.04
     env:
-      DATABASE_URL: ${{ env.DATABASE_PROD_URL }}
+      DATABASE_URL: ${{ secrets.DATABASE_PROD_URL }}
     steps:
       - uses: actions/checkout@v2
       - run: npx prisma generate
