@@ -89,5 +89,4 @@ integracion de SVIX en Clerk Dashboard
 
 
 ## Al MOMENTO DE DESPLEGAR / DEPLOY
-1- Asegurese que dentro de .github/deploy.yml la variable de entorno "DATABASE_URL" este configurada con la URI de
-la base de datos de produccion, esto para que las migraciones de prisma se puedan efectuar
+1- la variable de entorno "DATABASE_URL" esta configurada ya en el repositorio de Github con la url de produccion
