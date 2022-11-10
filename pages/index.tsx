@@ -6,6 +6,8 @@ import { findManyProducts } from '@api/database/product';
 import { IProductModel } from '@interfaces/models/IProductModel';
 import { ContentLayout } from '@organism/layouts/ContentLayout';
 import { ProductList } from '@organism/ProductList/index';
+import { useQuery } from 'react-query';
+import { getAllProducts } from '@api/axiosRequest/productRequest';
 
 // TODO: direct access to: prisma studio, database dashboard, vercel dashboard
 // TODO: clerk is in development mode
@@ -18,6 +20,12 @@ interface IHomePageProps {
 }
 
 const HomePage: FC<IHomePageProps> = ({ products }) => {
+  const { data } = useQuery({
+    queryKey: ['products'],
+    queryFn: getAllProducts,
+    initialData: products,
+  })
+
   return (
     <>
       <NextSeo
@@ -26,12 +34,13 @@ const HomePage: FC<IHomePageProps> = ({ products }) => {
       />
       <ContentLayout title="Todos los productos">
         <div className='mt-5'>
-          <ProductList products={products} />
+          <ProductList products={data} />
         </div>
       </ContentLayout>
     </>
   )
 }
+
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
@@ -39,7 +48,7 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         products
-      }
+      },
     }
 
   } catch (error) {

@@ -1,5 +1,6 @@
 // This function is running with supabase webhook
 export default async function handler(req, res) {
+  console.log("🚀 ~ file: revalidate.ts ~ line 3 ~ handler ~ req", req.body)
   // Check for token to confirm this is a valid request
   // this token is set in .env
 

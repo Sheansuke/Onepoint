@@ -125,21 +125,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ctx => {
   const slug = ctx.params?.slug as string
-
   try {
       const product = await findUniqueProduct(slug)
-
-      if (!product) {
-        return {
-          notFound: true,
-          revalidate: true,
-          redirect: {
-            destination: '/',
-            permanent: false
-          }
-        }
-      }
-
       return {
         props: {
           product
@@ -147,10 +134,13 @@ export const getStaticProps: GetStaticProps = async ctx => {
       }
     } catch (error) {
       return {
+        
         redirect: {
           destination: '/',
-          permanent: false
+          permanent: false,
+          
         }
+        
       }
     }
   }
