@@ -17,7 +17,7 @@ export default withAuth(
           statusCode: 200
         })
       } catch (error) {
-        console.log('🚀 ~ file: [clerkId].ts ~ line 21 ~ error', error)
+        // console.log('🚀 ~ file: [clerkId].ts ~ line 21 ~ error', error)
 
         return res.status(400).json({
           data: null,
