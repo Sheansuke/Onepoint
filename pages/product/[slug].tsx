@@ -52,13 +52,15 @@ const ProductBySlugPage: FC<ProductBySlugPageProps> = ({ product }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 md:pt-10 gap-10">
 
           {/* IMAGE COLUMN */}
-          <div className="flex justify-center card shadow-lg">
-            <Image
-              src={product.imageUrl}
-              width={500}
-              height={500}
-              alt={product.title}
-            />
+          <div className="flex justify-center  card shadow-lg bg-neutral">
+            <div className='flex justify-center'>
+              <Image
+                src={product.imageUrl}
+                width={500}
+                height={500}
+                alt={product.title}
+              />
+            </div>
           </div>
 
           {/* DESCRIPTION COLUMN */}
@@ -126,23 +128,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ctx => {
   const slug = ctx.params?.slug as string
   try {
-      const product = await findUniqueProduct(slug)
-      return {
-        props: {
-          product
-        }
-      }
-    } catch (error) {
-      return {
-        
-        redirect: {
-          destination: '/',
-          permanent: false,
-          
-        }
-        
+    const product = await findUniqueProduct(slug)
+    return {
+      props: {
+        product
       }
     }
+  } catch (error) {
+    return {
+
+      redirect: {
+        destination: '/',
+        permanent: false,
+
+      }
+
+    }
   }
+}
 
 export default ProductBySlugPage

@@ -4,35 +4,32 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}'
   ],
   daisyui: {
-    themes:[
+    themes: [
       {
         mytheme: {
-          
-          "primary": "#14b8a6",
-                   
-          "secondary": "#0f172a",
-                   
-          "accent": "#1FB2A6",
-                   
-          "neutral": "#FFFFFF",
-                   
-          "base-100": "#f8fafc",
-                   
-          "info": "#0ea5e9",
-                   
-          "success": "#36D399",
-                   
-          "warning": "#f59e0b",
-                   
-          "error": "#ef4444",
-                   },
+          primary: '#14b8a6',
+
+          secondary: '#0f172a',
+
+          accent: '#1FB2A6',
+
+          neutral: '#FFFFFF',
+
+          'base-100': '#f8fafc',
+
+          info: '#0ea5e9',
+
+          success: '#36D399',
+
+          warning: '#f59e0b',
+
+          error: '#ef4444'
+        }
       }
     ]
   },
   theme: {
-    extend: {
-      
-    },
+    extend: {},
     colors: {
       main: {
         primary: '#14b8a6',
