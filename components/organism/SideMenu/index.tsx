@@ -64,7 +64,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
           {NavItemsData.map((item, index) => (
             <NextMaterialLink key={index} href={item.navigateTo}>
               <label htmlFor="sideMenu">
-                <NavListItem text={item.text} icon={item.icon} />
+                <NavListItem text={item.text} icon={item.icon} href={item.navigateTo} />
               </label>
             </NextMaterialLink>
           ))}
@@ -86,7 +86,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ children }) => {
               {NavItemsAdminData.map((item, index) => (
                 <NextMaterialLink key={index} href={item.navigateTo}>
                   <label htmlFor="sideMenu">
-                    <NavListItem text={item.text} icon={item.icon} />
+                    <NavListItem text={item.text} icon={item.icon} href={item.navigateTo} />
                   </label>
                 </NextMaterialLink>
               ))}

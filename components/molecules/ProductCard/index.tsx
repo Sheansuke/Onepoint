@@ -34,8 +34,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
         <figure>
           <Image
             src={product.imageUrl}
-            width={410}
-            height={410}
+            width={528}
+            height={528}
             alt={product.title}
             className="hover:cursor-pointer "
           />
